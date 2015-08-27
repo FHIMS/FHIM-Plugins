@@ -1,0 +1,36 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Acceleo Dita Module Runtime Plug-in
+Bundle-SymbolicName: gov.us.fhim.uml.transform.dita
+Bundle-Version: 0.7.0.qualifier
+Bundle-Activator: gov.us.fhim.uml.transform.dita.Activator
+Bundle-Vendor: Eclipse Modeling Project
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.uml2.uml,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.ecore.xmi,
+ org.eclipse.ocl,
+ org.eclipse.ocl.ecore,
+ org.eclipse.acceleo.common,
+ org.eclipse.acceleo.parser;resolution:=optional,
+ org.eclipse.acceleo.model,
+ org.eclipse.acceleo.profiler,
+ org.eclipse.acceleo.engine,
+ org.eclipse.acceleo.common,
+ org.eclipse.acceleo.parser;resolution:=optional,
+ org.eclipse.acceleo.model,
+ org.eclipse.acceleo.profiler,
+ org.eclipse.acceleo.engine,
+ org.apache.commons.lang,
+ org.eclipse.emf.transaction,
+ org.eclipse.gmf.runtime.common.core,
+ org.eclipse.gmf.runtime.diagram.core,
+ com.ibm.xtools.modeler.ui;resolution:=optional,
+ com.google.guava,
+ org.openhealthtools.mdht.uml.term.core,
+ org.openhealthtools.mdht.uml.cda.dita;visibility:=reexport
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Eclipse-LazyStart: true
+Export-Package: gov.us.fhim.uml.transform.dita.main
+

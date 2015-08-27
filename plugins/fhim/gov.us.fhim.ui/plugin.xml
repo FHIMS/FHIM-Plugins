@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   
+
+
+  
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertyTabs">
+      <propertyTabs contributorId="org.openhealthtools.mdht.uml.ui.properties">     
+         <propertyTab
+               category="domain"
+               label="FHIM"
+               afterTab="property.tab.GeneralPropertySection"
+               id="property.tab.FHIMPropertySection">           
+         </propertyTab> 
+      </propertyTabs>
+   </extension>
+ 
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertySections">
+       <propertySections contributorId="org.openhealthtools.mdht.uml.ui.properties">
+     
+          <propertySection tab="property.tab.FHIMPropertySection" 
+	 	     class="gov.us.fhim.ui.properties.FHIMMappedProperty" 
+	 	     id="property.section.fhim.PropertySection"
+             filter="gov.us.fhim.ui.filters.PropertyFilter"/>
+             
+      
+             
+      </propertySections>
+   </extension> 
+   
+   
+     <extension point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            objectClass="org.eclipse.core.resources.IFile"
+            id="gov.us.fhim.ui.popupMenus.file"
+            nameFilter="*.uml">
+		 <menu label="Import Spreadsheet" path="group.port" 
+				id="gov.us.fhim.ui.popupMenus.import">
+			<separator name="additions"/>
+		 </menu>
+         <action
+               label="Import Spreadsheet"
+               class="gov.us.fhim.ui.actions.ImportSpreadsheet"
+               menubarPath="gov.us.fhim.ui.popupMenus.import/additions"
+               enablesFor="1"
+               id="gov.us.fhim.ui.actions.ImportSpreadsheetAction">
+         </action>
+      </objectContribution>
+   </extension>
+   
+   
+</plugin>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="gov.us.fhim.uml_0.7.0.qualifier.jar" id="gov.us.fhim.uml" version="0.7.0.qualifier">
+      <category name="gov.us.fhim.uml.cat"/>
+   </feature>
+   <category-def name="gov.us.fhim.uml.cat" label="FHIM UML"/>
+</site>

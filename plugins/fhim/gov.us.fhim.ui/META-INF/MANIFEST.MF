@@ -1,0 +1,23 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: FHIM UI
+Bundle-SymbolicName: gov.us.fhim.ui;singleton:=true
+Bundle-Version: 0.7.0.qualifier
+Bundle-Activator: gov.us.fhim.ui.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.ui.ide,
+ org.eclipse.core.runtime,
+ org.eclipse.emf.transaction,
+ org.eclipse.emf.workspace,
+ org.eclipse.gmf.runtime.common.core,
+ org.eclipse.gmf.runtime.diagram.ui.properties,
+ org.eclipse.uml2.uml.edit,
+ org.apache.commons.lang,
+ org.openhealthtools.mdht.uml.ui.properties,
+ org.openhealthtools.mdht.uml.common.ui
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-ActivationPolicy: lazy
+Export-Package: gov.us.fhim.ui,
+ gov.us.fhim.ui.filters,
+ gov.us.fhim.ui.properties
+Import-Package: gov.us.fhim.profile
