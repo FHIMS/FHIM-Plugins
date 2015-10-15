@@ -63,7 +63,7 @@ public interface Index extends EObject {
 	 * @return the value of the '<em>Value</em>' attribute.
 	 * @see #setValue(String)
 	 * @see gov.us.fhim.profile.FHIMPackage#getIndex_Value()
-	 * @model dataType="org.eclipse.uml2.types.String" required="true" ordered="false"
+	 * @model required="true" ordered="false"
 	 *        annotation="uml2.extensions addedInVersion='1'"
 	 * @generated
 	 */

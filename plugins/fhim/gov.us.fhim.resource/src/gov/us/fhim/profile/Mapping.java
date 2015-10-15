@@ -109,7 +109,7 @@ public interface Mapping extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Attribute</em>' attribute list.
 	 * @see gov.us.fhim.profile.FHIMPackage#getMapping_Attribute()
-	 * @model dataType="org.eclipse.uml2.types.String" ordered="false"
+	 * @model ordered="false"
 	 * @generated
 	 */
 	EList<String> getAttribute();

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="gov.us.fhim.uml"
-      label="Feature"
+      label="FHIM UI Extensions"
       version="0.7.0.qualifier">
 
    <description url="http://www.example.com/description">
@@ -53,6 +53,13 @@
 
    <plugin
          id="gov.us.fhim.uml.report.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.openhealthtools.mdht.uml.hdf"
          download-size="0"
          install-size="0"
          version="0.0.0"

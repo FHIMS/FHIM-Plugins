@@ -14,10 +14,11 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.uml2.uml.edit,
  org.apache.commons.lang,
  org.openhealthtools.mdht.uml.ui.properties,
- org.openhealthtools.mdht.uml.common.ui
+ org.openhealthtools.mdht.uml.common.ui,
+ gov.us.fhim.resource;bundle-version="0.7.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Export-Package: gov.us.fhim.ui,
  gov.us.fhim.ui.filters,
  gov.us.fhim.ui.properties
-Import-Package: gov.us.fhim.profile
+

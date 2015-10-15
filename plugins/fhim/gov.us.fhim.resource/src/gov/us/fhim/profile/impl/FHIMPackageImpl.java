@@ -8,14 +8,12 @@ import gov.us.fhim.profile.Index;
 import gov.us.fhim.profile.Iso11179;
 import gov.us.fhim.profile.Mapping;
 import gov.us.fhim.profile.StandardOrProject;
-
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-import org.eclipse.uml2.types.TypesPackage;
 import org.eclipse.uml2.uml.UMLPackage;
 
 /**
@@ -342,7 +340,6 @@ public class FHIMPackageImpl extends EPackageImpl implements FHIMPackage {
 
 		// Obtain other dependent packages
 		UMLPackage theUMLPackage = (UMLPackage)EPackage.Registry.INSTANCE.getEPackage(UMLPackage.eNS_URI);
-		TypesPackage theTypesPackage = (TypesPackage)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -355,17 +352,17 @@ public class FHIMPackageImpl extends EPackageImpl implements FHIMPackage {
 		initEReference(getMapping_Index(), this.getIndex(), null, "index", null, 1, -1, Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getMapping_Base_Classifier(), theUMLPackage.getClassifier(), null, "base_Classifier", null, 1, 1, Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getMapping_Base_Property(), theUMLPackage.getProperty(), null, "base_Property", null, 1, 1, Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEAttribute(getMapping_Attribute(), theTypesPackage.getString(), "attribute", null, 0, -1, Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getMapping_Attribute(), ecorePackage.getEString(), "attribute", null, 0, -1, Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(indexEClass, Index.class, "Index", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getIndex_StandardOrProject(), this.getStandardOrProject(), "standardOrProject", null, 1, 1, Index.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEAttribute(getIndex_Value(), theTypesPackage.getString(), "value", null, 1, 1, Index.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getIndex_Value(), ecorePackage.getEString(), "value", null, 1, 1, Index.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(iso11179EClass, Iso11179.class, "Iso11179", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getIso11179_Id(), theTypesPackage.getString(), "id", null, 1, 1, Iso11179.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEAttribute(getIso11179_CodeSystem(), theTypesPackage.getString(), "codeSystem", null, 1, 1, Iso11179.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEAttribute(getIso11179_Code(), theTypesPackage.getString(), "code", null, 1, 1, Iso11179.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEAttribute(getIso11179_Source(), theTypesPackage.getString(), "source", null, 1, 1, Iso11179.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getIso11179_Id(), ecorePackage.getEString(), "id", null, 1, 1, Iso11179.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getIso11179_CodeSystem(), ecorePackage.getEString(), "codeSystem", null, 1, 1, Iso11179.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getIso11179_Code(), ecorePackage.getEString(), "code", null, 1, 1, Iso11179.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getIso11179_Source(), ecorePackage.getEString(), "source", null, 1, 1, Iso11179.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getIso11179_Base_Property(), theUMLPackage.getProperty(), null, "base_Property", null, 1, 1, Iso11179.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		// Initialize enums and add enum literals
@@ -395,6 +392,7 @@ public class FHIMPackageImpl extends EPackageImpl implements FHIMPackage {
 		addEEnumLiteral(standardOrProjectEEnum, StandardOrProject.ONCSIRH_EX);
 		addEEnumLiteral(standardOrProjectEEnum, StandardOrProject.ONCSISDC);
 		addEEnumLiteral(standardOrProjectEEnum, StandardOrProject.ONCSITOC);
+		addEEnumLiteral(standardOrProjectEEnum, StandardOrProject.MU2);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -411,235 +409,235 @@ public class FHIMPackageImpl extends EPackageImpl implements FHIMPackage {
 	 * @generated
 	 */
 	protected void createUml2Annotations() {
-		String source = "uml2.extensions";		
+		String source = "uml2.extensions";	
 		addAnnotation
 		  (mappingEClass, 
 		   source, 
 		   new String[] {
 			 "addedInVersion", "1"
-		   });		
+		   });	
 		addAnnotation
 		  (getMapping_Index(), 
 		   source, 
 		   new String[] {
 			 "addedInVersion", "1"
-		   });		
+		   });	
 		addAnnotation
 		  (getMapping_Base_Classifier(), 
 		   source, 
 		   new String[] {
 			 "addedInVersion", "2"
-		   });		
+		   });	
 		addAnnotation
 		  (getMapping_Base_Property(), 
 		   source, 
 		   new String[] {
 			 "addedInVersion", "2"
-		   });		
+		   });	
 		addAnnotation
 		  (indexEClass, 
 		   source, 
 		   new String[] {
 			 "addedInVersion", "1"
-		   });		
+		   });	
 		addAnnotation
 		  (getIndex_StandardOrProject(), 
 		   source, 
 		   new String[] {
 			 "addedInVersion", "1"
-		   });		
+		   });	
 		addAnnotation
 		  (getIndex_Value(), 
 		   source, 
 		   new String[] {
 			 "addedInVersion", "1"
-		   });		
+		   });	
 		addAnnotation
 		  (standardOrProjectEEnum, 
 		   source, 
 		   new String[] {
 			 "addedInVersion", "1"
-		   });		
+		   });	
 		addAnnotation
 		  (standardOrProjectEEnum.getELiterals().get(0), 
 		   source, 
 		   new String[] {
 			 "addedInVersion", "1"
-		   });		
+		   });	
 		addAnnotation
 		  (standardOrProjectEEnum.getELiterals().get(1), 
 		   source, 
 		   new String[] {
 			 "addedInVersion", "4"
-		   });		
+		   });	
 		addAnnotation
 		  (standardOrProjectEEnum.getELiterals().get(2), 
 		   source, 
 		   new String[] {
 			 "addedInVersion", "1"
-		   });		
+		   });	
 		addAnnotation
 		  (standardOrProjectEEnum.getELiterals().get(3), 
 		   source, 
 		   new String[] {
 			 "addedInVersion", "1"
-		   });		
+		   });	
 		addAnnotation
 		  (standardOrProjectEEnum.getELiterals().get(4), 
 		   source, 
 		   new String[] {
 			 "addedInVersion", "4"
-		   });		
+		   });	
 		addAnnotation
 		  (standardOrProjectEEnum.getELiterals().get(5), 
 		   source, 
 		   new String[] {
 			 "addedInVersion", "4"
-		   });		
+		   });	
 		addAnnotation
 		  (standardOrProjectEEnum.getELiterals().get(6), 
 		   source, 
 		   new String[] {
 			 "addedInVersion", "4"
-		   });		
+		   });	
 		addAnnotation
 		  (standardOrProjectEEnum.getELiterals().get(7), 
 		   source, 
 		   new String[] {
 			 "addedInVersion", "4"
-		   });		
+		   });	
 		addAnnotation
 		  (standardOrProjectEEnum.getELiterals().get(8), 
 		   source, 
 		   new String[] {
 			 "addedInVersion", "4"
-		   });		
+		   });	
 		addAnnotation
 		  (standardOrProjectEEnum.getELiterals().get(9), 
 		   source, 
 		   new String[] {
 			 "addedInVersion", "4"
-		   });		
+		   });	
 		addAnnotation
 		  (standardOrProjectEEnum.getELiterals().get(10), 
 		   source, 
 		   new String[] {
 			 "addedInVersion", "4"
-		   });		
+		   });	
 		addAnnotation
 		  (standardOrProjectEEnum.getELiterals().get(11), 
 		   source, 
 		   new String[] {
 			 "addedInVersion", "4"
-		   });		
+		   });	
 		addAnnotation
 		  (standardOrProjectEEnum.getELiterals().get(12), 
 		   source, 
 		   new String[] {
 			 "addedInVersion", "4"
-		   });		
+		   });	
 		addAnnotation
 		  (standardOrProjectEEnum.getELiterals().get(13), 
 		   source, 
 		   new String[] {
 			 "addedInVersion", "4"
-		   });		
+		   });	
 		addAnnotation
 		  (standardOrProjectEEnum.getELiterals().get(14), 
 		   source, 
 		   new String[] {
 			 "addedInVersion", "4"
-		   });		
+		   });	
 		addAnnotation
 		  (standardOrProjectEEnum.getELiterals().get(15), 
 		   source, 
 		   new String[] {
 			 "addedInVersion", "4"
-		   });		
+		   });	
 		addAnnotation
 		  (standardOrProjectEEnum.getELiterals().get(16), 
 		   source, 
 		   new String[] {
 			 "addedInVersion", "4"
-		   });		
+		   });	
 		addAnnotation
 		  (standardOrProjectEEnum.getELiterals().get(17), 
 		   source, 
 		   new String[] {
 			 "addedInVersion", "4"
-		   });		
+		   });	
 		addAnnotation
 		  (standardOrProjectEEnum.getELiterals().get(18), 
 		   source, 
 		   new String[] {
 			 "addedInVersion", "4"
-		   });		
+		   });	
 		addAnnotation
 		  (standardOrProjectEEnum.getELiterals().get(19), 
 		   source, 
 		   new String[] {
 			 "addedInVersion", "4"
-		   });		
+		   });	
 		addAnnotation
 		  (standardOrProjectEEnum.getELiterals().get(20), 
 		   source, 
 		   new String[] {
 			 "addedInVersion", "4"
-		   });		
+		   });	
 		addAnnotation
 		  (standardOrProjectEEnum.getELiterals().get(21), 
 		   source, 
 		   new String[] {
 			 "addedInVersion", "4"
-		   });		
+		   });	
 		addAnnotation
 		  (standardOrProjectEEnum.getELiterals().get(22), 
 		   source, 
 		   new String[] {
 			 "addedInVersion", "4"
-		   });		
+		   });	
 		addAnnotation
 		  (standardOrProjectEEnum.getELiterals().get(23), 
 		   source, 
 		   new String[] {
 			 "addedInVersion", "4"
-		   });		
+		   });	
 		addAnnotation
 		  (standardOrProjectEEnum.getELiterals().get(24), 
 		   source, 
 		   new String[] {
 			 "addedInVersion", "4"
-		   });		
+		   });	
 		addAnnotation
 		  (iso11179EClass, 
 		   source, 
 		   new String[] {
 			 "addedInVersion", "1"
-		   });		
+		   });	
 		addAnnotation
 		  (getIso11179_Id(), 
 		   source, 
 		   new String[] {
 			 "addedInVersion", "1"
-		   });		
+		   });	
 		addAnnotation
 		  (getIso11179_CodeSystem(), 
 		   source, 
 		   new String[] {
 			 "addedInVersion", "1"
-		   });		
+		   });	
 		addAnnotation
 		  (getIso11179_Code(), 
 		   source, 
 		   new String[] {
 			 "addedInVersion", "1"
-		   });		
+		   });	
 		addAnnotation
 		  (getIso11179_Source(), 
 		   source, 
 		   new String[] {
 			 "addedInVersion", "4"
-		   });		
+		   });	
 		addAnnotation
 		  (getIso11179_Base_Property(), 
 		   source, 

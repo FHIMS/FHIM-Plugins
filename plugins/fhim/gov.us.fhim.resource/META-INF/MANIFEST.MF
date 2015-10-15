@@ -13,6 +13,5 @@ Export-Package: gov.us.fhim.profile,
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
- org.eclipse.uml2.types;visibility:=reexport,
  org.eclipse.uml2.uml;visibility:=reexport
 Bundle-ActivationPolicy: lazy

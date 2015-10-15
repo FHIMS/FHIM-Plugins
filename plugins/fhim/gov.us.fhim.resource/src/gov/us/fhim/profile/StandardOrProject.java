@@ -218,7 +218,15 @@ public enum StandardOrProject implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	ONCSITOC(24, "ONCSITOC", "ONCSITOC");
+	ONCSITOC(24, "ONCSITOC", "ONCSITOC"), /**
+	 * The '<em><b>MU2</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+											* <!-- end-user-doc -->
+	 * @see #MU2_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	MU2(25, "MU2", "MU2");
 
 	/**
 	 * The '<em><b>CCDA</b></em>' literal value.
@@ -604,6 +612,21 @@ public enum StandardOrProject implements Enumerator {
 	public static final int ONCSITOC_VALUE = 24;
 
 	/**
+	 * The '<em><b>MU2</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>MU2</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #MU2
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int MU2_VALUE = 25;
+
+	/**
 	 * An array of all the '<em><b>Standard Or Project</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -635,6 +658,7 @@ public enum StandardOrProject implements Enumerator {
 			ONCSIRH_EX,
 			ONCSISDC,
 			ONCSITOC,
+			MU2,
 		};
 
 	/**
@@ -710,6 +734,7 @@ public enum StandardOrProject implements Enumerator {
 			case ONCSIRH_EX_VALUE: return ONCSIRH_EX;
 			case ONCSISDC_VALUE: return ONCSISDC;
 			case ONCSITOC_VALUE: return ONCSITOC;
+			case MU2_VALUE: return MU2;
 		}
 		return null;
 	}

@@ -37,7 +37,7 @@ public interface Iso11179 extends EObject {
 	 * @return the value of the '<em>Id</em>' attribute.
 	 * @see #setId(String)
 	 * @see gov.us.fhim.profile.FHIMPackage#getIso11179_Id()
-	 * @model dataType="org.eclipse.uml2.types.String" required="true" ordered="false"
+	 * @model required="true" ordered="false"
 	 *        annotation="uml2.extensions addedInVersion='1'"
 	 * @generated
 	 */
@@ -64,7 +64,7 @@ public interface Iso11179 extends EObject {
 	 * @return the value of the '<em>Code System</em>' attribute.
 	 * @see #setCodeSystem(String)
 	 * @see gov.us.fhim.profile.FHIMPackage#getIso11179_CodeSystem()
-	 * @model dataType="org.eclipse.uml2.types.String" required="true" ordered="false"
+	 * @model required="true" ordered="false"
 	 *        annotation="uml2.extensions addedInVersion='1'"
 	 * @generated
 	 */
@@ -91,7 +91,7 @@ public interface Iso11179 extends EObject {
 	 * @return the value of the '<em>Code</em>' attribute.
 	 * @see #setCode(String)
 	 * @see gov.us.fhim.profile.FHIMPackage#getIso11179_Code()
-	 * @model dataType="org.eclipse.uml2.types.String" required="true" ordered="false"
+	 * @model required="true" ordered="false"
 	 *        annotation="uml2.extensions addedInVersion='1'"
 	 * @generated
 	 */
@@ -118,7 +118,7 @@ public interface Iso11179 extends EObject {
 	 * @return the value of the '<em>Source</em>' attribute.
 	 * @see #setSource(String)
 	 * @see gov.us.fhim.profile.FHIMPackage#getIso11179_Source()
-	 * @model dataType="org.eclipse.uml2.types.String" required="true" ordered="false"
+	 * @model required="true" ordered="false"
 	 *        annotation="uml2.extensions addedInVersion='4'"
 	 * @generated
 	 */

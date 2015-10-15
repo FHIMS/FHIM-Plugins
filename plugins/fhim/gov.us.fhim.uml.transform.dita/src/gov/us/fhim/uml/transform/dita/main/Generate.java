@@ -346,7 +346,7 @@ public class Generate extends AbstractAcceleoGenerator {
      * 
      * @param resourceSet
      *            The resource set which registry has to be updated.
-     * @generated
+     * @generated NOT
      */
     
     @Override
@@ -355,15 +355,12 @@ public class Generate extends AbstractAcceleoGenerator {
         if (!isInWorkspace(org.eclipse.uml2.uml.UMLPackage.class)) {
             resourceSet.getPackageRegistry().put(org.eclipse.uml2.uml.UMLPackage.eINSTANCE.getNsURI(), org.eclipse.uml2.uml.UMLPackage.eINSTANCE);
         }
-        if (!isInWorkspace(org.openhealthtools.mdht.uml.term.core.profile.TermPackage.class)) {
-            resourceSet.getPackageRegistry().put(org.openhealthtools.mdht.uml.term.core.profile.TermPackage.eINSTANCE.getNsURI(), org.openhealthtools.mdht.uml.term.core.profile.TermPackage.eINSTANCE);
-        }
         if (!isInWorkspace(org.eclipse.emf.ecore.EcorePackage.class)) {
             resourceSet.getPackageRegistry().put(org.eclipse.emf.ecore.EcorePackage.eINSTANCE.getNsURI(), org.eclipse.emf.ecore.EcorePackage.eINSTANCE);
         }
-        if (!isInWorkspace(org.openhealthtools.mdht.uml.term.core.profile.TermPackage.class)) {
-            resourceSet.getPackageRegistry().put(org.openhealthtools.mdht.uml.term.core.profile.TermPackage.eINSTANCE.getNsURI(), org.openhealthtools.mdht.uml.term.core.profile.TermPackage.eINSTANCE);
-        }
+//        if (!isInWorkspace(com.ibm.xtools.umlnotation.UmlnotationPackage.class)) {
+//            resourceSet.getPackageRegistry().put(com.ibm.xtools.umlnotation.UmlnotationPackage.eINSTANCE.getNsURI(), com.ibm.xtools.umlnotation.UmlnotationPackage.eINSTANCE);
+//        }
         
         /*
          * If you want to change the content of this method, do NOT forget to change the "@generated"
