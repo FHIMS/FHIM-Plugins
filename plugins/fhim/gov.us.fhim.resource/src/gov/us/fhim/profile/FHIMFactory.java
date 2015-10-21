@@ -13,6 +13,9 @@ import org.eclipse.emf.ecore.EFactory;
  * @generated
  */
 public interface FHIMFactory extends EFactory {
+
+	org.eclipse.uml2.uml.util.UMLUtil.ProfileApplicationHelper asdf = null;
+
 	/**
 	 * The singleton instance of the factory.
 	 * <!-- begin-user-doc -->

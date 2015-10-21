@@ -19,6 +19,7 @@ Require-Bundle: org.eclipse.ui,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Export-Package: gov.us.fhim.ui,
+ gov.us.fhim.ui.actions,
  gov.us.fhim.ui.filters,
  gov.us.fhim.ui.properties
 
