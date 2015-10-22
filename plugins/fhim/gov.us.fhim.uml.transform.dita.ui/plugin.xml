@@ -15,7 +15,7 @@
                enablesFor="+"
                id="gov.us.fhim.uml.transform.dita.ui.popupMenus.acceleoGenerateDitaAction"
                icon="icons/default.gif"
-               label="DITA"
+               label="Publish"
                menubarPath="org.eclipse.acceleo.module.menu/acceleo"/>
       </objectContribution>
    </extension>
