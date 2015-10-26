@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Ecore="http://www.eclipse.org/uml2/schemas/Ecore/5" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xsi:schemaLocation="http://www.eclipse.org/uml2/schemas/Ecore/5 pathmap://UML_PROFILES/Ecore.profile.uml#_z1OFcHjqEdy8S4Cr8Rc_NA">
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Ecore="http://www.eclipse.org/uml2/schemas/Ecore/5" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xsi:schemaLocation="http://www.eclipse.org/uml2/schemas/Ecore/5 pathmap://UML_PROFILES/Ecore.profile.uml#_z1OFcHjqEdy8S4Cr8Rc_NA">
   <uml:Profile xmi:id="_Vgc4AAK0EeS6g7XLt9rX8g" name="fhim" metamodelReference="_VloS8AK0EeS6g7XLt9rX8g">
     <eAnnotations xmi:id="_VmOI0AK0EeS6g7XLt9rX8g" source="http://www.eclipse.org/uml2/2.0.0/UML">
       <contents xmi:type="ecore:EPackage" xmi:id="_bbk84A3cEeSGTazHdUQojA" name="fhim" nsURI="http:///schemas/fhim/_bbjuwA3cEeSGTazHdUQojA/5" nsPrefix="fhim">
@@ -265,8 +265,8 @@
         <eAnnotations xmi:id="_g9gUtgK1EeS6g7XLt9rX8g" source="uml2.extensions">
           <details xmi:id="_g9gUtwK1EeS6g7XLt9rX8g" key="addedInVersion" value="1"/>
         </eAnnotations>
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_BvqPsVLlEeSXsp_jTlirJw" value="1"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_BvqPsFLlEeSXsp_jTlirJw" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_BvqPsVLlEeSXsp_jTlirJw" value="1"/>
       </ownedAttribute>
       <ownedAttribute xmi:id="_44MzQAK1EeS6g7XLt9rX8g" name="base_Classifier" association="_44MMMAK1EeS6g7XLt9rX8g">
         <eAnnotations xmi:id="_8wWJgAK1EeS6g7XLt9rX8g" source="uml2.extensions">
@@ -282,8 +282,8 @@
       </ownedAttribute>
       <ownedAttribute xmi:id="_qd4IEFLgEeSAj9zrFtHurw" name="attribute">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_A8SSAVLlEeSXsp_jTlirJw"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_A8SSAFLlEeSXsp_jTlirJw" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_A8SSAVLlEeSXsp_jTlirJw"/>
       </ownedAttribute>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_fTxzQAK0EeS6g7XLt9rX8g" name="Index">
@@ -497,6 +497,8 @@
         </eAnnotations>
       </ownedLiteral>
       <ownedLiteral xmi:id="_zFRi8CF5EeWCMsbt5es6xg" name="MU2"/>
+      <ownedLiteral xmi:id="_AEyO4HvmEeWxZr10aRYW5g" name="NCPDP Telecom"/>
+      <ownedLiteral xmi:id="_D16XIHvmEeWxZr10aRYW5g" name="NCPDP Script"/>
     </packagedElement>
     <profileApplication xmi:id="_YKHrkFLaEeSAj9zrFtHurw">
       <eAnnotations xmi:id="_YKLV8FLaEeSAj9zrFtHurw" source="http://www.eclipse.org/uml2/2.0.0/UML">

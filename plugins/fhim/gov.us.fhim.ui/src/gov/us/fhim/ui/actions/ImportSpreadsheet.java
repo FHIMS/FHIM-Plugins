@@ -4,10 +4,10 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     Sean Muir (JKM Software) - initial API and implementation
- *     
+ *
  *******************************************************************************/
 package gov.us.fhim.ui.actions;
 
@@ -46,7 +46,7 @@ import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.TreeSelection;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -99,7 +99,7 @@ public class ImportSpreadsheet implements IObjectActionDelegate {
 
 		ObjectPluginAction opa = (ObjectPluginAction) action;
 
-		final TreeSelection selection = (TreeSelection) opa.getSelection();
+		final IStructuredSelection selection = (IStructuredSelection) opa.getSelection();
 
 		final String ActionTitle = "Import Terminology";
 
@@ -118,7 +118,7 @@ public class ImportSpreadsheet implements IObjectActionDelegate {
 
 				File f = (File) selection.getFirstElement();
 
-				String umlPath = myWorkspaceRoot.getLocation().toOSString() + f.getFullPath().toOSString();
+				String umlPath = f.getLocation().toOSString(); // myWorkspaceRoot.getLocation().toOSString() + f.getFullPath().toOSString();
 
 				try {
 					importMapping(monitor, umlPath, fdlg);
@@ -211,6 +211,9 @@ public class ImportSpreadsheet implements IObjectActionDelegate {
 
 		HashMap<Integer, StandardOrProject> columnmapping = new HashMap<Integer, StandardOrProject>();
 
+		int standardColumn = -1;
+		int valueColumn = -1;
+
 		HashMap<String, NamedElement> namedElements = new HashMap<String, NamedElement>();
 
 		monitor.subTask("Opening Model ");
@@ -222,6 +225,7 @@ public class ImportSpreadsheet implements IObjectActionDelegate {
 				if (!StringUtils.isEmpty(ne.getQualifiedName())) {
 					namedElements.put(ne.getQualifiedName(), ne);
 					namedElements.put(ne.getQualifiedName().replace("(Abstract)", ""), ne);
+					// System.out.println("ADDDMING" + ne.getQualifiedName());
 				}
 
 			}
@@ -253,6 +257,10 @@ public class ImportSpreadsheet implements IObjectActionDelegate {
 							columnmapping.put(columnCtr, sorp);
 						} else if ("FHIM".equals(column)) {
 							fhimColumn = columnCtr;
+						} else if ("Standard".equalsIgnoreCase(column)) {
+							standardColumn = columnCtr;
+						} else if ("Value".equalsIgnoreCase(column)) {
+							valueColumn = columnCtr;
 						} else {
 							didNotFind.put(0, "Can not map following column " + column);
 						}
@@ -287,21 +295,41 @@ public class ImportSpreadsheet implements IObjectActionDelegate {
 
 								Mapping mapping2 = (Mapping) theTarget.getStereotypeApplication(mapping);
 
-								for (Integer c : columnmapping.keySet()) {
-									if (c < results.length) {
-										String value = results[c];
-										if (!StringUtils.isEmpty(value)) {
-											Index index = FHIMFactory.eINSTANCE.createIndex();
-											index.setStandardOrProject(columnmapping.get(c));
-											index.setValue(value);
-											mapping2.getIndex().add(index);
+								if (!columnmapping.isEmpty()) {
+									for (Integer c : columnmapping.keySet()) {
+										if (c < results.length) {
+											String value = results[c];
+											if (!StringUtils.isEmpty(value)) {
+												Index index = FHIMFactory.eINSTANCE.createIndex();
+												index.setStandardOrProject(columnmapping.get(c));
+												index.setValue(value);
+												mapping2.getIndex().add(index);
+											}
 										}
+
+									}
+								} else if (standardColumn != -1 && valueColumn != -1) {
+									StandardOrProject sorp = StandardOrProject.getByName(results[standardColumn].replaceAll(
+										"\\W", ""));
+
+									if (sorp != null && !StringUtils.isEmpty(results[valueColumn])) {
+										Index index = FHIMFactory.eINSTANCE.createIndex();
+										index.setStandardOrProject(sorp);
+										index.setValue(results[valueColumn]);
+										mapping2.getIndex().add(index);
+									} else {
+										System.out.println("No Standard or project found" + results[standardColumn]);
+										didNotFind.put(lineCtr, results[fhimColumn].replaceAll("\\.", "::"));
 									}
 
 								}
 
+								// standardColumn
+
 							} else {
+
 								didNotFind.put(lineCtr, results[fhimColumn].replaceAll("\\.", "::"));
+
 							}
 
 						}
@@ -318,6 +346,10 @@ public class ImportSpreadsheet implements IObjectActionDelegate {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+			}
+
+			for (Integer k : didNotFind.keySet()) {
+				System.out.println("MISSING" + didNotFind.get(k));
 			}
 		}
 
@@ -345,9 +377,9 @@ public class ImportSpreadsheet implements IObjectActionDelegate {
 	/**
 	 * UMLModelMetricsDialog displays the results from the qvt transformation
 	 * Give them something to look at insted of just an okay button
-	 * 
+	 *
 	 * @author seanmuir
-	 * 
+	 *
 	 */
 	public class MetricsDialog extends TitleAreaDialog {
 

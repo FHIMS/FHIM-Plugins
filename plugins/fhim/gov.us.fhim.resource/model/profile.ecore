@@ -173,6 +173,8 @@
       </eAnnotations>
     </eLiterals>
     <eLiterals name="MU2" value="25"/>
+    <eLiterals name="NCPDPTelecom" value="26"/>
+    <eLiterals name="NCPDPScript" value="27"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Iso11179">
     <eAnnotations source="uml2.extensions">

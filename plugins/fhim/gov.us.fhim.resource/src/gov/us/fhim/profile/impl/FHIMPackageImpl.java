@@ -393,6 +393,8 @@ public class FHIMPackageImpl extends EPackageImpl implements FHIMPackage {
 		addEEnumLiteral(standardOrProjectEEnum, StandardOrProject.ONCSISDC);
 		addEEnumLiteral(standardOrProjectEEnum, StandardOrProject.ONCSITOC);
 		addEEnumLiteral(standardOrProjectEEnum, StandardOrProject.MU2);
+		addEEnumLiteral(standardOrProjectEEnum, StandardOrProject.NCPDP_TELECOM);
+		addEEnumLiteral(standardOrProjectEEnum, StandardOrProject.NCPDP_SCRIPT);
 
 		// Create resource
 		createResource(eNS_URI);

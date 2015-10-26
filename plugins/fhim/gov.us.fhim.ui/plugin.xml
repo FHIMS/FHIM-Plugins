@@ -55,9 +55,10 @@
    
      <extension point="org.eclipse.ui.popupMenus">
       <objectContribution
-            objectClass="org.eclipse.core.resources.IFile"
+      		adaptable="true"
             id="gov.us.fhim.ui.popupMenus.file"
-            nameFilter="*.uml,*.emx">
+            nameFilter="*.emx"
+            objectClass="org.eclipse.core.resources.IFile">
 		 <menu label="Import Spreadsheet" path="group.port" 
 				id="gov.us.fhim.ui.popupMenus.import">
 			<separator name="additions"/>

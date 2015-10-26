@@ -226,7 +226,23 @@ public enum StandardOrProject implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	MU2(25, "MU2", "MU2");
+	MU2(25, "MU2", "MU2"), /**
+	 * The '<em><b>NCPDP Telecom</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #NCPDP_TELECOM_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	NCPDP_TELECOM(26, "NCPDPTelecom", "NCPDPTelecom"), /**
+	 * The '<em><b>NCPDP Script</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #NCPDP_SCRIPT_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	NCPDP_SCRIPT(27, "NCPDPScript", "NCPDPScript");
 
 	/**
 	 * The '<em><b>CCDA</b></em>' literal value.
@@ -627,6 +643,36 @@ public enum StandardOrProject implements Enumerator {
 	public static final int MU2_VALUE = 25;
 
 	/**
+	 * The '<em><b>NCPDP Telecom</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>NCPDP Telecom</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #NCPDP_TELECOM
+	 * @model name="NCPDPTelecom"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NCPDP_TELECOM_VALUE = 26;
+
+	/**
+	 * The '<em><b>NCPDP Script</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>NCPDP Script</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #NCPDP_SCRIPT
+	 * @model name="NCPDPScript"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NCPDP_SCRIPT_VALUE = 27;
+
+	/**
 	 * An array of all the '<em><b>Standard Or Project</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -659,6 +705,8 @@ public enum StandardOrProject implements Enumerator {
 			ONCSISDC,
 			ONCSITOC,
 			MU2,
+			NCPDP_TELECOM,
+			NCPDP_SCRIPT,
 		};
 
 	/**
@@ -735,6 +783,8 @@ public enum StandardOrProject implements Enumerator {
 			case ONCSISDC_VALUE: return ONCSISDC;
 			case ONCSITOC_VALUE: return ONCSITOC;
 			case MU2_VALUE: return MU2;
+			case NCPDP_TELECOM_VALUE: return NCPDP_TELECOM;
+			case NCPDP_SCRIPT_VALUE: return NCPDP_SCRIPT;
 		}
 		return null;
 	}
