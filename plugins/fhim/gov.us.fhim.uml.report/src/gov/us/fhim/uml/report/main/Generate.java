@@ -23,6 +23,7 @@ import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.openhealthtools.mdht.uml.term.core.profile.TermPackage;
 
 /**
  * Entry point of the 'Generate' generation module.

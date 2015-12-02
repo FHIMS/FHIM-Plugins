@@ -4,6 +4,16 @@
 
 [template public generateElement(aPackage : Package)]
 [comment @main/]
+
+[if (aPackage.name.equalsIgnoreCase('FHIM'))]
+[file ('HL7V2Mapping.csv', false, 'UTF-8')]
+[for (bucket : String | getStandard('HL7'))]
+[bucket /],[getnamedelements(aPackage,bucket)/]
+[/for]
+[/file]
+[/if]
+
+
 [file (aPackage.name.concat('.csv'), false, 'UTF-8')]
 Element,[FHIM::StandardOrProject::MU2.toString()/],[FHIM::StandardOrProject::CCDA.toString()/],[FHIM::StandardOrProject::HL7CDA.toString()/],[FHIM::StandardOrProject::HL7FHIR.toString()/],[FHIM::StandardOrProject::HL7v2.toString()/],[FHIM::StandardOrProject::ONCSIDAF.toString()/]
 [for (element : Type | aPackage.ownedType)]
@@ -14,11 +24,77 @@ Element,[FHIM::StandardOrProject::MU2.toString()/],[FHIM::StandardOrProject::CCD
 [/if]
 [/for]
 [/file]
+
+[file ('AllByMapping.csv', true, 'UTF-8')]
+[aPackage.name /]
+[if (aPackage.name.equalsIgnoreCase('FHIM'))]
+Element,[FHIM::StandardOrProject::HL7v2.toString()/]
+[/if]
+[for (element : Type | aPackage.ownedType)]
+[if (element.oclIsTypeOf(Class))][element.qualifiedName /] [for (mapping : Mapping | element.getStereotypeApplications()->select(oclIsTypeOf(Mapping)).oclAsType(Mapping))] [report2(mapping) /][/for]
+[for (it : Property | element.oclAsType(Class).attribute)]
+[it.qualifiedName/][for (mapping : Mapping | it.getStereotypeApplications()->select(oclIsTypeOf(Mapping)).oclAsType(Mapping))] [report2(mapping) /][/for]
+[/for]
+[/if]
+[/for]
+
+[/file]
 [/template]
 
+[template public getnamedelements(aPackage : Package,value : String) post (replaceAll('\n', '').trim())]
+[for (element : Package |  aPackage.member->select(oclIsTypeOf(Package)).oclAsType(Package) ) ]
+ 	[for (mapping : Mapping | element.getStereotypeApplications()->select(oclIsTypeOf(Mapping)).oclAsType(Mapping))] 
+		[report3(element, mapping, value, FHIM::StandardOrProject::HL7v2) /]
+	[/for]
+	[for (aClass : Class |  element.member->select(oclIsTypeOf(Class)).oclAsType(Class) ) ]
+		 [for (mapping : Mapping | aClass.getStereotypeApplications()->select(oclIsTypeOf(Mapping)).oclAsType(Mapping))] 
+			[report3(aClass, mapping, value, FHIM::StandardOrProject::HL7v2) /]
+		[/for]
+		[for (p : Property | aClass.ownedAttribute)]
+			[for (mapping : Mapping | p.getStereotypeApplications()->select(oclIsTypeOf(Mapping)).oclAsType(Mapping))] 
+				[report3(p, mapping, value, FHIM::StandardOrProject::HL7v2) /]
+			[/for]
+		[/for]
+	[/for] 
+	[getnamedelements(element,value) /]
+[/for]
+[/template]
+
+[template public getnamedelementsdd(aClass : Class) post (replaceAll('\n', '').trim())]
+[for (element : Package |  aClass.member->select(oclIsTypeOf(Package)).oclAsType(Package) ) ]
+[element.qualifiedName /],
+[/for]
+[/template]
+ 
 [template public report(mapping : Mapping)]
 ,[generateIndexing(mapping, FHIM::StandardOrProject::MU2)/],[generateIndexing(mapping, FHIM::StandardOrProject::CCDA)/],[generateIndexing(mapping, FHIM::StandardOrProject::HL7CDA)/],[generateIndexing(mapping, FHIM::StandardOrProject::HL7FHIR)/],[generateIndexing(mapping, FHIM::StandardOrProject::HL7v2)/],[generateIndexing(mapping, FHIM::StandardOrProject::ONCSIDAF)/]
 [/template]
 [template public generateIndexing(mapping : Mapping,filter : StandardOrProject)]
 [for (it : Index | mapping.index->select(i : Index | i.standardOrProject = filter))][it.value/] [/for]
 [/template]
+
+[template public report2(mapping : Mapping)]
+,[generateIndexing(mapping, FHIM::StandardOrProject::HL7v2)/]
+[/template]
+
+[template public report3(element : NamedElement,mapping : Mapping, value : String,filter : StandardOrProject) post (replaceAll('\n', '').trim()) ]
+[for (it : Index | mapping.index->select(i : Index | i.standardOrProject = filter))]
+	[if (it.value.equalsIgnoreCase(value)) ]
+		[element.qualifiedName /],
+	[/if]
+[/for]
+[/template]
+
+
+[template public generateIndexing2(element : NamedElement,mapping : Mapping,filter : StandardOrProject,value : String) post (replaceAll('\n', '').trim()) ]
+[for (it : Index | mapping.index->select(i : Index | i.standardOrProject = filter))]
+[if (it.value.equalsIgnoreCase(value)) ]
+[element.qualifiedName /]
+[/if]
+[/for]
+[/template]
+
+
+[query public getStandard(aParam: String) : Sequence(String) = 
+    invoke('gov.us.fhim.uml.report.queries.Queries', 'getStandardBuckets(java.lang.String)', Sequence{aParam})
+  /]

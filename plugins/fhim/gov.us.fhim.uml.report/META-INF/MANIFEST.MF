@@ -16,9 +16,12 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.acceleo.profiler,
  org.eclipse.acceleo.engine,
  com.google.guava,
- gov.us.fhim.resource
+ gov.us.fhim.resource,
+ org.openhealthtools.mdht.uml.term.core
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Eclipse-LazyStart: true
-Export-Package: gov.us.fhim.uml.report.main
+Export-Package: gov.us.fhim.uml.report,
+ gov.us.fhim.uml.report.main,
+ gov.us.fhim.uml.report.queries
 
