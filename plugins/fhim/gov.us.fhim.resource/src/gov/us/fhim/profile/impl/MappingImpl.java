@@ -119,11 +119,14 @@ public class MappingImpl extends MinimalEObjectImpl.Container implements Mapping
 
 	public Classifier getBase_Classifier() {
 		if (base_Classifier != null && base_Classifier.eIsProxy()) {
-			InternalEObject oldBase_Classifier = (InternalEObject)base_Classifier;
-			base_Classifier = (Classifier)eResolveProxy(oldBase_Classifier);
+			InternalEObject oldBase_Classifier = (InternalEObject) base_Classifier;
+			base_Classifier = (Classifier) eResolveProxy(oldBase_Classifier);
 			if (base_Classifier != oldBase_Classifier) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, FHIMPackage.MAPPING__BASE_CLASSIFIER, oldBase_Classifier, base_Classifier));
+				if (eNotificationRequired()) {
+					eNotify(new ENotificationImpl(
+						this, Notification.RESOLVE, FHIMPackage.MAPPING__BASE_CLASSIFIER, oldBase_Classifier,
+						base_Classifier));
+				}
 			}
 		}
 		return base_Classifier;
@@ -147,8 +150,10 @@ public class MappingImpl extends MinimalEObjectImpl.Container implements Mapping
 	public void setBase_Classifier(Classifier newBase_Classifier) {
 		Classifier oldBase_Classifier = base_Classifier;
 		base_Classifier = newBase_Classifier;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FHIMPackage.MAPPING__BASE_CLASSIFIER, oldBase_Classifier, base_Classifier));
+		if (eNotificationRequired()) {
+			eNotify(new ENotificationImpl(
+				this, Notification.SET, FHIMPackage.MAPPING__BASE_CLASSIFIER, oldBase_Classifier, base_Classifier));
+		}
 	}
 
 	/**
@@ -159,11 +164,13 @@ public class MappingImpl extends MinimalEObjectImpl.Container implements Mapping
 
 	public Property getBase_Property() {
 		if (base_Property != null && base_Property.eIsProxy()) {
-			InternalEObject oldBase_Property = (InternalEObject)base_Property;
-			base_Property = (Property)eResolveProxy(oldBase_Property);
+			InternalEObject oldBase_Property = (InternalEObject) base_Property;
+			base_Property = (Property) eResolveProxy(oldBase_Property);
 			if (base_Property != oldBase_Property) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, FHIMPackage.MAPPING__BASE_PROPERTY, oldBase_Property, base_Property));
+				if (eNotificationRequired()) {
+					eNotify(new ENotificationImpl(
+						this, Notification.RESOLVE, FHIMPackage.MAPPING__BASE_PROPERTY, oldBase_Property, base_Property));
+				}
 			}
 		}
 		return base_Property;
@@ -187,8 +194,10 @@ public class MappingImpl extends MinimalEObjectImpl.Container implements Mapping
 	public void setBase_Property(Property newBase_Property) {
 		Property oldBase_Property = base_Property;
 		base_Property = newBase_Property;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FHIMPackage.MAPPING__BASE_PROPERTY, oldBase_Property, base_Property));
+		if (eNotificationRequired()) {
+			eNotify(new ENotificationImpl(
+				this, Notification.SET, FHIMPackage.MAPPING__BASE_PROPERTY, oldBase_Property, base_Property));
+		}
 	}
 
 	/**
@@ -214,7 +223,7 @@ public class MappingImpl extends MinimalEObjectImpl.Container implements Mapping
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case FHIMPackage.MAPPING__INDEX:
-				return ((InternalEList<?>)getIndex()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>) getIndex()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -231,10 +240,14 @@ public class MappingImpl extends MinimalEObjectImpl.Container implements Mapping
 			case FHIMPackage.MAPPING__INDEX:
 				return getIndex();
 			case FHIMPackage.MAPPING__BASE_CLASSIFIER:
-				if (resolve) return getBase_Classifier();
+				if (resolve) {
+					return getBase_Classifier();
+				}
 				return basicGetBase_Classifier();
 			case FHIMPackage.MAPPING__BASE_PROPERTY:
-				if (resolve) return getBase_Property();
+				if (resolve) {
+					return getBase_Property();
+				}
 				return basicGetBase_Property();
 			case FHIMPackage.MAPPING__ATTRIBUTE:
 				return getAttribute();
@@ -253,17 +266,17 @@ public class MappingImpl extends MinimalEObjectImpl.Container implements Mapping
 		switch (featureID) {
 			case FHIMPackage.MAPPING__INDEX:
 				getIndex().clear();
-				getIndex().addAll((Collection<? extends Index>)newValue);
+				getIndex().addAll((Collection<? extends Index>) newValue);
 				return;
 			case FHIMPackage.MAPPING__BASE_CLASSIFIER:
-				setBase_Classifier((Classifier)newValue);
+				setBase_Classifier((Classifier) newValue);
 				return;
 			case FHIMPackage.MAPPING__BASE_PROPERTY:
-				setBase_Property((Property)newValue);
+				setBase_Property((Property) newValue);
 				return;
 			case FHIMPackage.MAPPING__ATTRIBUTE:
 				getAttribute().clear();
-				getAttribute().addAll((Collection<? extends String>)newValue);
+				getAttribute().addAll((Collection<? extends String>) newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -282,10 +295,10 @@ public class MappingImpl extends MinimalEObjectImpl.Container implements Mapping
 				getIndex().clear();
 				return;
 			case FHIMPackage.MAPPING__BASE_CLASSIFIER:
-				setBase_Classifier((Classifier)null);
+				setBase_Classifier((Classifier) null);
 				return;
 			case FHIMPackage.MAPPING__BASE_PROPERTY:
-				setBase_Property((Property)null);
+				setBase_Property((Property) null);
 				return;
 			case FHIMPackage.MAPPING__ATTRIBUTE:
 				getAttribute().clear();
@@ -323,7 +336,9 @@ public class MappingImpl extends MinimalEObjectImpl.Container implements Mapping
 
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if (eIsProxy()) {
+			return super.toString();
+		}
 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (attribute: ");

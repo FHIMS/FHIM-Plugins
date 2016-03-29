@@ -27,222 +27,238 @@ public enum StandardOrProject implements Enumerator {
 	 * @ordered
 	 */
 	CCDA(0, "CCDA", "CCDA"), /**
-	 * The '<em><b>HL7CDA</b></em>' literal object.
-	 * <!-- begin-user-doc -->
+								* The '<em><b>HL7CDA</b></em>' literal object.
+								* <!-- begin-user-doc -->
 								* <!-- end-user-doc -->
-	 * @see #HL7CDA_VALUE
-	 * @generated
-	 * @ordered
-	 */
+								* @see #HL7CDA_VALUE
+								* @generated
+								* @ordered
+								*/
 	HL7CDA(1, "HL7CDA", "HL7CDA"), /**
-	 * The '<em><b>HL7FHIR</b></em>' literal object.
-	 * <!-- begin-user-doc -->
+									* The '<em><b>HL7FHIR</b></em>' literal object.
+									* <!-- begin-user-doc -->
 									* <!-- end-user-doc -->
-	 * @see #HL7FHIR_VALUE
-	 * @generated
-	 * @ordered
-	 */
+									* @see #HL7FHIR_VALUE
+									* @generated
+									* @ordered
+									*/
 	HL7FHIR(2, "HL7FHIR", "HL7FHIR"), /**
-	 * The '<em><b>HL 7v2</b></em>' literal object.
-	 * <!-- begin-user-doc -->
+										* The '<em><b>HL 7v2</b></em>' literal object.
+										* <!-- begin-user-doc -->
 										* <!-- end-user-doc -->
-	 * @see #HL_7V2_VALUE
-	 * @generated
-	 * @ordered
-	 */
+										* @see #HL_7V2_VALUE
+										* @generated
+										* @ordered
+										*/
 	HL_7V2(3, "HL7v2", "HL7v2"), /**
-	 * The '<em><b>HL 7v3</b></em>' literal object.
-	 * <!-- begin-user-doc -->
+									* The '<em><b>HL 7v3</b></em>' literal object.
+									* <!-- begin-user-doc -->
 									* <!-- end-user-doc -->
-	 * @see #HL_7V3_VALUE
-	 * @generated
-	 * @ordered
-	 */
+									* @see #HL_7V3_VALUE
+									* @generated
+									* @ordered
+									*/
 	HL_7V3(4, "HL7v3", "HL7v3"), /**
-	 * The '<em><b>NCPDP</b></em>' literal object.
-	 * <!-- begin-user-doc -->
+									* The '<em><b>NCPDP</b></em>' literal object.
+									* <!-- begin-user-doc -->
 									* <!-- end-user-doc -->
-	 * @see #NCPDP_VALUE
-	 * @generated
-	 * @ordered
-	 */
+									* @see #NCPDP_VALUE
+									* @generated
+									* @ordered
+									*/
 	NCPDP(5, "NCPDP", "NCPDP"), /**
-	 * The '<em><b>X12</b></em>' literal object.
-	 * <!-- begin-user-doc -->
+								* The '<em><b>X12</b></em>' literal object.
+								* <!-- begin-user-doc -->
 								* <!-- end-user-doc -->
-	 * @see #X12_VALUE
-	 * @generated
-	 * @ordered
-	 */
+								* @see #X12_VALUE
+								* @generated
+								* @ordered
+								*/
 	X12(6, "X12", "X12"), /**
-	 * The '<em><b>ONCSI Blue Button</b></em>' literal object.
-	 * <!-- begin-user-doc -->
+							* The '<em><b>ONCSI Blue Button</b></em>' literal object.
+							* <!-- begin-user-doc -->
 							* <!-- end-user-doc -->
-	 * @see #ONCSI_BLUE_BUTTON_VALUE
-	 * @generated
-	 * @ordered
-	 */
+							* @see #ONCSI_BLUE_BUTTON_VALUE
+							* @generated
+							* @ordered
+							*/
 	ONCSI_BLUE_BUTTON(7, "ONCSIBlueButton", "ONCSIBlueButton"), /**
-	 * The '<em><b>ONCSICQF</b></em>' literal object.
-	 * <!-- begin-user-doc -->
+																* The '<em><b>ONCSICQF</b></em>' literal object.
+																* <!-- begin-user-doc -->
 																* <!-- end-user-doc -->
-	 * @see #ONCSICQF_VALUE
-	 * @generated
-	 * @ordered
-	 */
+																* @see #ONCSICQF_VALUE
+																* @generated
+																* @ordered
+																*/
 	ONCSICQF(8, "ONCSICQF", "ONCSICQF"), /**
-	 * The '<em><b>ONCSIDAF</b></em>' literal object.
-	 * <!-- begin-user-doc -->
+											* The '<em><b>ONCSIDAF</b></em>' literal object.
+											* <!-- begin-user-doc -->
 											* <!-- end-user-doc -->
-	 * @see #ONCSIDAF_VALUE
-	 * @generated
-	 * @ordered
-	 */
+											* @see #ONCSIDAF_VALUE
+											* @generated
+											* @ordered
+											*/
 	ONCSIDAF(9, "ONCSIDAF", "ONCSIDAF"), /**
-	 * The '<em><b>ONCSIDPROV</b></em>' literal object.
-	 * <!-- begin-user-doc -->
+											* The '<em><b>ONCSIDPROV</b></em>' literal object.
+											* <!-- begin-user-doc -->
 											* <!-- end-user-doc -->
-	 * @see #ONCSIDPROV_VALUE
-	 * @generated
-	 * @ordered
-	 */
+											* @see #ONCSIDPROV_VALUE
+											* @generated
+											* @ordered
+											*/
 	ONCSIDPROV(10, "ONCSIDPROV", "ONCSIDPROV"), /**
-	 * The '<em><b>ONCSIDS4P</b></em>' literal object.
-	 * <!-- begin-user-doc -->
+												* The '<em><b>ONCSIDS4P</b></em>' literal object.
+												* <!-- begin-user-doc -->
 												* <!-- end-user-doc -->
-	 * @see #ONCSIDS4P_VALUE
-	 * @generated
-	 * @ordered
-	 */
+												* @see #ONCSIDS4P_VALUE
+												* @generated
+												* @ordered
+												*/
 	ONCSIDS4P(11, "ONCSIDS4P", "ONCSIDS4P"), /**
-	 * The '<em><b>ONCS Ies MD</b></em>' literal object.
-	 * <!-- begin-user-doc -->
+												* The '<em><b>ONCS Ies MD</b></em>' literal object.
+												* <!-- begin-user-doc -->
 												* <!-- end-user-doc -->
-	 * @see #ONCS_IES_MD_VALUE
-	 * @generated
-	 * @ordered
-	 */
+												* @see #ONCS_IES_MD_VALUE
+												* @generated
+												* @ordered
+												*/
 	ONCS_IES_MD(12, "ONCSIesMD", "ONCSIesMD"), /**
-	 * The '<em><b>ONCSIEUU Se Health</b></em>' literal object.
-	 * <!-- begin-user-doc -->
+												* The '<em><b>ONCSIEUU Se Health</b></em>' literal object.
+												* <!-- begin-user-doc -->
 												* <!-- end-user-doc -->
-	 * @see #ONCSIEUU_SE_HEALTH_VALUE
-	 * @generated
-	 * @ordered
-	 */
+												* @see #ONCSIEUU_SE_HEALTH_VALUE
+												* @generated
+												* @ordered
+												*/
 	ONCSIEUU_SE_HEALTH(13, "ONCSIEUUSeHealth", "ONCSIEUUSeHealth"), /**
-	 * The '<em><b>ONCSI He D</b></em>' literal object.
-	 * <!-- begin-user-doc -->
+																	* The '<em><b>ONCSI He D</b></em>' literal object.
+																	* <!-- begin-user-doc -->
 																	* <!-- end-user-doc -->
-	 * @see #ONCSI_HE_D_VALUE
-	 * @generated
-	 * @ordered
-	 */
+																	* @see #ONCSI_HE_D_VALUE
+																	* @generated
+																	* @ordered
+																	*/
 	ONCSI_HE_D(14, "ONCSIHeD", "ONCSIHeD"), /**
-	 * The '<em><b>ONCSILCC</b></em>' literal object.
-	 * <!-- begin-user-doc -->
+											* The '<em><b>ONCSILCC</b></em>' literal object.
+											* <!-- begin-user-doc -->
 											* <!-- end-user-doc -->
-	 * @see #ONCSILCC_VALUE
-	 * @generated
-	 * @ordered
-	 */
+											* @see #ONCSILCC_VALUE
+											* @generated
+											* @ordered
+											*/
 	ONCSILCC(15, "ONCSILCC", "ONCSILCC"), /**
-	 * The '<em><b>ONCSILOI</b></em>' literal object.
-	 * <!-- begin-user-doc -->
+											* The '<em><b>ONCSILOI</b></em>' literal object.
+											* <!-- begin-user-doc -->
 											* <!-- end-user-doc -->
-	 * @see #ONCSILOI_VALUE
-	 * @generated
-	 * @ordered
-	 */
+											* @see #ONCSILOI_VALUE
+											* @generated
+											* @ordered
+											*/
 	ONCSILOI(16, "ONCSILOI", "ONCSILOI"), /**
-	 * The '<em><b>ONCSILRI</b></em>' literal object.
-	 * <!-- begin-user-doc -->
+											* The '<em><b>ONCSILRI</b></em>' literal object.
+											* <!-- begin-user-doc -->
 											* <!-- end-user-doc -->
-	 * @see #ONCSILRI_VALUE
-	 * @generated
-	 * @ordered
-	 */
+											* @see #ONCSILRI_VALUE
+											* @generated
+											* @ordered
+											*/
 	ONCSILRI(17, "ONCSILRI", "ONCSILRI"), /**
-	 * The '<em><b>ONCSIPD</b></em>' literal object.
-	 * <!-- begin-user-doc -->
+											* The '<em><b>ONCSIPD</b></em>' literal object.
+											* <!-- begin-user-doc -->
 											* <!-- end-user-doc -->
-	 * @see #ONCSIPD_VALUE
-	 * @generated
-	 * @ordered
-	 */
+											* @see #ONCSIPD_VALUE
+											* @generated
+											* @ordered
+											*/
 	ONCSIPD(18, "ONCSIPD", "ONCSIPD"), /**
-	 * The '<em><b>ONCSIPDMP</b></em>' literal object.
-	 * <!-- begin-user-doc -->
+										* The '<em><b>ONCSIPDMP</b></em>' literal object.
+										* <!-- begin-user-doc -->
 										* <!-- end-user-doc -->
-	 * @see #ONCSIPDMP_VALUE
-	 * @generated
-	 * @ordered
-	 */
+										* @see #ONCSIPDMP_VALUE
+										* @generated
+										* @ordered
+										*/
 	ONCSIPDMP(19, "ONCSIPDMP", "ONCSIPDMP"), /**
-	 * The '<em><b>ONCSI Public Health</b></em>' literal object.
-	 * <!-- begin-user-doc -->
+												* The '<em><b>ONCSI Public Health</b></em>' literal object.
+												* <!-- begin-user-doc -->
 												* <!-- end-user-doc -->
-	 * @see #ONCSI_PUBLIC_HEALTH_VALUE
-	 * @generated
-	 * @ordered
-	 */
+												* @see #ONCSI_PUBLIC_HEALTH_VALUE
+												* @generated
+												* @ordered
+												*/
 	ONCSI_PUBLIC_HEALTH(20, "ONCSIPublicHealth", "ONCSIPublicHealth"), /**
-	 * The '<em><b>ONCSIQH</b></em>' literal object.
-	 * <!-- begin-user-doc -->
+																		* The '<em><b>ONCSIQH</b></em>' literal object.
+																		* <!-- begin-user-doc -->
 																		* <!-- end-user-doc -->
-	 * @see #ONCSIQH_VALUE
-	 * @generated
-	 * @ordered
-	 */
+																		* @see #ONCSIQH_VALUE
+																		* @generated
+																		* @ordered
+																		*/
 	ONCSIQH(21, "ONCSIQH", "ONCSIQH"), /**
-	 * The '<em><b>ONCSIRH Ex</b></em>' literal object.
-	 * <!-- begin-user-doc -->
+										* The '<em><b>ONCSIRH Ex</b></em>' literal object.
+										* <!-- begin-user-doc -->
 										* <!-- end-user-doc -->
-	 * @see #ONCSIRH_EX_VALUE
-	 * @generated
-	 * @ordered
-	 */
+										* @see #ONCSIRH_EX_VALUE
+										* @generated
+										* @ordered
+										*/
 	ONCSIRH_EX(22, "ONCSIRHEx", "ONCSIRHEx"), /**
-	 * The '<em><b>ONCSISDC</b></em>' literal object.
-	 * <!-- begin-user-doc -->
+												* The '<em><b>ONCSISDC</b></em>' literal object.
+												* <!-- begin-user-doc -->
 												* <!-- end-user-doc -->
-	 * @see #ONCSISDC_VALUE
-	 * @generated
-	 * @ordered
-	 */
+												* @see #ONCSISDC_VALUE
+												* @generated
+												* @ordered
+												*/
 	ONCSISDC(23, "ONCSISDC", "ONCSISDC"), /**
-	 * The '<em><b>ONCSITOC</b></em>' literal object.
-	 * <!-- begin-user-doc -->
+											* The '<em><b>ONCSITOC</b></em>' literal object.
+											* <!-- begin-user-doc -->
 											* <!-- end-user-doc -->
-	 * @see #ONCSITOC_VALUE
-	 * @generated
-	 * @ordered
-	 */
+											* @see #ONCSITOC_VALUE
+											* @generated
+											* @ordered
+											*/
 	ONCSITOC(24, "ONCSITOC", "ONCSITOC"), /**
-	 * The '<em><b>MU2</b></em>' literal object.
-	 * <!-- begin-user-doc -->
+											* The '<em><b>MU2</b></em>' literal object.
+											* <!-- begin-user-doc -->
 											* <!-- end-user-doc -->
-	 * @see #MU2_VALUE
-	 * @generated
-	 * @ordered
-	 */
+											* @see #MU2_VALUE
+											* @generated
+											* @ordered
+											*/
 	MU2(25, "MU2", "MU2"), /**
-	 * The '<em><b>NCPDP Telecom</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #NCPDP_TELECOM_VALUE
-	 * @generated
-	 * @ordered
-	 */
+							* The '<em><b>NCPDP Telecom</b></em>' literal object.
+							* <!-- begin-user-doc -->
+							* <!-- end-user-doc -->
+							* @see #NCPDP_TELECOM_VALUE
+							* @generated
+							* @ordered
+							*/
 	NCPDP_TELECOM(26, "NCPDPTelecom", "NCPDPTelecom"), /**
-	 * The '<em><b>NCPDP Script</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #NCPDP_SCRIPT_VALUE
-	 * @generated
-	 * @ordered
-	 */
-	NCPDP_SCRIPT(27, "NCPDPScript", "NCPDPScript");
+														* The '<em><b>NCPDP Script</b></em>' literal object.
+														* <!-- begin-user-doc -->
+														* <!-- end-user-doc -->
+														* @see #NCPDP_SCRIPT_VALUE
+														* @generated
+														* @ordered
+														*/
+	NCPDP_SCRIPT(27, "NCPDPScript", "NCPDPScript"), /**
+													* The '<em><b>VHA</b></em>' literal object.
+													* <!-- begin-user-doc -->
+													* <!-- end-user-doc -->
+													* @see #VHA_VALUE
+													* @generated
+													* @ordered
+													*/
+	VHA(28, "VHA", "VHA"), /**
+							* The '<em><b>DOD</b></em>' literal object.
+							* <!-- begin-user-doc -->
+							* <!-- end-user-doc -->
+							* @see #DOD_VALUE
+							* @generated
+							* @ordered
+							*/
+	DOD(29, "DOD", "DOD");
 
 	/**
 	 * The '<em><b>CCDA</b></em>' literal value.
@@ -673,41 +689,45 @@ public enum StandardOrProject implements Enumerator {
 	public static final int NCPDP_SCRIPT_VALUE = 27;
 
 	/**
+	 * The '<em><b>VHA</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>VHA</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #VHA
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int VHA_VALUE = 28;
+
+	/**
+	 * The '<em><b>DOD</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>DOD</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #DOD
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int DOD_VALUE = 29;
+
+	/**
 	 * An array of all the '<em><b>Standard Or Project</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private static final StandardOrProject[] VALUES_ARRAY = new StandardOrProject[] {
-			CCDA,
-			HL7CDA,
-			HL7FHIR,
-			HL_7V2,
-			HL_7V3,
-			NCPDP,
-			X12,
-			ONCSI_BLUE_BUTTON,
-			ONCSICQF,
-			ONCSIDAF,
-			ONCSIDPROV,
-			ONCSIDS4P,
-			ONCS_IES_MD,
-			ONCSIEUU_SE_HEALTH,
-			ONCSI_HE_D,
-			ONCSILCC,
-			ONCSILOI,
-			ONCSILRI,
-			ONCSIPD,
-			ONCSIPDMP,
-			ONCSI_PUBLIC_HEALTH,
-			ONCSIQH,
-			ONCSIRH_EX,
-			ONCSISDC,
-			ONCSITOC,
-			MU2,
-			NCPDP_TELECOM,
-			NCPDP_SCRIPT,
-		};
+			CCDA, HL7CDA, HL7FHIR, HL_7V2, HL_7V3, NCPDP, X12, ONCSI_BLUE_BUTTON, ONCSICQF, ONCSIDAF, ONCSIDPROV,
+			ONCSIDS4P, ONCS_IES_MD, ONCSIEUU_SE_HEALTH, ONCSI_HE_D, ONCSILCC, ONCSILOI, ONCSILRI, ONCSIPD, ONCSIPDMP,
+			ONCSI_PUBLIC_HEALTH, ONCSIQH, ONCSIRH_EX, ONCSISDC, ONCSITOC, MU2, NCPDP_TELECOM, NCPDP_SCRIPT, VHA, DOD, };
 
 	/**
 	 * A public read-only list of all the '<em><b>Standard Or Project</b></em>' enumerators.
@@ -757,34 +777,66 @@ public enum StandardOrProject implements Enumerator {
 	 */
 	public static StandardOrProject get(int value) {
 		switch (value) {
-			case CCDA_VALUE: return CCDA;
-			case HL7CDA_VALUE: return HL7CDA;
-			case HL7FHIR_VALUE: return HL7FHIR;
-			case HL_7V2_VALUE: return HL_7V2;
-			case HL_7V3_VALUE: return HL_7V3;
-			case NCPDP_VALUE: return NCPDP;
-			case X12_VALUE: return X12;
-			case ONCSI_BLUE_BUTTON_VALUE: return ONCSI_BLUE_BUTTON;
-			case ONCSICQF_VALUE: return ONCSICQF;
-			case ONCSIDAF_VALUE: return ONCSIDAF;
-			case ONCSIDPROV_VALUE: return ONCSIDPROV;
-			case ONCSIDS4P_VALUE: return ONCSIDS4P;
-			case ONCS_IES_MD_VALUE: return ONCS_IES_MD;
-			case ONCSIEUU_SE_HEALTH_VALUE: return ONCSIEUU_SE_HEALTH;
-			case ONCSI_HE_D_VALUE: return ONCSI_HE_D;
-			case ONCSILCC_VALUE: return ONCSILCC;
-			case ONCSILOI_VALUE: return ONCSILOI;
-			case ONCSILRI_VALUE: return ONCSILRI;
-			case ONCSIPD_VALUE: return ONCSIPD;
-			case ONCSIPDMP_VALUE: return ONCSIPDMP;
-			case ONCSI_PUBLIC_HEALTH_VALUE: return ONCSI_PUBLIC_HEALTH;
-			case ONCSIQH_VALUE: return ONCSIQH;
-			case ONCSIRH_EX_VALUE: return ONCSIRH_EX;
-			case ONCSISDC_VALUE: return ONCSISDC;
-			case ONCSITOC_VALUE: return ONCSITOC;
-			case MU2_VALUE: return MU2;
-			case NCPDP_TELECOM_VALUE: return NCPDP_TELECOM;
-			case NCPDP_SCRIPT_VALUE: return NCPDP_SCRIPT;
+			case CCDA_VALUE:
+				return CCDA;
+			case HL7CDA_VALUE:
+				return HL7CDA;
+			case HL7FHIR_VALUE:
+				return HL7FHIR;
+			case HL_7V2_VALUE:
+				return HL_7V2;
+			case HL_7V3_VALUE:
+				return HL_7V3;
+			case NCPDP_VALUE:
+				return NCPDP;
+			case X12_VALUE:
+				return X12;
+			case ONCSI_BLUE_BUTTON_VALUE:
+				return ONCSI_BLUE_BUTTON;
+			case ONCSICQF_VALUE:
+				return ONCSICQF;
+			case ONCSIDAF_VALUE:
+				return ONCSIDAF;
+			case ONCSIDPROV_VALUE:
+				return ONCSIDPROV;
+			case ONCSIDS4P_VALUE:
+				return ONCSIDS4P;
+			case ONCS_IES_MD_VALUE:
+				return ONCS_IES_MD;
+			case ONCSIEUU_SE_HEALTH_VALUE:
+				return ONCSIEUU_SE_HEALTH;
+			case ONCSI_HE_D_VALUE:
+				return ONCSI_HE_D;
+			case ONCSILCC_VALUE:
+				return ONCSILCC;
+			case ONCSILOI_VALUE:
+				return ONCSILOI;
+			case ONCSILRI_VALUE:
+				return ONCSILRI;
+			case ONCSIPD_VALUE:
+				return ONCSIPD;
+			case ONCSIPDMP_VALUE:
+				return ONCSIPDMP;
+			case ONCSI_PUBLIC_HEALTH_VALUE:
+				return ONCSI_PUBLIC_HEALTH;
+			case ONCSIQH_VALUE:
+				return ONCSIQH;
+			case ONCSIRH_EX_VALUE:
+				return ONCSIRH_EX;
+			case ONCSISDC_VALUE:
+				return ONCSISDC;
+			case ONCSITOC_VALUE:
+				return ONCSITOC;
+			case MU2_VALUE:
+				return MU2;
+			case NCPDP_TELECOM_VALUE:
+				return NCPDP_TELECOM;
+			case NCPDP_SCRIPT_VALUE:
+				return NCPDP_SCRIPT;
+			case VHA_VALUE:
+				return VHA;
+			case DOD_VALUE:
+				return DOD;
 		}
 		return null;
 	}
@@ -829,7 +881,7 @@ public enum StandardOrProject implements Enumerator {
 	 */
 
 	public int getValue() {
-	  return value;
+		return value;
 	}
 
 	/**
@@ -839,7 +891,7 @@ public enum StandardOrProject implements Enumerator {
 	 */
 
 	public String getName() {
-	  return name;
+		return name;
 	}
 
 	/**
@@ -849,7 +901,7 @@ public enum StandardOrProject implements Enumerator {
 	 */
 
 	public String getLiteral() {
-	  return literal;
+		return literal;
 	}
 
 	/**

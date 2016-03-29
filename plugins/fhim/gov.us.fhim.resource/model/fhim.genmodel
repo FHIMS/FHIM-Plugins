@@ -58,6 +58,8 @@
       <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="profile.ecore#//StandardOrProject/MU2"/>
       <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="profile.ecore#//StandardOrProject/NCPDPTelecom"/>
       <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="profile.ecore#//StandardOrProject/NCPDPScript"/>
+      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="profile.ecore#//StandardOrProject/VHA"/>
+      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="profile.ecore#//StandardOrProject/DOD"/>
     </genEnums>
     <genClasses xsi:type="genmodel:GenClass" ecoreClass="profile.ecore#//Mapping">
       <genFeatures xsi:type="genmodel:GenFeature" property="None" children="true"

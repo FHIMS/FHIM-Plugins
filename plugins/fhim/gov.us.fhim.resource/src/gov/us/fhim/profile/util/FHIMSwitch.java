@@ -70,24 +70,31 @@ public class FHIMSwitch<T> extends Switch<T> {
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
 			case FHIMPackage.MAPPING: {
-				Mapping mapping = (Mapping)theEObject;
+				Mapping mapping = (Mapping) theEObject;
 				T result = caseMapping(mapping);
-				if (result == null) result = defaultCase(theEObject);
+				if (result == null) {
+					result = defaultCase(theEObject);
+				}
 				return result;
 			}
 			case FHIMPackage.INDEX: {
-				Index index = (Index)theEObject;
+				Index index = (Index) theEObject;
 				T result = caseIndex(index);
-				if (result == null) result = defaultCase(theEObject);
+				if (result == null) {
+					result = defaultCase(theEObject);
+				}
 				return result;
 			}
 			case FHIMPackage.ISO11179: {
-				Iso11179 iso11179 = (Iso11179)theEObject;
+				Iso11179 iso11179 = (Iso11179) theEObject;
 				T result = caseIso11179(iso11179);
-				if (result == null) result = defaultCase(theEObject);
+				if (result == null) {
+					result = defaultCase(theEObject);
+				}
 				return result;
 			}
-			default: return defaultCase(theEObject);
+			default:
+				return defaultCase(theEObject);
 		}
 	}
 

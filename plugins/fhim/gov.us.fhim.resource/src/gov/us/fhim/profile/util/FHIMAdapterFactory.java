@@ -55,7 +55,7 @@ public class FHIMAdapterFactory extends AdapterFactoryImpl {
 			return true;
 		}
 		if (object instanceof EObject) {
-			return ((EObject)object).eClass().getEPackage() == modelPackage;
+			return ((EObject) object).eClass().getEPackage() == modelPackage;
 		}
 		return false;
 	}
@@ -67,23 +67,26 @@ public class FHIMAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	protected FHIMSwitch<Adapter> modelSwitch = new FHIMSwitch<Adapter>() {
-			@Override
-			public Adapter caseMapping(Mapping object) {
-				return createMappingAdapter();
-			}
-			@Override
-			public Adapter caseIndex(Index object) {
-				return createIndexAdapter();
-			}
-			@Override
-			public Adapter caseIso11179(Iso11179 object) {
-				return createIso11179Adapter();
-			}
-			@Override
-			public Adapter defaultCase(EObject object) {
-				return createEObjectAdapter();
-			}
-		};
+		@Override
+		public Adapter caseMapping(Mapping object) {
+			return createMappingAdapter();
+		}
+
+		@Override
+		public Adapter caseIndex(Index object) {
+			return createIndexAdapter();
+		}
+
+		@Override
+		public Adapter caseIso11179(Iso11179 object) {
+			return createIso11179Adapter();
+		}
+
+		@Override
+		public Adapter defaultCase(EObject object) {
+			return createEObjectAdapter();
+		}
+	};
 
 	/**
 	 * Creates an adapter for the <code>target</code>.
@@ -96,7 +99,7 @@ public class FHIMAdapterFactory extends AdapterFactoryImpl {
 
 	@Override
 	public Adapter createAdapter(Notifier target) {
-		return modelSwitch.doSwitch((EObject)target);
+		return modelSwitch.doSwitch((EObject) target);
 	}
 
 	/**

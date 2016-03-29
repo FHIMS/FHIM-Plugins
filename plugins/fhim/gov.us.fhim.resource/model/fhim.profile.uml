@@ -499,6 +499,8 @@
       <ownedLiteral xmi:id="_zFRi8CF5EeWCMsbt5es6xg" name="MU2"/>
       <ownedLiteral xmi:id="_AEyO4HvmEeWxZr10aRYW5g" name="NCPDP Telecom"/>
       <ownedLiteral xmi:id="_D16XIHvmEeWxZr10aRYW5g" name="NCPDP Script"/>
+      <ownedLiteral xmi:id="_OdevQJ0CEeWOdKNpnIhgcQ" name="VHA"/>
+      <ownedLiteral xmi:id="_P2LAgJ0CEeWOdKNpnIhgcQ" name="DOD"/>
     </packagedElement>
     <profileApplication xmi:id="_YKHrkFLaEeSAj9zrFtHurw">
       <eAnnotations xmi:id="_YKLV8FLaEeSAj9zrFtHurw" source="http://www.eclipse.org/uml2/2.0.0/UML">
