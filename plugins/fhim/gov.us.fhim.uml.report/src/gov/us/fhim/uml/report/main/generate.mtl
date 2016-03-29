@@ -8,17 +8,17 @@
 [if (aPackage.name.equalsIgnoreCase('FHIM'))]
 [file ('HL7V2Mapping.csv', false, 'UTF-8')]
 [for (bucket : String | getStandard('HL7'))]
-[bucket /],[getnamedelements(aPackage,bucket)/]
+[bucket /],[getStandardDescription(bucket) /],[getnamedelements(aPackage,bucket)/]
 [/for]
 [/file]
 [/if]
 
 
 [file (aPackage.name.concat('.csv'), false, 'UTF-8')]
-Element,[FHIM::StandardOrProject::MU2.toString()/],[FHIM::StandardOrProject::CCDA.toString()/],[FHIM::StandardOrProject::HL7CDA.toString()/],[FHIM::StandardOrProject::HL7FHIR.toString()/],[FHIM::StandardOrProject::HL7v2.toString()/],[FHIM::StandardOrProject::ONCSIDAF.toString()/]
+Element,[FHIM::StandardOrProject::VHA.toString()/],[FHIM::StandardOrProject::DOD.toString()/]
 [for (element : Type | aPackage.ownedType)]
 [if (element.oclIsTypeOf(Class))][element.qualifiedName /] [for (mapping : Mapping | element.getStereotypeApplications()->select(oclIsTypeOf(Mapping)).oclAsType(Mapping))] [report(mapping) /][/for]
-[for (it : Property | element.oclAsType(Class).attribute)]
+[for (it : Property | element.oclAsType(Class).getAllAttributes())]
 [it.qualifiedName/][for (mapping : Mapping | it.getStereotypeApplications()->select(oclIsTypeOf(Mapping)).oclAsType(Mapping))] [report(mapping) /][/for]
 [/for]
 [/if]
@@ -67,7 +67,7 @@ Element,[FHIM::StandardOrProject::HL7v2.toString()/]
 [/template]
  
 [template public report(mapping : Mapping)]
-,[generateIndexing(mapping, FHIM::StandardOrProject::MU2)/],[generateIndexing(mapping, FHIM::StandardOrProject::CCDA)/],[generateIndexing(mapping, FHIM::StandardOrProject::HL7CDA)/],[generateIndexing(mapping, FHIM::StandardOrProject::HL7FHIR)/],[generateIndexing(mapping, FHIM::StandardOrProject::HL7v2)/],[generateIndexing(mapping, FHIM::StandardOrProject::ONCSIDAF)/]
+,[generateIndexing(mapping, FHIM::StandardOrProject::VHA)/],[generateIndexing(mapping, FHIM::StandardOrProject::DOD)/]
 [/template]
 [template public generateIndexing(mapping : Mapping,filter : StandardOrProject)]
 [for (it : Index | mapping.index->select(i : Index | i.standardOrProject = filter))][it.value/] [/for]
@@ -97,4 +97,8 @@ Element,[FHIM::StandardOrProject::HL7v2.toString()/]
 
 [query public getStandard(aParam: String) : Sequence(String) = 
     invoke('gov.us.fhim.uml.report.queries.Queries', 'getStandardBuckets(java.lang.String)', Sequence{aParam})
+  /]
+
+[query public getStandardDescription(aParam: String) : String = 
+    invoke('gov.us.fhim.uml.report.queries.Queries', 'getStandardDescription(java.lang.String)', Sequence{aParam})
   /]

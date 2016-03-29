@@ -1,14 +1,49 @@
 package gov.us.fhim.uml.report.queries;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Properties;
 import java.util.TreeSet;
 
 public class Queries {
 
+	private static Properties configFile = new Properties();
+	
+	 public static String getStandardDescription(String bucket){
+		 
+		 return configFile.get(bucket).toString().replace(",", " ");
+//		 if (configFile.contains(bucket)) {
+//			 return (String) configFile.get(bucket);
+//			 
+//		 } else {
+//			 for (Object foo : configFile.keySet()) {
+////				 System.out.println(configFile.get(foo));
+////				 if (configFile.contains(foo)) {
+////					 System.out.println("found");
+////				 }
+////			 }
+//			 return "";
+//		 }
+	 }
 	
 	 public static ArrayList<String> getStandardBuckets(String standard){
 		
-		ArrayList<String> buckets = populateStandardHL7V2();
+		ArrayList<String> buckets = new ArrayList<String>();
+		
+		
+		try {
+			
+			configFile.clear();
+			configFile.load(Queries.class.getClassLoader().getResourceAsStream("hl7v2.properties"));
+			
+			for (Object key : configFile.keySet()) {
+				buckets.add((String) key);
+			}
+		
+		} catch (IOException e) {
+ 
+			e.printStackTrace();
+		}
 		
 	
 		return buckets;
