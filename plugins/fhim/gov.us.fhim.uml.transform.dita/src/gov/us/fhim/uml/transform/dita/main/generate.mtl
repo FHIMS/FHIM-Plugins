@@ -511,7 +511,10 @@
 <!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
 <topic id="[enumeration.qualifiedName.replaceAll('\\W+','').replaceAll(':+','')/]" xml:lang="en-us">
 <title id="title">[generateClassTitle(enumeration)/]</title>
-<shortdesc id="shortdesc">[generateClassShortDescription(enumeration)/]</shortdesc>
+<shortdesc id="shortdesc">
+[generateClassShortDescription(enumeration)/]
+<tt>The use of any code system referenced in the FHIM model is governed by the license requirements of the specific code system noted. Please refer to the code system authority for use restrictions.</tt>
+</shortdesc>
 <body id="body" >[generateEnumerationBody(enumeration)/]</body>
 </topic>
 [/file]
