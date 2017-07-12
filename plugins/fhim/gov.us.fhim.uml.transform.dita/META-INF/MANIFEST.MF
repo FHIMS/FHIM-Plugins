@@ -32,5 +32,6 @@ Require-Bundle: org.eclipse.core.runtime,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Eclipse-LazyStart: true
-Export-Package: gov.us.fhim.uml.transform.dita.main
+Export-Package: gov.us.fhim.uml.transform.dita,
+ gov.us.fhim.uml.transform.dita.main
 

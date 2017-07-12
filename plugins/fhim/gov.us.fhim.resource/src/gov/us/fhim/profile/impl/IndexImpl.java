@@ -104,13 +104,9 @@ public class IndexImpl extends MinimalEObjectImpl.Container implements Index {
 
 	public void setStandardOrProject(StandardOrProject newStandardOrProject) {
 		StandardOrProject oldStandardOrProject = standardOrProject;
-		standardOrProject = newStandardOrProject == null
-				? STANDARD_OR_PROJECT_EDEFAULT
-				: newStandardOrProject;
-		if (eNotificationRequired()) {
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, FHIMPackage.INDEX__STANDARD_OR_PROJECT, oldStandardOrProject, standardOrProject));
-		}
+		standardOrProject = newStandardOrProject == null ? STANDARD_OR_PROJECT_EDEFAULT : newStandardOrProject;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FHIMPackage.INDEX__STANDARD_OR_PROJECT, oldStandardOrProject, standardOrProject));
 	}
 
 	/**
@@ -132,9 +128,8 @@ public class IndexImpl extends MinimalEObjectImpl.Container implements Index {
 	public void setValue(String newValue) {
 		String oldValue = value;
 		value = newValue;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, FHIMPackage.INDEX__VALUE, oldValue, value));
-		}
 	}
 
 	/**
@@ -164,10 +159,10 @@ public class IndexImpl extends MinimalEObjectImpl.Container implements Index {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case FHIMPackage.INDEX__STANDARD_OR_PROJECT:
-				setStandardOrProject((StandardOrProject) newValue);
+				setStandardOrProject((StandardOrProject)newValue);
 				return;
 			case FHIMPackage.INDEX__VALUE:
-				setValue((String) newValue);
+				setValue((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -204,9 +199,7 @@ public class IndexImpl extends MinimalEObjectImpl.Container implements Index {
 			case FHIMPackage.INDEX__STANDARD_OR_PROJECT:
 				return standardOrProject != STANDARD_OR_PROJECT_EDEFAULT;
 			case FHIMPackage.INDEX__VALUE:
-				return VALUE_EDEFAULT == null
-						? value != null
-						: !VALUE_EDEFAULT.equals(value);
+				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -219,9 +212,7 @@ public class IndexImpl extends MinimalEObjectImpl.Container implements Index {
 
 	@Override
 	public String toString() {
-		if (eIsProxy()) {
-			return super.toString();
-		}
+		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (standardOrProject: ");

@@ -17,6 +17,15 @@
                icon="icons/default.gif"
                label="Generate Mapping Report"
                menubarPath="org.eclipse.acceleo.module.menu/acceleo"/>
+               
+               
+           <action
+               class="gov.us.fhim.uml.report.ui.popupMenus.TerminologyReportAction"
+               enablesFor="+"
+               id="gov.us.fhim.uml.report.ui.popupMenus.TerminologyReportAction"
+               icon="icons/default.gif"
+               label="Generate Terminology Report"
+               menubarPath="org.eclipse.acceleo.module.menu/acceleo"/>      
       </objectContribution>
    </extension>
 </plugin>

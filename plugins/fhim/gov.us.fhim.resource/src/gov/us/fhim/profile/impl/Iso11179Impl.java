@@ -159,9 +159,8 @@ public class Iso11179Impl extends MinimalEObjectImpl.Container implements Iso111
 	public void setId(String newId) {
 		String oldId = id;
 		id = newId;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, FHIMPackage.ISO11179__ID, oldId, id));
-		}
 	}
 
 	/**
@@ -183,10 +182,8 @@ public class Iso11179Impl extends MinimalEObjectImpl.Container implements Iso111
 	public void setCodeSystem(String newCodeSystem) {
 		String oldCodeSystem = codeSystem;
 		codeSystem = newCodeSystem;
-		if (eNotificationRequired()) {
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, FHIMPackage.ISO11179__CODE_SYSTEM, oldCodeSystem, codeSystem));
-		}
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FHIMPackage.ISO11179__CODE_SYSTEM, oldCodeSystem, codeSystem));
 	}
 
 	/**
@@ -208,9 +205,8 @@ public class Iso11179Impl extends MinimalEObjectImpl.Container implements Iso111
 	public void setCode(String newCode) {
 		String oldCode = code;
 		code = newCode;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, FHIMPackage.ISO11179__CODE, oldCode, code));
-		}
 	}
 
 	/**
@@ -232,9 +228,8 @@ public class Iso11179Impl extends MinimalEObjectImpl.Container implements Iso111
 	public void setSource(String newSource) {
 		String oldSource = source;
 		source = newSource;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, FHIMPackage.ISO11179__SOURCE, oldSource, source));
-		}
 	}
 
 	/**
@@ -245,14 +240,11 @@ public class Iso11179Impl extends MinimalEObjectImpl.Container implements Iso111
 
 	public Property getBase_Property() {
 		if (base_Property != null && base_Property.eIsProxy()) {
-			InternalEObject oldBase_Property = (InternalEObject) base_Property;
-			base_Property = (Property) eResolveProxy(oldBase_Property);
+			InternalEObject oldBase_Property = (InternalEObject)base_Property;
+			base_Property = (Property)eResolveProxy(oldBase_Property);
 			if (base_Property != oldBase_Property) {
-				if (eNotificationRequired()) {
-					eNotify(new ENotificationImpl(
-						this, Notification.RESOLVE, FHIMPackage.ISO11179__BASE_PROPERTY, oldBase_Property,
-						base_Property));
-				}
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, FHIMPackage.ISO11179__BASE_PROPERTY, oldBase_Property, base_Property));
 			}
 		}
 		return base_Property;
@@ -276,10 +268,8 @@ public class Iso11179Impl extends MinimalEObjectImpl.Container implements Iso111
 	public void setBase_Property(Property newBase_Property) {
 		Property oldBase_Property = base_Property;
 		base_Property = newBase_Property;
-		if (eNotificationRequired()) {
-			eNotify(new ENotificationImpl(
-				this, Notification.SET, FHIMPackage.ISO11179__BASE_PROPERTY, oldBase_Property, base_Property));
-		}
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FHIMPackage.ISO11179__BASE_PROPERTY, oldBase_Property, base_Property));
 	}
 
 	/**
@@ -300,9 +290,7 @@ public class Iso11179Impl extends MinimalEObjectImpl.Container implements Iso111
 			case FHIMPackage.ISO11179__SOURCE:
 				return getSource();
 			case FHIMPackage.ISO11179__BASE_PROPERTY:
-				if (resolve) {
-					return getBase_Property();
-				}
+				if (resolve) return getBase_Property();
 				return basicGetBase_Property();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -318,19 +306,19 @@ public class Iso11179Impl extends MinimalEObjectImpl.Container implements Iso111
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case FHIMPackage.ISO11179__ID:
-				setId((String) newValue);
+				setId((String)newValue);
 				return;
 			case FHIMPackage.ISO11179__CODE_SYSTEM:
-				setCodeSystem((String) newValue);
+				setCodeSystem((String)newValue);
 				return;
 			case FHIMPackage.ISO11179__CODE:
-				setCode((String) newValue);
+				setCode((String)newValue);
 				return;
 			case FHIMPackage.ISO11179__SOURCE:
-				setSource((String) newValue);
+				setSource((String)newValue);
 				return;
 			case FHIMPackage.ISO11179__BASE_PROPERTY:
-				setBase_Property((Property) newValue);
+				setBase_Property((Property)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -358,7 +346,7 @@ public class Iso11179Impl extends MinimalEObjectImpl.Container implements Iso111
 				setSource(SOURCE_EDEFAULT);
 				return;
 			case FHIMPackage.ISO11179__BASE_PROPERTY:
-				setBase_Property((Property) null);
+				setBase_Property((Property)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -374,21 +362,13 @@ public class Iso11179Impl extends MinimalEObjectImpl.Container implements Iso111
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case FHIMPackage.ISO11179__ID:
-				return ID_EDEFAULT == null
-						? id != null
-						: !ID_EDEFAULT.equals(id);
+				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 			case FHIMPackage.ISO11179__CODE_SYSTEM:
-				return CODE_SYSTEM_EDEFAULT == null
-						? codeSystem != null
-						: !CODE_SYSTEM_EDEFAULT.equals(codeSystem);
+				return CODE_SYSTEM_EDEFAULT == null ? codeSystem != null : !CODE_SYSTEM_EDEFAULT.equals(codeSystem);
 			case FHIMPackage.ISO11179__CODE:
-				return CODE_EDEFAULT == null
-						? code != null
-						: !CODE_EDEFAULT.equals(code);
+				return CODE_EDEFAULT == null ? code != null : !CODE_EDEFAULT.equals(code);
 			case FHIMPackage.ISO11179__SOURCE:
-				return SOURCE_EDEFAULT == null
-						? source != null
-						: !SOURCE_EDEFAULT.equals(source);
+				return SOURCE_EDEFAULT == null ? source != null : !SOURCE_EDEFAULT.equals(source);
 			case FHIMPackage.ISO11179__BASE_PROPERTY:
 				return base_Property != null;
 		}
@@ -403,9 +383,7 @@ public class Iso11179Impl extends MinimalEObjectImpl.Container implements Iso111
 
 	@Override
 	public String toString() {
-		if (eIsProxy()) {
-			return super.toString();
-		}
+		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (id: ");

@@ -234,8 +234,475 @@
 [/template]
 
 
-
 [template public generateReviewSheet(aPackage : Package)]
+
+ 
+ 
+[file ('review/'+aPackage.name+'.xml', false, 'UTF-8')]
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+  <LastAuthor>Sean Muir</LastAuthor>
+  <Created>2016-07-15T16:18:50Z</Created>
+  <Version>14.0</Version>
+ </DocumentProperties>
+ <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+  <WindowHeight>14680</WindowHeight>
+  <WindowWidth>28800</WindowWidth>
+  <WindowTopX>0</WindowTopX>
+  <WindowTopY>-440</WindowTopY>
+  <ProtectStructure>False</ProtectStructure>
+  <ProtectWindows>False</ProtectWindows>
+ </ExcelWorkbook>
+<Styles>
+  <Style ss:ID="s28" ss:Name="Check Cell">
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Double" ss:Weight="3"
+     ss:Color="#333333"/>
+    <Border ss:Position="Left" ss:LineStyle="Double" ss:Weight="3"
+     ss:Color="#333333"/>
+    <Border ss:Position="Right" ss:LineStyle="Double" ss:Weight="3"
+     ss:Color="#333333"/>
+    <Border ss:Position="Top" ss:LineStyle="Double" ss:Weight="3"
+     ss:Color="#333333"/>
+   </Borders>
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="11" ss:Color="#FFFFFF"
+    ss:Bold="1"/>
+   <Interior ss:Color="#969696" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s57" ss:Name="Default">
+  </Style>
+  <Style ss:ID="s58" ss:Parent="s57">
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="12" ss:Color="#000000"/>
+  </Style>
+  <Style ss:ID="s59" ss:Parent="s57">
+   <Alignment ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Font ss:FontName="Liberation Serif" ss:Size="22" ss:Bold="1"/>
+  </Style>
+  <Style ss:ID="s60" ss:Parent="s57">
+   <Alignment ss:Vertical="Top" ss:WrapText="1"/>
+   <Font ss:FontName="Liberation Serif"/>
+  </Style>
+  <Style ss:ID="s61" ss:Parent="s57">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+   <Font ss:FontName="Liberation Serif" ss:Bold="1"/>
+  </Style>
+  <Style ss:ID="s63" ss:Parent="s28">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+  </Style>
+
+ <Style ss:ID="s64" ss:Parent="s57">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+<Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="12" ss:Color="#FFFFFF"
+    ss:Bold="1"/>
+  </Style>
+
+
+<Style ss:ID="s65" ss:Parent="s57">
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Double" ss:Weight="3"
+     ss:Color="#333333"/>
+    
+   </Borders>
+  </Style>
+
+ </Styles>
+
+  <Names>
+   
+   <NamedRange ss:Name="ValueSets" ss:RefersTo="=Terminology!C1"/>
+
+ 
+
+
+
+
+	[for (aClass : Class | aPackage.eContents(Class)->select(visibility = uml::VisibilityKind::public)->sortedBy(name))]
+		[for (property : Property | aClass.ownedAttribute->select(association = null))]
+			[for (vsc: ValueSetConstraint| property.getStereotypeApplications()->select(oclIsTypeOf(ValueSetConstraint)).oclAsType(ValueSetConstraint))]
+				[let vsv  : ValueSetVersion = vsc.reference]
+ 
+<NamedRange ss:Name="xxxx[vsv.fullName.replaceAll(' ', '')/]" ss:RefersTo="=OFFSET([vsv.fullName/]!R1C1, CELL(&quot;row&quot;,INDEX(ValueSets, MATCH(&quot;[vsv.fullName/]&quot;,ValueSets,0))) - 1,0,1,1)"  />
+ 					 
+				[/let]
+			[/for]
+		[/for]
+	[/for]
+
+  </Names>
+
+ <Worksheet ss:Name="Intro">
+  <Table  x:FullColumns="1"
+   x:FullRows="1" ss:DefaultColumnWidth="53" ss:DefaultRowHeight="15">
+   <Column ss:AutoFitWidth="0" ss:Width="711"/>
+   <Row ss:Height="30">
+    <Cell ss:StyleID="s59"><Data ss:Type="String">[aPackage.name /] Domain</Data></Cell>
+    <Cell ss:StyleID="s59"/>
+    <Cell ss:StyleID="s59"/>
+    <Cell ss:StyleID="s58"/>
+    <Cell ss:StyleID="s58"/>
+    <Cell ss:StyleID="s58"/>
+   </Row>
+
+ 
+
+  <Row  ss:AutoFitHeight="1" ss:Height="[calculateCommentHeight(aPackage) /]" >
+    <Cell ss:StyleID="s61"  ><Data ss:Type="String"> [for (aComment : Comment | aPackage.ownedComment)] [ escapeXml(aComment._body)  /] [/for]</Data></Cell>
+    <Cell ss:StyleID="s59"/>
+    <Cell ss:StyleID="s59"/>
+    <Cell ss:StyleID="s58"/>
+    <Cell ss:StyleID="s58"/>
+    <Cell ss:StyleID="s58"/>
+  </Row>
+
+
+
+ 
+
+   <Row ss:AutoFitHeight="0" ss:Height="78">
+    <Cell ss:StyleID="s60"><Data ss:Type="String">The purpose of this review is to identify the data elements required for the interoperable exchange for the [aPackage.name /] domain including dependencies. A column is provided at the far right of the table for you to enter comments related to each data element. If the class or domain is missing data elements, please add a row at the bottom of the sheet and specify a name, description, and type of data (e.g. numeric, string, date/time, code).</Data></Cell>
+    <Cell ss:StyleID="s60"/>
+    <Cell ss:StyleID="s60"/>
+    <Cell ss:StyleID="s60"/>
+    <Cell ss:StyleID="s60"/>
+    <Cell ss:StyleID="s60"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="67">
+    <Cell ss:StyleID="s60"><Data ss:Type="String">Once you have reviewed the data elements, please review the value sets associated with the coded data elements. Please provide feedback by adding comments in the column provided at the right of item/row or by adding rows at the bottom table. For any new coded concepts without a valid code yet, our team will propose them for addition in the source coding system.</Data></Cell>
+    <Cell ss:StyleID="s60"/>
+    <Cell ss:StyleID="s60"/>
+    <Cell ss:StyleID="s60"/>
+    <Cell ss:StyleID="s60"/>
+    <Cell ss:StyleID="s60"/>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageSetup>
+    <Header x:Margin="0.3"/>
+    <Footer x:Margin="0.3"/>
+    <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
+   </PageSetup>
+   <PageLayoutZoom>0</PageLayoutZoom>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <ActiveRow>17</ActiveRow>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="Elements">
+  <Names>
+   <NamedRange ss:Name="_FilterDatabase" ss:RefersTo="=data!R1C1:R118C6"
+    ss:Hidden="1"/>
+  
+  </Names>
+  <Table  x:FullColumns="1"
+   x:FullRows="1" ss:StyleID="s58" ss:DefaultColumnWidth="65"
+   ss:DefaultRowHeight="15">
+   <Column ss:StyleID="s58" ss:Width="319"/>
+   <Column ss:StyleID="s58" ss:AutoFitWidth="0" ss:Width="500"/>
+   <Column ss:StyleID="s58" ss:AutoFitWidth="0" ss:Width="118"/>
+   <Column ss:StyleID="s58" ss:AutoFitWidth="0" ss:Width="130"/>
+   <Column ss:StyleID="s58" ss:AutoFitWidth="0" ss:Width="133"/>
+   <Column ss:StyleID="s58" ss:AutoFitWidth="0" ss:Width="301"/>
+   <Column ss:StyleID="s58" ss:Width="64"/>
+   <Column ss:StyleID="s58" ss:Width="130"/>
+   <Column ss:StyleID="s58" ss:Width="64" ss:Span="2"/>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">Element Name</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">Element Description</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">Format/Type</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   
+    <Cell ss:StyleID="s63"><Data ss:Type="String">Optionality/Repetition</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+
+ 	<Cell ss:StyleID="s63"><Data ss:Type="String">Value Set Name</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+
+    <Cell ss:StyleID="s63"><Data ss:Type="String">Reviewer's Comments</Data></Cell>
+   </Row>
+ 
+
+[if (not aPackage.eContents(Class)->isEmpty())]
+	[for (aClass : Class | aPackage.eContents(Class)->select(visibility = uml::VisibilityKind::public)->sortedBy(name))]
+ 
+ 
+
+       <Row  ss:AutoFitHeight="1" ss:Height="[calculateCommentHeight(aClass) /]" >
+            <Cell ss:StyleID="s61"><Data ss:Type="String">[aClass.name/] Class </Data> <NamedCell ss:Name="_FilterDatabase"/></Cell>
+            <Cell ss:StyleID="s61"><Data ss:Type="String"> [for (aComment : Comment | aClass.ownedComment)] [ escapeXml(aComment._body)  /] [/for]</Data></Cell>
+            <Cell ss:StyleID="s61"><Data ss:Type="String"> </Data> <NamedCell ss:Name="_FilterDatabase"/></Cell>
+            <Cell ss:StyleID="s61"><Data ss:Type="String"> </Data> <NamedCell ss:Name="_FilterDatabase"/> </Cell>
+            <Cell ss:StyleID="s61"><Data ss:Type="String"> </Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+            <Cell ss:StyleID="s61"><Data ss:Type="String"> </Data></Cell>
+       </Row>
+
+
+	[for (property : Property | aClass.ownedAttribute->select(association = null))]
+
+      <Row ss:AutoFitHeight="1" ss:Height="[calculateCommentHeight(property) /]">
+            <Cell ss:StyleID="s61"><Data ss:Type="String">[aClass.name/].[property.name/]</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+            <Cell ss:StyleID="s61"><Data ss:Type="String">[for (aComment : Comment | property.ownedComment)] [ escapeXml(aComment._body)  /] [/for]</Data></Cell>
+            <Cell ss:StyleID="s61"><Data ss:Type="String"> [property.type.name/]</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+            <Cell ss:StyleID="s61"><Data ss:Type="String">([property.lower/]..[if (property.upper >= 0)][property.upper/][else]*[/if])</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+[for (vsc: ValueSetConstraint| property.getStereotypeApplications()->select(oclIsTypeOf(ValueSetConstraint)).oclAsType(ValueSetConstraint))]
+[let vsv  : ValueSetVersion = vsc.reference]
+<Cell ss:StyleID="s61" ss:HRef="#'[vsv.fullName/]'!A1"><Data ss:Type="String" >[vsv.fullName/]</Data></Cell>
+[/let]
+[/for]
+            <Cell ss:StyleID="s61"><Data ss:Type="String"></Data></Cell>
+       </Row>
+
+
+	[/for]
+
+	[for (property : Property | aClass.ownedAttribute->select(association <> null))]
+
+
+ 	 <Row ss:AutoFitHeight="1" ss:Height="[calculateCommentHeight(property) /]" >
+            <Cell ss:StyleID="s61"><Data ss:Type="String">[aClass.name/].[property.name/]</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+            <Cell ss:StyleID="s61"><Data ss:Type="String">[for (aComment : Comment | property.ownedComment)] [ escapeXml(aComment._body)  /] [/for]</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+            <Cell ss:StyleID="s61"><Data ss:Type="String">[property.type.name/]</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+            <Cell ss:StyleID="s61"><Data ss:Type="String">NA</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+            <Cell ss:StyleID="s61"><Data ss:Type="String">([property.lower/]..[if (property.upper >= 0)][property.upper/][else]*[/if])</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+            <Cell ss:StyleID="s61"><Data ss:Type="String"> </Data></Cell>
+        </Row>
+
+
+	[/for]
+
+	[/for]
+[/if]
+
+ </Table>
+
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageLayoutZoom>0</PageLayoutZoom>
+   <Selected/>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <ActiveRow>2</ActiveRow>
+     <RangeSelection>R3C1:R3C6</RangeSelection>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+
+ 
+
+  </WorksheetOptions>
+ <ConditionalFormatting xmlns="urn:schemas-microsoft-com:office:excel">
+   <Range>R1C1:R198C6</Range>
+   <Condition>
+    <Value1>AND(MOD(ROW(),2)=1,ROW()&gt;1)</Value1>
+    <Format Style='color:windowtext;background:#DCE6F1;mso-pattern:black none'/>
+   </Condition>
+  </ConditionalFormatting>
+ <AutoFilter x:Range="R1C1:R118C6"
+   xmlns="urn:schemas-microsoft-com:office:excel">
+  </AutoFilter>
+ </Worksheet>
+
+
+	[for (aClass : Class | aPackage.eContents(Class)->select(visibility = uml::VisibilityKind::public)->sortedBy(name))]
+		[for (property : Property | aClass.ownedAttribute->select(association = null))]
+			[for (vsc: ValueSetConstraint| property.getStereotypeApplications()->select(oclIsTypeOf(ValueSetConstraint)).oclAsType(ValueSetConstraint))]
+				[let vsv  : ValueSetVersion = vsc.reference]
+
+
+ <Worksheet ss:Name="[vsv.fullName/]">
+  <Names>
+   <NamedRange ss:Name="_FilterDatabase" ss:RefersTo="=data!R1C1:R118C6"
+    ss:Hidden="1"/>
+  </Names>
+  <Table  x:FullColumns="1"
+   x:FullRows="1" ss:StyleID="s58" ss:DefaultColumnWidth="65"
+   ss:DefaultRowHeight="15">
+   <Column ss:StyleID="s58" ss:Width="319"/>
+   <Column ss:StyleID="s58" ss:AutoFitWidth="0" ss:Width="328"/>
+   <Column ss:StyleID="s58" ss:AutoFitWidth="0" ss:Width="118"/>
+   <Column ss:StyleID="s58" ss:AutoFitWidth="0" ss:Width="130"/>
+   <Column ss:StyleID="s58" ss:AutoFitWidth="0" ss:Width="133"/>
+   <Column ss:StyleID="s58" ss:AutoFitWidth="0" ss:Width="301"/>
+   <Column ss:StyleID="s58" ss:Width="64"/>
+   <Column ss:StyleID="s58" ss:Width="130"/>
+   <Column ss:StyleID="s58" ss:Width="64" ss:Span="2"/>
+  
+ 
+ 
+
+   <Row ss:AutoFitHeight="1">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">Value Set Constraint</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">Element Description</Data></Cell>
+	<Cell ss:StyleID="s63"><Data ss:Type="String"> </Data></Cell>
+	<Cell ss:StyleID="s63"><Data ss:Type="String">Comments</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="1">
+    <Cell ss:StyleID="s58"/>
+    <Cell ss:StyleID="s58"/>
+    <Cell ss:StyleID="s58"/>
+    <Cell ss:StyleID="s58"/>
+    <Cell ss:StyleID="s58"/>
+   </Row>
+
+
+					[let ee : Enumeration = vsv.base_Enumeration.oclAsType(Enumeration)]
+  			<Row ss:AutoFitHeight="1" ss:Height="[calculateCommentHeight(property) /]">
+            <Cell ss:StyleID="s61" ><Data ss:Type="String">[vsv.fullName/]</Data> <NamedCell ss:Name="[vsv.fullName.replaceAll(' ', '')/]"/></Cell>
+            <Cell ss:MergeAcross="2" ss:StyleID="s61"><Data ss:Type="String">  [for (aComment : Comment | property.ownedComment)] [ escapeXml(aComment._body)  /] [/for]  </Data></Cell>
+            <Cell ss:StyleID="s61"><Data ss:Type="String"> </Data></Cell>
+            <Cell ss:StyleID="s61"><Data ss:Type="String"> </Data></Cell>
+            </Row>
+
+			<Row ss:AutoFitHeight="0" ss:Height="26">
+            <Cell ss:StyleID="s61"><Data ss:Type="String">Code System:</Data></Cell>
+            <Cell ss:StyleID="s61"><Data ss:Type="String"> Source: [vsv.codeSystem.source /]   OID:  [vsv.codeSystem.identifier /] </Data></Cell>
+            </Row>
+
+			<Row ss:AutoFitHeight="0" ss:Height="26">
+            <Cell ss:StyleID="s61"><Data ss:Type="String">Web Reference:</Data></Cell>
+            <Cell ss:StyleID="s61"><Data ss:Type="String">  [vsv.url /] </Data></Cell>
+            </Row>
+
+			<Row ss:AutoFitHeight="0" ss:Height="26">
+            <Cell ss:StyleID="s61"><Data ss:Type="String">Codes</Data></Cell>
+           
+            </Row>
+
+
+[for (ol : EnumerationLiteral |   ee.ownedLiteral )]
+  	 <Row>
+               <Cell ss:StyleID="s61"><Data ss:Type="String">   </Data></Cell>
+               <Cell ss:StyleID="s61"><Data ss:Type="String"> [ol.name/] </Data></Cell>
+        </Row>
+[/for]
+ 
+
+<Row ss:AutoFitHeight="0" ss:Height="26">
+          
+           
+            </Row>
+       
+		
+					[/let]
+
+ </Table>
+
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageLayoutZoom>0</PageLayoutZoom>
+   <Selected/>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <ActiveRow>2</ActiveRow>
+     <RangeSelection>R3C1:R3C6</RangeSelection>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+  <x:WorksheetOptions/>
+ </Worksheet>
+
+				[/let]
+			[/for]
+		[/for]
+	[/for]
+
+	[for (aClass : Class | aPackage.eContents(Class)->select(visibility = uml::VisibilityKind::public)->sortedBy(name))]
+		[for (property : Property | aClass.ownedAttribute->select(association = null))]
+			[for (csc: CodeSystemConstraint| property.getStereotypeApplications()->select(oclIsTypeOf(CodeSystemConstraint)).oclAsType(CodeSystemConstraint))]
+				[let csv  : CodeSystemVersion = csc.reference]
+
+ <Worksheet ss:Name="[csv.fullName/]">
+  <Names>
+   <NamedRange ss:Name="_FilterDatabase" ss:RefersTo="=data!R1C1:R118C6"
+    ss:Hidden="1"/>
+  </Names>
+  <Table  x:FullColumns="1"
+   x:FullRows="1" ss:StyleID="s58" ss:DefaultColumnWidth="65"
+   ss:DefaultRowHeight="15">
+   <Column ss:StyleID="s58" ss:Width="319"/>
+   <Column ss:StyleID="s58" ss:AutoFitWidth="0" ss:Width="328"/>
+   <Column ss:StyleID="s58" ss:AutoFitWidth="0" ss:Width="118"/>
+   <Column ss:StyleID="s58" ss:AutoFitWidth="0" ss:Width="130"/>
+   <Column ss:StyleID="s58" ss:AutoFitWidth="0" ss:Width="133"/>
+   <Column ss:StyleID="s58" ss:AutoFitWidth="0" ss:Width="301"/>
+   <Column ss:StyleID="s58" ss:Width="64"/>
+   <Column ss:StyleID="s58" ss:Width="130"/>
+   <Column ss:StyleID="s58" ss:Width="64" ss:Span="2"/>
+  
+ 
+ 
+
+   <Row ss:AutoFitHeight="1">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">Value Set Constraint</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">Element Description</Data></Cell>
+	<Cell ss:StyleID="s63"><Data ss:Type="String"> </Data></Cell>
+	<Cell ss:StyleID="s63"><Data ss:Type="String">Comments</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="1">
+    <Cell ss:StyleID="s58"/>
+    <Cell ss:StyleID="s58"/>
+    <Cell ss:StyleID="s58"/>
+    <Cell ss:StyleID="s58"/>
+    <Cell ss:StyleID="s58"/>
+   </Row>
+
+					[let ee : Enumeration = csv.base_Enumeration.oclAsType(Enumeration)]
+						 
+           <Row ss:AutoFitHeight="1" ss:Height="[calculateCommentHeight(property) /]" >
+               <Cell ss:StyleID="s61"><Data ss:Type="String">[ee.name/] 
+                  
+             <Cell ss:StyleID="s61"><Data ss:Type="String">[ee.name/] Value Set:  [for (aComment : Comment | property.ownedComment)] [ escapeXml(aComment._body)  /] [/for]  [csv.url/]
+            </Data></Cell>
+        </Row>	
+					[/let]
+
+</Table>
+
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageLayoutZoom>0</PageLayoutZoom>
+   <Selected/>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <ActiveRow>2</ActiveRow>
+     <RangeSelection>R3C1:R3C6</RangeSelection>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+  <x:WorksheetOptions/>
+ </Worksheet>
+				[/let]
+			[/for]
+		[/for]
+	[/for]
+
+
+
+
+ 
+
+</Workbook>
+[/file]
+[/template]
+
+
+
+[template public generateReviewSheeta(aPackage : Package)]
 [file ('review/'+aPackage.name+'.html', false, 'UTF-8')]
 
 <html xmlns:Standard="http://www.eclipse.org/uml2/schemas/Standard/1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:fhim="http:///schemas/fhim/_bbjuwA3cEeSGTazHdUQojA/5" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:term="http://www.openhealthtools.org/mdht/schemas/term/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmlns:xmi="http://www.omg.org/XMI" xmlns:umlnotation="http://www.ibm.com/xtools/1.5.3/Umlnotation" xmlns:Default="http:///schemas/Default/_fNm3AAqoEd6-N_NOT9vsCA/2" xmlns:CDA="http://www.openhealthtools.org/mdht/schemas/cda/4" xmlns:Default_1="http:///schemas/Default/1" xmlns:RIM="http:///schemas/RIM/_fvnwgAH4Ed6VH-9W1IVKXA/4" xmlns:SketchNotation="http://www.ibm.com/ccl/soa/sketch/notation/1.0.0/">
@@ -790,4 +1257,7 @@
 [query public getEnumerationDefinition(enumeration : Enumeration) : String = invoke('org.openhealthtools.mdht.uml.cda.dita.TransformValueSet', 'getDefinition(org.eclipse.uml2.uml.Enumeration)', Sequence{enumeration})/]
 
 [query public escapeXml(input : String) : String = invoke('org.apache.commons.lang.StringEscapeUtils', 'escapeXml(java.lang.String)', Sequence{input})/]
+
+
+[query public calculateCommentHeight(input : Element) : Integer = invoke('gov.us.fhim.uml.transform.dita.DitaUtil' , 'calculateCommentHeight(org.eclipse.uml2.uml.Element)',Sequence{input} ) /]
 

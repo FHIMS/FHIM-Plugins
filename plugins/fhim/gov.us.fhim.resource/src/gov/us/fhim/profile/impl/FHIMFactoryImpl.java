@@ -30,11 +30,12 @@ public class FHIMFactoryImpl extends EFactoryImpl implements FHIMFactory {
 	 */
 	public static FHIMFactory init() {
 		try {
-			FHIMFactory theFHIMFactory = (FHIMFactory) EPackage.Registry.INSTANCE.getEFactory(FHIMPackage.eNS_URI);
+			FHIMFactory theFHIMFactory = (FHIMFactory)EPackage.Registry.INSTANCE.getEFactory(FHIMPackage.eNS_URI);
 			if (theFHIMFactory != null) {
 				return theFHIMFactory;
 			}
-		} catch (Exception exception) {
+		}
+		catch (Exception exception) {
 			EcorePlugin.INSTANCE.log(exception);
 		}
 		return new FHIMFactoryImpl();
@@ -59,12 +60,9 @@ public class FHIMFactoryImpl extends EFactoryImpl implements FHIMFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case FHIMPackage.MAPPING:
-				return createMapping();
-			case FHIMPackage.INDEX:
-				return createIndex();
-			case FHIMPackage.ISO11179:
-				return createIso11179();
+			case FHIMPackage.MAPPING: return createMapping();
+			case FHIMPackage.INDEX: return createIndex();
+			case FHIMPackage.ISO11179: return createIso11179();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -82,8 +80,7 @@ public class FHIMFactoryImpl extends EFactoryImpl implements FHIMFactory {
 			case FHIMPackage.STANDARD_OR_PROJECT:
 				return createStandardOrProjectFromString(eDataType, initialValue);
 			default:
-				throw new IllegalArgumentException("The datatype '" + eDataType.getName() +
-						"' is not a valid classifier");
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -99,8 +96,7 @@ public class FHIMFactoryImpl extends EFactoryImpl implements FHIMFactory {
 			case FHIMPackage.STANDARD_OR_PROJECT:
 				return convertStandardOrProjectToString(eDataType, instanceValue);
 			default:
-				throw new IllegalArgumentException("The datatype '" + eDataType.getName() +
-						"' is not a valid classifier");
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -144,10 +140,7 @@ public class FHIMFactoryImpl extends EFactoryImpl implements FHIMFactory {
 	 */
 	public StandardOrProject createStandardOrProjectFromString(EDataType eDataType, String initialValue) {
 		StandardOrProject result = StandardOrProject.get(initialValue);
-		if (result == null) {
-			throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" +
-					eDataType.getName() + "'");
-		}
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
 
@@ -157,9 +150,7 @@ public class FHIMFactoryImpl extends EFactoryImpl implements FHIMFactory {
 	 * @generated
 	 */
 	public String convertStandardOrProjectToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null
-				? null
-				: instanceValue.toString();
+		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**
@@ -169,7 +160,7 @@ public class FHIMFactoryImpl extends EFactoryImpl implements FHIMFactory {
 	 */
 
 	public FHIMPackage getFHIMPackage() {
-		return (FHIMPackage) getEPackage();
+		return (FHIMPackage)getEPackage();
 	}
 
 	/**
