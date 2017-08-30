@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Acceleo Report Module Runtime Plug-in
 Bundle-SymbolicName: gov.us.fhim.uml.report
-Bundle-Version: 0.7.0.qualifier
+Bundle-Version: 0.8.0.qualifier
 Bundle-Activator: gov.us.fhim.uml.report.Activator
 Bundle-Vendor: Eclipse Modeling Project
 Require-Bundle: org.eclipse.core.runtime,
@@ -16,8 +16,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.acceleo.profiler,
  org.eclipse.acceleo.engine,
  com.google.guava,
- gov.us.fhim.resource,
- org.openhealthtools.mdht.uml.term.core
+ org.eclipse.mdht.uml.term.core
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Eclipse-LazyStart: true

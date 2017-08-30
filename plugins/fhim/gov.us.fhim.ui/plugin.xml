@@ -5,51 +5,11 @@
 
 
   
-   <extension point="org.eclipse.ui.views.properties.tabbed.propertyTabs">
-      <propertyTabs contributorId="org.openhealthtools.mdht.uml.ui.properties">     
-         <propertyTab
-               category="domain"
-               label="FHIM"
-               afterTab="property.tab.GeneralPropertySection"
-               id="property.tab.FHIMPropertySection">           
-         </propertyTab> 
-      </propertyTabs>
-   </extension>
    
-     <extension point="org.eclipse.ui.views.properties.tabbed.propertySections">
-       <propertySections contributorId="com.ibm.xtools.modeler.ui.properties">
-          <propertySection tab="property.tab.FHIMPropertySection" 
-	 	     class="gov.us.fhim.ui.properties.FHIMMappedProperty" 
-	 	     id="property.section.fhim.PropertySection"
-             filter="gov.us.fhim.ui.filters.PropertyFilter"/>
-      </propertySections>
-   </extension> 
    
     
-   	<extension point="org.eclipse.ui.views.properties.tabbed.propertyTabs">
-		<propertyTabs contributorId="com.ibm.xtools.modeler.ui.properties">   
-		  <propertyTab
-               category="Core"
-               label="FHIM"
-               afterTab="property.tab.GeneralPropertySection"
-               id="property.tab.FHIMPropertySection">           
-         </propertyTab> 
-      </propertyTabs>
-   </extension>
 		
  
-   <extension point="org.eclipse.ui.views.properties.tabbed.propertySections">
-       <propertySections contributorId="org.openhealthtools.mdht.uml.ui.properties">
-     
-          <propertySection tab="property.tab.FHIMPropertySection" 
-	 	     class="gov.us.fhim.ui.properties.FHIMMappedProperty" 
-	 	     id="property.section.fhim.PropertySection"
-             filter="gov.us.fhim.ui.filters.PropertyFilter"/>
-             
-      
-             
-      </propertySections>
-   </extension> 
    
    
    
@@ -64,7 +24,7 @@
 			<separator name="additions"/>
 		 </menu>
          <action
-               label="Import Spreadsheet"
+               label="Import Terminology Spreadsheet"
                class="gov.us.fhim.ui.actions.ImportSpreadsheet"
                menubarPath="gov.us.fhim.ui.popupMenus.import/additions"
                enablesFor="1"

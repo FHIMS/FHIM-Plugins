@@ -1,26 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project default="terminologyreport" name="gov.us.fhim.uml.report">
-    <property name="ECLIPSE_HOME" value="../../../../../../../../Applications/IBM/SoftwareDeliveryPlatform"/>
-    <property name="ECLIPSE_WORKSPACE" value="../../../../../../IBM/rationalsdp/workspace7"/>
+    <property name="ECLIPSE_HOME" value="../../../../../../../../Applications/IBM/SoftwareDeliveryPlatform_2"/>
+    <property name="ECLIPSE_WORKSPACE" value="../../../../../../IBM/rationalsdp/workspaceMDHTBuild"/>
 
     <!-- The classpath with only the dependencies used by the project -->
     <path id="gov.us.fhim.uml.report.libraryclasspath">
         <pathelement location="${ECLIPSE_WORKSPACE}/gov.us.fhim.uml.report/bin"/>
-        <pathelement location="${ECLIPSE_HOME}/jdk/Contents/Home/jre/lib/resources.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/jdk/Contents/Home/jre/lib/rt.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/jdk/Contents/Home/jre/lib/jsse.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/jdk/Contents/Home/jre/lib/jce.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/jdk/Contents/Home/jre/lib/charsets.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/jdk/Contents/Home/jre/lib/jfr.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/jdk/Contents/Home/jre/lib/ext/cldrdata.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/jdk/Contents/Home/jre/lib/ext/dnsns.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/jdk/Contents/Home/jre/lib/ext/jfxrt.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/jdk/Contents/Home/jre/lib/ext/localedata.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/jdk/Contents/Home/jre/lib/ext/nashorn.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/jdk/Contents/Home/jre/lib/ext/sunec.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/jdk/Contents/Home/jre/lib/ext/sunjce_provider.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/jdk/Contents/Home/jre/lib/ext/sunpkcs11.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/jdk/Contents/Home/jre/lib/ext/zipfs.jar"/>
     </path>
 
     <path id="gov.us.fhim.uml.report.classpath">

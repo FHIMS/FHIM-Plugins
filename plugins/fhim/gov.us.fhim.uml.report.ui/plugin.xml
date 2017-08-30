@@ -10,13 +10,6 @@
          <menu id="org.eclipse.acceleo.module.menu" label="FHIM Reports" path="additionsAcceleo">
                <groupMarker name="acceleo"/> 
          </menu>
-         <action
-               class="gov.us.fhim.uml.report.ui.popupMenus.AcceleoGenerateReportAction"
-               enablesFor="+"
-               id="gov.us.fhim.uml.report.ui.popupMenus.acceleoGenerateReportAction"
-               icon="icons/default.gif"
-               label="Generate Mapping Report"
-               menubarPath="org.eclipse.acceleo.module.menu/acceleo"/>
                
                
            <action

@@ -6,105 +6,17 @@
 	<parent>
 		<groupId>gov.us.fhim</groupId>
 		<artifactId>gov.us.fhim.plugins</artifactId>
-		<version>0.7.0-SNAPSHOT</version>
+		<version>0.8.0-SNAPSHOT</version>
 	</parent>
  
 	<artifactId>gov.us.fhim.ui</artifactId>
  
 	<packaging>eclipse-plugin</packaging>
 
-	<repositories>
-		<repository>
-			<id>cdatools.com</id>
-			<name>cdatools.com-releases</name>
-			<url>http://cdatools.com:8081/artifactory/ext-snapshot-local</url>
-		</repository>
 
-	</repositories>
+	
+	
+ 
 
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>attach-sources</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<configuration>
-					<tags>
-						<tag>
-							<name>generated</name>
-							<placement>X</placement>
-						</tag>
-					</tags>
-				</configuration>
-				<executions>
-					<execution>
-						<id>attach-javadocs</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
-
-
-	<dependencies>
-		<dependency>
-			<groupId>org.openhealthtools.mdht</groupId>
-			<artifactId>org.openhealthtools.mdht.uml.common</artifactId>
-			<version>2.5.11-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.openhealthtools.mdht</groupId>
-			<artifactId>org.openhealthtools.mdht.uml.common.ui</artifactId>
-			<version>2.5.11-SNAPSHOT</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.openhealthtools.mdht</groupId>
-			<artifactId>org.openhealthtools.mdht.uml.edit</artifactId>
-			<version>2.5.11-SNAPSHOT</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.openhealthtools.mdht</groupId>
-			<artifactId>org.openhealthtools.mdht.uml.ui.navigator</artifactId>
-			<version>2.5.11-SNAPSHOT</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.openhealthtools.mdht</groupId>
-			<artifactId>org.openhealthtools.mdht.uml.validation</artifactId>
-			<version>2.5.11-SNAPSHOT</version>
-		</dependency>
-
-
-
-
-
-
-
-
-		<dependency>
-			<groupId>org.openhealthtools.mdht</groupId>
-			<artifactId>
-				org.openhealthtools.mdht.uml.ui.properties
-			</artifactId>
-			<version>2.5.11-SNAPSHOT</version>
-		</dependency>
-	</dependencies>
 </project>

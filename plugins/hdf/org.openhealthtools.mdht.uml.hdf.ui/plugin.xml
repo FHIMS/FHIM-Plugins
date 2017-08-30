@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+
+	<!--
+		Copyright (c) 2006, 2009 David A Carlson. All rights reserved. This
+		program and the accompanying materials are made available under the
+		terms of the Eclipse Public License v1.0 which accompanies this
+		distribution, and is available at
+		http://www.eclipse.org/legal/epl-v10.html Contributors: David A
+		Carlson (XMLmodeling.com) - initial API and implementation $Id$
+	-->
+
+
+	<!--
+		HDF UI Plugin Definitions HDF UI Plugin should contain only ui
+		definitions that are shared between RSM and Papyrus. Platform specific
+		UI extensions such as tabbed properties should be defined in the
+		corresponding plugin
+	-->
+
+<plugin>
+
+   <extension point="org.eclipse.mdht.uml.common.notation">
+      <provider profileURI="pathmap://HL7_PROFILES/HDF.profile.uml"
+      		 class="org.openhealthtools.mdht.uml.hdf.ui.util.HDFAnnotationProvider"/>
+   </extension>
+   
+	<!-- Definition of vocabulary provider utilized to define vocabulary constraints  -->
+	<extension-point id="org.openhealthtools.mdht.uml.hdf.vocabularyprovider"
+		name="vocabularyprovider" schema="schema/VocabularyProvider.exsd" />
+
+	<extension point="org.eclipse.ui.popupMenus">
+		<objectContribution adaptable="true"
+			objectClass="org.eclipse.gmf.runtime.notation.View" id="objectContribution.uml.contrib1">
+			<menu label="%menu_HL7Tools" path="additions" id="hl7tools">
+				<separator name="transform">
+				</separator>
+			</menu>
+			<action label="%menu_AssignRimColors"
+				class="org.openhealthtools.mdht.uml.hdf.ui.actions.AssignRIMColors"
+				menubarPath="hl7tools/transform" enablesFor="1"
+				id="org.openhealthtools.mdht.uml.hdf.ui.actions.AssignRIMColors">
+			</action>
+		</objectContribution>
+	</extension>
+
+
+
+	<!--
+      Clone Editor Dialog
+   -->
+	
+	
+
+</plugin>

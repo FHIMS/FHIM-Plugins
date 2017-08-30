@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>gov.us.fhim</groupId>
 	<artifactId>gov.us.fhim</artifactId>
-	<version>0.7.0-SNAPSHOT</version>
+	<version>0.8.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
    <properties>
@@ -22,19 +22,25 @@
 		<repository>
 			<id>luna</id>
 			<layout>p2</layout>
-			<url>http://download.eclipse.org/releases/luna</url>
+			<url>http://download.eclipse.org/releases/neon</url>
+		</repository>
+				<repository>
+			<id>mdht-neon</id>
+			<layout>p2</layout>
+			<url>https://hudson.eclipse.org/mdht/job/MDHT-master/lastSuccessfulBuild/artifact/repository</url>
 		</repository>
 		<repository>
-			<id>cdatools.com</id>
-			<name>cdatools.com-releases</name>
-			<url>http://cdatools.com:8081/artifactory/ext-snapshot-local</url>
+			<id>nebula</id>
+			<layout>p2</layout>
+			<url>http://download.eclipse.org/nebula/releases/latest</url>
 		</repository>
 	</repositories>
 
 	<modules>
 		<module>plugins/fhim</module>
-		<module>features/fhim</module>
-		<module>releng/gov.us.fhim.uml.site</module>
+		<module>plugins/hdf</module>
+	 	<module>features/fhim</module>
+	<!-- 	<module>releng/gov.us.fhim.uml.site</module> -->
 	</modules>
 	<build>
 		<plugins>

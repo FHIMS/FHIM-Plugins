@@ -1,9 +1,5 @@
 package gov.us.fhim.uml.report.ui.popupMenus;
 
-import gov.us.fhim.uml.report.ui.Activator;
-import gov.us.fhim.uml.report.ui.common.GenerateAll;
-import gov.us.fhim.uml.report.ui.common.GenerateTerminologyReport;
-
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -25,6 +21,9 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionDelegate;
+
+import gov.us.fhim.uml.report.ui.Activator;
+import gov.us.fhim.uml.report.ui.common.GenerateTerminologyReport;
 
 public class TerminologyReportAction extends ActionDelegate implements IActionDelegate  {
 

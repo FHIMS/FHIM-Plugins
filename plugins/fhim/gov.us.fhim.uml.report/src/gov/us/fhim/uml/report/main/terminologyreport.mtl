@@ -1,5 +1,5 @@
 [comment encoding = UTF-8 /]
-[module terminologyreport('http://www.eclipse.org/uml2/4.0.0/UML','http://gov.us.fhim/profile/1','http://www.openhealthtools.org/mdht/schemas/term/1')]
+[module terminologyreport('http://www.eclipse.org/uml2/4.0.0/UML','http://www.openhealthtools.org/mdht/schemas/term/1')]
 
 
 [template public generateElement(aPackage : Package)]

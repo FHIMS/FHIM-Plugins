@@ -11,12 +11,6 @@
  *******************************************************************************/
 package gov.us.fhim.ui.actions;
 
-import gov.us.fhim.profile.FHIMFactory;
-import gov.us.fhim.profile.FHIMPackage;
-import gov.us.fhim.profile.Index;
-import gov.us.fhim.profile.Mapping;
-import gov.us.fhim.profile.StandardOrProject;
-
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -47,6 +41,11 @@ import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.mdht.uml.term.core.profile.ContextToValueSet;
+import org.eclipse.mdht.uml.term.core.profile.TermFactory;
+import org.eclipse.mdht.uml.term.core.profile.ValueSetConstraints;
+import org.eclipse.mdht.uml.term.core.util.ITermProfileConstants;
+import org.eclipse.mdht.uml.term.core.util.TermProfileUtil;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -66,9 +65,8 @@ import org.eclipse.ui.internal.ObjectPluginAction;
 import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.NamedElement;
 import org.eclipse.uml2.uml.Package;
-import org.eclipse.uml2.uml.Stereotype;
+import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.UMLPackage;
-import org.eclipse.uml2.uml.util.UMLUtil;
 
 public class ImportSpreadsheet implements IObjectActionDelegate {
 
@@ -175,20 +173,16 @@ public class ImportSpreadsheet implements IObjectActionDelegate {
 
 	int importedItems;
 
-	public static Mapping getMapping(NamedElement theTarget) {
-
-		FHIMPackage.eINSTANCE.getMapping();
-
-		Mapping mapping = null;
-		Stereotype stereotype = theTarget.getAppliedStereotype("fhim::Mapping");
-		if (stereotype == null) {
-			UMLUtil.safeApplyStereotype(theTarget, theTarget.getApplicableStereotype("fhim::Mapping"));
-			stereotype = theTarget.getAppliedStereotype("fhim::Mapping");
+	public static ValueSetConstraints getValueSetConstraints(Property property) {
+		ValueSetConstraints valueSetConstraints = TermProfileUtil.getValueSetConstraints(property);
+		if (valueSetConstraints == null) {
+			// Stereotype stereotype = TermProfileUtil.getAppliedStereotype(
+			// property, ITermProfileConstants.VALUE_SET_CONSTRAINTS);
+			// UMLUtil.safeApplyStereotype(property, stereotype);
+			TermProfileUtil.applyStereotype(property, ITermProfileConstants.VALUE_SET_CONSTRAINTS);
+			valueSetConstraints = TermProfileUtil.getValueSetConstraints(property);
 		}
-		if (stereotype != null) {
-			mapping = (Mapping) theTarget.getStereotypeApplication(stereotype);
-		}
-		return mapping;
+		return valueSetConstraints;
 	}
 
 	HashMap<Integer, String> didNotFind = new HashMap<Integer, String>();
@@ -209,12 +203,9 @@ public class ImportSpreadsheet implements IObjectActionDelegate {
 
 		monitor.beginTask("FHIM Mapping Import", 1000);
 
-		HashMap<Integer, StandardOrProject> columnmapping = new HashMap<Integer, StandardOrProject>();
+		// HashMap<Integer, StandardOrProject> columnmapping = new HashMap<Integer, StandardOrProject>();
 
-		int standardColumn = -1;
-		int valueColumn = -1;
-
-		HashMap<String, NamedElement> namedElements = new HashMap<String, NamedElement>();
+		HashMap<String, Property> namedElements = new HashMap<String, Property>();
 
 		monitor.subTask("Opening Model ");
 
@@ -222,15 +213,14 @@ public class ImportSpreadsheet implements IObjectActionDelegate {
 			if (e instanceof NamedElement) {
 				monitor.worked(1);
 				NamedElement ne = (NamedElement) e;
-				if (!StringUtils.isEmpty(ne.getQualifiedName())) {
-					namedElements.put(ne.getQualifiedName(), ne);
-					namedElements.put(ne.getQualifiedName().replace("(Abstract)", ""), ne);
-					// System.out.println("ADDDMING" + ne.getQualifiedName());
+				if (!StringUtils.isEmpty(ne.getQualifiedName()) && ne instanceof Property) {
+					namedElements.put(ne.getQualifiedName(), (Property) ne);
+					// namedElements.put(ne.getQualifiedName().replace("(Abstract)", ""), ne);
+					System.out.println("Adding Property" + ne.getQualifiedName());
 				}
 
 			}
 		}
-		int fhimColumn = -1;
 		didNotFind.clear();
 
 		for (int i = 0, n = files.length; i < n; i++) {
@@ -240,101 +230,100 @@ public class ImportSpreadsheet implements IObjectActionDelegate {
 			monitor.subTask("Importing " + files[i]);
 
 			try {
-				br = new BufferedReader(new InputStreamReader(new FileInputStream(fdlg.getFilterPath() +
-						System.getProperty("file.separator") + files[i]), "UTF-8"));
+				br = new BufferedReader(
+					new InputStreamReader(
+						new FileInputStream(fdlg.getFilterPath() + System.getProperty("file.separator") + files[i]),
+						"UTF-8"));
 
 				String thisLine;
 
+				// pop the header
 				thisLine = br.readLine();
 
-				if (thisLine != null) {
-					String[] columns = thisLine.split(",");
-					int columnCtr = 0;
-					for (String column : columns) {
-						StandardOrProject sorp = StandardOrProject.getByName(column.replaceAll("\\W", ""));
+				while ((thisLine = br.readLine()) != null) {
+					monitor.worked(10);
 
-						if (sorp != null) {
-							columnmapping.put(columnCtr, sorp);
-						} else if ("FHIM".equals(column)) {
-							fhimColumn = columnCtr;
-						} else if ("Standard".equalsIgnoreCase(column)) {
-							standardColumn = columnCtr;
-						} else if ("Value".equalsIgnoreCase(column)) {
-							valueColumn = columnCtr;
+					String[] results = thisLine.split(",");
+					String packageName = results[0];
+					String className = results[1];
+					String propertyName = results[2];
+					String context = results[3];
+					String valueSetName = results[3];
+					String valueSetLocation = results[6];
+					String key = "FHIM::" + packageName + "::" + className + "::" + propertyName;
+
+					if (namedElements.containsKey(key)) {
+						ValueSetConstraints vscs = getValueSetConstraints(namedElements.get(key));
+						ContextToValueSet ctv = TermFactory.eINSTANCE.createContextToValueSet();
+						ctv.setContext(context);
+						ctv.setValueSetName(valueSetName);
+						if (valueSetLocation.toUpperCase().startsWith("HTTP")) {
+							ctv.setValueSetURI(valueSetLocation);
 						} else {
-							didNotFind.put(0, "Can not map following column " + column);
+							ctv.setValueSetOID(valueSetLocation);
 						}
-						columnCtr++;
+						vscs.getConstraints().add(ctv);
+
+					} else {
+						System.out.println("NOT FOUND " + key);
 					}
 
-				}
-
-				if (fhimColumn != -1) {
-					int lineCtr = 0;
-					while ((thisLine = br.readLine()) != null) {
-						monitor.worked(10);
-
-						String[] results = thisLine.split(",");
-						lineCtr++;
-						NamedElement theTarget = null;
-
-						if (results.length > 0 && results.length > fhimColumn &&
-								!StringUtils.isEmpty(results[fhimColumn]) && !"?".equals(results[fhimColumn])) {
-							theTarget = null;
-
-							if (namedElements.containsKey(results[fhimColumn].replaceAll("\\.", "::"))) {
-								// System.out.println("found " + results[fhimColumn].replaceAll("\\.", "::"));
-
-								theTarget = namedElements.get(results[fhimColumn].replaceAll("\\.", "::"));
-
-								Stereotype mapping = theTarget.getApplicableStereotype("fhim::Mapping");
-
-								if (!theTarget.isStereotypeApplied(mapping)) {
-									theTarget.applyStereotype(mapping);
-								}
-
-								Mapping mapping2 = (Mapping) theTarget.getStereotypeApplication(mapping);
-
-								if (!columnmapping.isEmpty()) {
-									for (Integer c : columnmapping.keySet()) {
-										if (c < results.length) {
-											String value = results[c];
-											if (!StringUtils.isEmpty(value)) {
-												Index index = FHIMFactory.eINSTANCE.createIndex();
-												index.setStandardOrProject(columnmapping.get(c));
-												index.setValue(value);
-												mapping2.getIndex().add(index);
-											}
-										}
-
-									}
-								} else if (standardColumn != -1 && valueColumn != -1) {
-									StandardOrProject sorp = StandardOrProject.getByName(results[standardColumn].replaceAll(
-										"\\W", ""));
-
-									if (sorp != null && !StringUtils.isEmpty(results[valueColumn])) {
-										Index index = FHIMFactory.eINSTANCE.createIndex();
-										index.setStandardOrProject(sorp);
-										index.setValue(results[valueColumn]);
-										mapping2.getIndex().add(index);
-									} else {
-										System.out.println("No Standard or project found" + results[standardColumn]);
-										didNotFind.put(lineCtr, results[fhimColumn].replaceAll("\\.", "::"));
-									}
-
-								}
-
-								// standardColumn
-
-							} else {
-
-								didNotFind.put(lineCtr, results[fhimColumn].replaceAll("\\.", "::"));
-
-							}
-
-						}
-					} // end while
-				}
+					// if (results.length > 0 && results.length > fhimColumn &&
+					// !StringUtils.isEmpty(results[fhimColumn]) && !"?".equals(results[fhimColumn])) {
+					// theTarget = null;
+					//
+					// if (namedElements.containsKey(results[fhimColumn].replaceAll("\\.", "::"))) {
+					// // System.out.println("found " + results[fhimColumn].replaceAll("\\.", "::"));
+					//
+					// theTarget = namedElements.get(results[fhimColumn].replaceAll("\\.", "::"));
+					//
+					// Stereotype mapping = theTarget.getApplicableStereotype("fhim::Mapping");
+					//
+					// if (!theTarget.isStereotypeApplied(mapping)) {
+					// theTarget.applyStereotype(mapping);
+					// }
+					//
+					// Mapping mapping2 = (Mapping) theTarget.getStereotypeApplication(mapping);
+					//
+					// if (!columnmapping.isEmpty()) {
+					// for (Integer c : columnmapping.keySet()) {
+					// if (c < results.length) {
+					// String value = results[c];
+					// if (!StringUtils.isEmpty(value)) {
+					// Index index = FHIMFactory.eINSTANCE.createIndex();
+					// index.setStandardOrProject(columnmapping.get(c));
+					// index.setValue(value);
+					// mapping2.getIndex().add(index);
+					// }
+					// }
+					//
+					// }
+					// } else if (standardColumn != -1 && valueColumn != -1) {
+					// StandardOrProject sorp = StandardOrProject.getByName(
+					// results[standardColumn].replaceAll("\\W", ""));
+					//
+					// if (sorp != null && !StringUtils.isEmpty(results[valueColumn])) {
+					// Index index = FHIMFactory.eINSTANCE.createIndex();
+					// index.setStandardOrProject(sorp);
+					// index.setValue(results[valueColumn]);
+					// mapping2.getIndex().add(index);
+					// } else {
+					// System.out.println("No Standard or project found" + results[standardColumn]);
+					// didNotFind.put(lineCtr, results[fhimColumn].replaceAll("\\.", "::"));
+					// }
+					//
+					// }
+					//
+					// // standardColumn
+					//
+					// } else {
+					//
+					// didNotFind.put(lineCtr, results[fhimColumn].replaceAll("\\.", "::"));
+					//
+					// }
+					//
+					// }
+				} // end while
 
 			} catch (Exception e) {
 
@@ -355,7 +344,9 @@ public class ImportSpreadsheet implements IObjectActionDelegate {
 
 		Map<String, String> options = new HashMap<String, String>();
 
-		for (Resource resource : resourceSet.getResources()) {
+		for (
+
+		Resource resource : resourceSet.getResources()) {
 			try {
 				System.out.println("Saving " + resource.getURI().toString());
 				resource.save(options);
