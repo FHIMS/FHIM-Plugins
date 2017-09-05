@@ -30,6 +30,13 @@
                enablesFor="1"
                id="gov.us.fhim.ui.actions.ImportSpreadsheetAction">
          </action>
+         <action
+               class="gov.us.fhim.ui.actions.ImportCIMISpreadsheet"
+               enablesFor="1"
+               id="gov.us.fhim.ui.actions.ImportCIMIAction"
+               label="Import CIMI Spreadsheet"
+               menubarPath="gov.us.fhim.ui.popupMenus.import/additions">
+         </action>
       </objectContribution>
    </extension>
    
