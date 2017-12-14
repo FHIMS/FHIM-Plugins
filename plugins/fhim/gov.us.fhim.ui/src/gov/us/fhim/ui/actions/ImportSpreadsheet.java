@@ -247,8 +247,8 @@ public class ImportSpreadsheet implements IObjectActionDelegate {
 					String packageName = results[0];
 					String className = results[1];
 					String propertyName = results[2];
-					String context = results[3];
-					String valueSetName = results[3];
+					String context = results[3] + " " + results[5];
+					String valueSetName = results[4];
 					String valueSetLocation = results[6];
 					String key = "FHIM::" + packageName + "::" + className + "::" + propertyName;
 
