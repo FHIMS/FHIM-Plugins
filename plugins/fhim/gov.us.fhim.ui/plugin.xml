@@ -37,8 +37,28 @@
                label="Import CIMI Spreadsheet"
                menubarPath="gov.us.fhim.ui.popupMenus.import/additions">
          </action>
+         
+          <action
+               class="gov.us.fhim.ui.actions.ImportValueSets"
+               enablesFor="1"
+               id="gov.us.fhim.ui.actions.ImportValues"
+               label="Import Valuesets for Publication"
+               menubarPath="gov.us.fhim.ui.popupMenus.import/additions">
+         </action>
+         
       </objectContribution>
    </extension>
+    
+    	<extension point="org.eclipse.ui.preferencePages">
+ 		<page id="FHIRTerminologyServers"
+  	      name="FHIR Terminology Servers"
+	      class="gov.us.fhim.ui.preferences.FHIMPreferencePage">
+   		</page>
+   	
+ 	 
+   	</extension> 
+
+	 
    
    
 </plugin>

@@ -8,39 +8,44 @@
 	<version>0.8.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-   <properties>
+	<properties>
 		<build_version>2.5.4-SNAPSHOT</build_version>
 		<tycho-version>0.22.0</tycho-version>
 		<org.apache.maven.version>2.4</org.apache.maven.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-<!--  		<release_url>http://52.26.42.198:8081/nexus/content/repositories/releases</release_url>
-		<snapshot_url>http://52.26.42.198:8081/nexus/content/repositories/snapshots</snapshot_url>
-		<repository_id>remote.nexus</repository_id> -->
+		<!-- <release_url>http://52.26.42.198:8081/nexus/content/repositories/releases</release_url> 
+			<snapshot_url>http://52.26.42.198:8081/nexus/content/repositories/snapshots</snapshot_url> 
+			<repository_id>remote.nexus</repository_id> -->
 	</properties>
-	
-		<repositories>
+
+	<repositories>
 		<repository>
 			<id>luna</id>
 			<layout>p2</layout>
 			<url>http://download.eclipse.org/releases/neon</url>
 		</repository>
-				<repository>
+		<repository>
 			<id>mdht-neon</id>
 			<layout>p2</layout>
-			<url>https://hudson.eclipse.org/mdht/job/MDHT-master/lastSuccessfulBuild/artifact/repository</url>
+			<url>https://hudson.eclipse.org/mdht/job/MDHT-RSA/lastSuccessfulBuild/artifact/repository/</url>
 		</repository>
 		<repository>
 			<id>nebula</id>
 			<layout>p2</layout>
 			<url>http://download.eclipse.org/nebula/releases/latest</url>
 		</repository>
+		<repository>
+			<id>rsa</id>
+			<url>file:/Applications/IBM/IBMIMShared</url>
+			<layout>p2</layout>
+		</repository>
 	</repositories>
 
 	<modules>
 		<module>plugins/fhim</module>
 		<module>plugins/hdf</module>
-	 	<module>features/fhim</module>
-	<!-- 	<module>releng/gov.us.fhim.uml.site</module> -->
+		<module>features/fhim</module>
+		<!-- <module>releng/gov.us.fhim.uml.site</module> -->
 	</modules>
 	<build>
 		<plugins>
@@ -141,9 +146,9 @@
 					</dependency-resolution>
 
 
-				
-					
-					
+
+
+
 				</configuration>
 			</plugin>
 

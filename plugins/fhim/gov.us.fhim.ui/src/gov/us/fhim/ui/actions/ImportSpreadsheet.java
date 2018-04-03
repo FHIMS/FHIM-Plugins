@@ -244,6 +244,10 @@ public class ImportSpreadsheet implements IObjectActionDelegate {
 					monitor.worked(10);
 
 					String[] results = thisLine.split(",");
+
+					if (results.length != 7) {
+						continue;
+					}
 					String packageName = results[0];
 					String className = results[1];
 					String propertyName = results[2];
