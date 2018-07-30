@@ -1,0 +1,72 @@
+grammar gov.us.fhim.xtext.cimi.CIMIDSL with org.eclipse.xtext.common.Terminals
+
+generate cIMIDSL "http://www.us.gov/fhim/xtext/cimi/CIMIDSL"
+
+import 'http://www.eclipse.org/xtext/xbase/Xbase' as xbase
+
+ArchetypeModel:
+	(elements+=Archetype)*;
+
+Archetype:
+	'archetype' '(' 'adl_version=' adl_version=MYSTRING ';' 'rm_release=' rm_release=MYSTRING ';' 'generated' ')\r'
+	name=MYSTRING '\r' '\r'
+	'language\r' (language=Languge) '\r' '\r'
+	'description\r' (description=Description) '\r' '\r'
+	'definition\r' (definition=Matches) '\r' '\r'
+	'terminology\r' (terminology=Terminology) '\r' '\r';
+
+Description:
+	'original_author' '=' '<' '\r' originalAuthor=OriginalAuthor '>' '\r'
+	'details' '=' '<' '\r' details=Details '>' '\r';
+
+Details:
+	'"[' name=MYSTRING ']"' '=' '\r' '<'
+	'language' '=' '<[' language=MYSTRING ']>' '\r'
+	'use' '=' '<[' use=STRING ']>' '\r'
+	'copyright' '=' '<[' copyright=STRING ']>' '\r'
+	'other_details' '=' '<[' other_details=OtherDetails ']>' '\r' '>' '\r';
+
+OtherDetails:
+	'["lifecycle_state"]' '=' '<' lifecycle_state=STRING '>' '\r'
+	'["custodian_namespace"]' '=' '<' custodian_namespace=STRING '>' '\r'
+	'["custodian_organization"]' '=' '<' custodian_organization=STRING '>' '\r'
+	'["license"]' '=' '<' license=STRING '>' '\r'
+	'["ip_acknowledgement_loinc"]' '=' '<' ip_acknowledgement_loinc=STRING '>' '\r'
+	'["ip_acknowledgement_snomed"]' '=' '<' ip_acknowledgement_snomed=STRING '>' '\r';
+
+OriginalAuthor:
+	'["date"]' '=' '<' date=STRING '>' '\r'
+	'["organization"]' '=' '<' organization=STRING '>' '\r'
+	'["name"]' '=' '<' name=STRING '>' '\r'
+	'["email"]' '=' '<' email=STRING '>' '\r';
+
+Languge:
+	'original_language' '=' '<[' name=MYSTRING ']>';
+
+Matches:
+	name=MYSTRING ('[' definition=MYSTRING ']')? 'matches' '{\r'
+	((submatch+=Matches)* | ((value=MYSTRING)? '[' valueDefinition=MYSTRING ']'))
+	'}\r';
+
+Terminology:
+	'term_definitions' '=' '<' '\r' (termDefinition=TermDefinitions) '\r' '>' '\r'
+	'term_bindings' '=' '<' '\r' (termBinding=TermBindings) '\r' '>' '\r';
+
+TermDefinitions:
+	'[' name=STRING ']' '=' '\r' '<' '\r' (elements+=TermDefinition)* '\r' '>' '\r';
+
+TermBindings:
+	'[' name=STRING ']' '=' '\r' '<' '\r' (elements+=TermBinding)* '\r' '>' '\r';
+
+TermDefinition:
+	'[' name=STRING ']' '=' '<' '\r'
+	'text' '=' '<' text=MYSTRING '>' '\r'
+	'description' '=' '<' description=MYSTRING '>' '\r' '>' '\r';
+
+TermBinding:
+	'[' name=STRING ']' '=' '<' binding=MYSTRING '>' '\r';
+
+terminal MYSTRING:
+	('\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\' | '"'))*;
+ 
+ 

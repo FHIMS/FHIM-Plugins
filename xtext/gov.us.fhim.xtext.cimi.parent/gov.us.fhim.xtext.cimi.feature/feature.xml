@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature id="gov.us.fhim.xtext.cimi.feature"
+	label="CIMIDSL Feature "
+	version="1.0.0.qualifier">
+	<plugin
+			id="gov.us.fhim.xtext.cimi"
+			download-size="0"
+			install-size="0"
+			version="0.0.0"
+			unpack="false"/>
+	<plugin
+			id="gov.us.fhim.xtext.cimi.ide"
+			download-size="0"
+			install-size="0"
+			version="0.0.0"
+			unpack="false"/>
+	<plugin
+			id="gov.us.fhim.xtext.cimi.ui"
+			download-size="0"
+			install-size="0"
+			version="0.0.0"
+			unpack="false"/>
+</feature>
