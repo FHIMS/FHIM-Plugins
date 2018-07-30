@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.standardhealh.cimpl.dsl.ide
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: org.standardhealh.cimpl.dsl.ide; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.standardhealh.cimpl.dsl,
+ org.eclipse.xtext.ide,
+ org.eclipse.xtext.xbase.ide
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: org.standardhealh.cimpl.dsl.ide.contentassist.antlr.internal,
+ org.standardhealh.cimpl.dsl.ide.contentassist.antlr
+

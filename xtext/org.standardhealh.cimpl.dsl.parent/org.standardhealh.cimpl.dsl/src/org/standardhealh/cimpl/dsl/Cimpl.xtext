@@ -1,0 +1,205 @@
+grammar org.standardhealh.cimpl.dsl.Cimpl with org.eclipse.xtext.common.Terminals
+
+generate cimpl "http://www.standardhealh.org/cimpl/dsl/Cimpl"
+
+Model:
+	elements=Doc?;
+	
+Doc:                
+header=DocHeader	
+uses=UsesStatement
+entries+=EntryElement*;
+
+// descriptionProp? usesStatement? pathDefs? vocabularyDefs? dataDefs);
+//	description=DescriptionProp
+// DescriptionProp: 'Description:' STRING '\r';	
+
+DocHeader:'Grammar:' 'DataElement' version=STRING '\r\n' 'Namespace:' namespace=STRING '\r' '\r';
+
+UsesStatement:'Uses:' namespace+=STRING (',' namespace+=STRING)*'\r''\r';
+
+EntryElement: 'EntryElement' name=STRING'\r\n'
+	          'Based On:'basedOn=STRING'\r\n' 
+	          'Concept:' concept=STRING'\r\n'
+	          'Description:' description=STRING'\r\n'
+	          (elements+=Element)? ('\r\n' elements+=Element)*'\r\n'
+	          ('\t'subelements+=EntryElement)*
+	          'Value:'value=STRING?'\r\n';
+
+Element: lower=INT'..'upper=INT name=STRING;
+
+//
+//pathDefs:           pathDef+;
+//pathDef:            KW_PATH MYSTRING EQUAL URL;
+//
+//vocabularyDefs:     vocabularyDef+;
+//vocabularyDef:      KW_VOCABULARY MYSTRING EQUAL (URL | URN_OID | URN); // (KW_VOCAB_VERSION WHOLE_NUMBER DOT WHOLE_NUMBER)?;
+//
+//dataDefs:           dataDef*;
+//dataDef:            elementDef | entryDef;
+//
+//elementDef:         elementHeader elementProps? values;
+//elementHeader:      KW_ABSTRACT? KW_ELEMENT simpleName;
+//
+//entryDef:           entryHeader elementProps? values;
+//entryHeader:        KW_ENTRY_ELEMENT simpleName;
+//
+//elementProps:       elementProp+;
+//elementProp:        basedOnProp | conceptProp | descriptionProp;
+//
+//values:             value? field*;
+//
+//value:              KW_VALUE count? OPEN_PAREN? valueType (KW_OR valueType)* CLOSE_PAREN?; // TODO: Remove PAREN (here for backwards compatibility now)
+//valueType:          simpleOrFQName | ref | primitive | elementWithConstraint | tbd;
+//
+//field:              count? OPEN_PAREN? fieldType (KW_OR fieldType)* CLOSE_PAREN?; // TODO: Remove PAREN (here for backwards compatibility now)
+//fieldType:          specialWord | simpleOrFQName | ref | elementWithConstraint | tbd;
+//
+//basedOnProp:        KW_BASED_ON (simpleOrFQName | tbd);
+//conceptProp:        KW_CONCEPT (concepts | tbd);
+//concepts:           fullyQualifiedCode (COMMA fullyQualifiedCode)*;
+//
+//version:            INT DOT INT;
+//namespace:          MYSTRING | DOT_SEPARATED_LW;
+//specialWord:        KW_BAR_ENTRY | KW_BAR_VALUE ;
+//simpleName:         MYSTRING; //LOWER_WORD is not intended use, and will throw an error. However, this prevents compiler crash.
+//fullyQualifiedName: DOT_SEPARATED_UW;
+//simpleOrFQName:     simpleName | fullyQualifiedName;
+//ref:                KW_REF OPEN_PAREN simpleOrFQName CLOSE_PAREN;
+//code:               '#' ID MYSTRING?;
+//fullyQualifiedCode: (MYSTRING code) | tbdCode;
+//codeOrFQCode:       fullyQualifiedCode | code;
+//bindingInfix:       KW_MUST_BE | KW_SHOULD_BE | KW_COULD_BE;
+//typeConstraint:     count (simpleOrFQName | ref | primitive | tbd);
+//
+////elementWithConstraint
+//
+//elementWithConstraint:      (specialWord | simpleOrFQName | elementPath | primitive) elementConstraint?;
+//// NOTE: not supporting _Value in subpath for now because that requires more significant work to support it in
+//// the importer, models, and other tooling.
+//elementPath:                (specialWord | simpleOrFQName) (((DOT simpleName)+ (DOT primitive)?) | ((DOT simpleName)* DOT primitive));
+//elementConstraint:          elementCodeVSConstraint | elementCodeValueConstraint | elementIncludesCodeValueConstraint | elementBooleanConstraint | elementTypeConstraint | elementIncludesTypeConstraint | elementWithUnitsConstraint;
+//legacyWithCode:             KW_WITH (KW_CODE | simpleOrFQName); // Just here for backwards compatibility until definitions are updated
+//elementCodeVSConstraint:    legacyWithCode? bindingInfix? KW_FROM valueset KW_IF_COVERED?;
+//elementCodeValueConstraint: KW_IS codeOrFQCode;
+//elementIncludesCodeValueConstraint: (KW_INCLUDES codeOrFQCode)+;
+//elementBooleanConstraint:   KW_IS (KW_TRUE | KW_FALSE);
+//elementTypeConstraint:      (KW_IS_TYPE | KW_VALUE_IS_TYPE) (simpleOrFQName | ref | primitive | tbd);
+//elementIncludesTypeConstraint: (KW_INCLUDES typeConstraint)+;
+//elementWithUnitsConstraint: KW_WITH KW_UNITS fullyQualifiedCode;
+//valueset:           URL | PATH_URL | URN_OID | simpleName | tbd;
+//
+//primitive: MYSTRING;
+//primitive2:          (KW_BOOLEAN | KW_INTEGER | KW_STRING | KW_DECIMAL | KW_URI | KW_BASE64_BINARY | KW_INSTANT | KW_DATE
+//                    | KW_DATE_TIME | KW_TIME | KW_CODE | KW_OID | KW_ID | KW_MARKDOWN | KW_UNSIGNED_INT
+//                    | KW_POSITIVE_INT | KW_XHTML);
+//count:              INT RANGE (INT | STAR);
+//tbd:                KW_TBDSSS MYSTRING?;	
+//tbdCode:            KW_TBD_CODE MYSTRING?;
+//
+//
+////WHOLE_NUMBER:       ('0'..'9')*;
+////ALL_CAPS:           (UC)(UC|INT)*;
+////UPPER_WORD:         (UC)(UC|LC|INT)*;
+////LOWER_WORD:        (LC)(UC|LC|INT)*;
+//DOT_SEPARATED_LW:   MYSTRING '.' MYSTRING;
+//DOT_SEPARATED_UW:  MYSTRING '.' MYSTRING;
+//
+//	
+////WHOLE_NUMBER=1
+////ALL_CAPS=2
+////UPPER_WORD=3
+////LOWER_WORD=4
+////DOT_SEPARATED_LW=5
+////DOT_SEPARATED_UW=6
+////MYSTRING=7
+////  ('a'..'z'|'A'..'Z'|'_'|'$'|'.'|'@')('a'..'z'|'A'..'Z'|'_'|'-'|'+'|'$'|'.'|'0'..'9'|'@')*
+//
+//URL: MYSTRING* '://' MYSTRING* ;
+//PATH_URL : MYSTRING* '/' MYSTRING* ;
+//URN_OID: 'urn:oid:' ID;
+//URN: 'urn' '(' ID ')';
+
+//terminal MYSTRING: ('\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\' | '"'))*;
+	
+//terminal LC : 'a'..'z';
+//terminal UC : 'A'..'Z';
+
+//terminal CODE: '#' ID;
+
+//URL:                ('a'..'z'|'A'..'Z')* '://' [a-zA-Z][0-9a-zA-Z_%#=\\?\\-\\.\\/]*;
+//PATH_URL:           [A-Z][A-Z0-9]* '/' [0-9a-zA-Z][0-9a-zA-Z_%#=\\?\\-\\.\\/]*;
+//URN_OID:            'urn:oid:' [0-2]'.'[0-9]+('.'[0-9]+)*;
+//URN:                'urn' (':'[0-9a-zA-Z\\.]+)+;
+//CODE:               '#' ~[, \r\t\n]+;
+//WS:                 [ \r\t] -> channel(HIDDEN);
+//NEWLINE:            '\n' -> channel(HIDDEN);
+//COMMENT:            '/*' .*? '*/' -> skip;
+//LINE_COMMENT:       '//' ~[\r\n]* -> skip;
+
+
+// Common Lexer Definitions for FHIR primitives
+// Used by SHRDataElementLexer and SHRValueSetLexer
+//KW_BOOLEAN:         'boolean';
+//KW_INTEGER:         'integer';
+//KW_STRING:          'string';
+//KW_DECIMAL:         'decimal';
+//KW_URI:             'uri';
+//KW_BASE64_BINARY:   'base64Binary';
+//KW_INSTANT:         'instant';
+//KW_DATE:            'date';
+//KW_DATE_TIME:       'dateTime';
+//KW_TIME:            'time';
+//KW_CODE:            'code';
+//KW_OID:             'oid';
+//KW_ID:              'id';
+//KW_MARKDOWN:        'markdown';
+//KW_UNSIGNED_INT:    'unsignedInt';
+//KW_POSITIVE_INT:    'positiveInt';
+//KW_XHTML:           'xhtml';
+	
+// KEYWORDS for SHR Data Elements
+//KW_GRAMMAR:         'Grammar:';
+//KW_G_DATA_ELEMENT:  'DataElement';
+//KW_NAMESPACE:       'Namespace:';
+//KW_USES:            'Uses:';
+//KW_PATH:            'Path:';
+//KW_VOCABULARY:      'CodeSystem:';
+////KW_VOCAB_VERSION:   'Version:';
+//KW_ABSTRACT:        'Abstract';
+//KW_ELEMENT:         'Element:';
+//KW_ENTRY_ELEMENT:   'EntryElement:';
+//KW_BASED_ON:        'Based on:';
+//KW_VALUE:           'Value:';
+//KW_CONCEPT:         'Concept:';
+//KW_DESCRIPTION:     'Description:';
+//KW_REF:             'ref';
+//KW_OR:              'or';
+//KW_WITH:            'with';
+//KW_MUST_BE:         'must be';
+//KW_SHOULD_BE:       'should be';
+//KW_COULD_BE:        'could be';
+//KW_IF_COVERED:      'if covered';
+//KW_FROM:            'from';
+//KW_UNITS:           'units';
+//KW_IS:              'is';
+//KW_IS_TYPE:         'is type';
+//KW_VALUE_IS_TYPE:   'value is type';
+//KW_INCLUDES:        'includes';
+//KW_TRUE:            'true';
+//KW_FALSE:           'false';
+//KW_TBDSSS: 'xxxTBD';
+//KW_TBD_CODE:        'TBD#TBD';
+//
+//// KEYWORDS for special constrainable items
+//KW_BAR_ENTRY:       '_Entry';
+//KW_BAR_VALUE:       '_Value';
+//
+//// SYMBOLS
+//DOT:                '.';
+//EQUAL:              '=';
+//COMMA:              ',';
+//STAR:               '*';
+//OPEN_PAREN:         '(';
+//CLOSE_PAREN:        ')';
+//RANGE:              '..';	
