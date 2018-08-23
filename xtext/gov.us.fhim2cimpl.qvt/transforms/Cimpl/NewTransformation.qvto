@@ -1,0 +1,340 @@
+import Strings;
+
+modeltype uml uses 'http://www.eclipse.org/uml2/2.1.0/UML';
+modeltype ecore "strict" uses ecore('http://www.eclipse.org/emf/2002/Ecore');
+modeltype cimpl  uses 'http://www.standardhealh.org/cimpl/dsl/Cimpl';
+modeltype term uses 'http://www.openhealthtools.org/mdht/schemas/term/1';
+
+transformation NewTransformation(in fhimModel : uml,out cimplModel : cimpl);
+
+main() {
+
+	fhimModel.rootObjects()[uml::Package].ownedElement[uml::UseCase]-> map toCIMPL2();
+
+}
+
+
+mapping uml::UseCase::toCIMPL2() : cimpl::Profile
+{
+
+	result.header :=   object cimpl::Header {
+	 
+	};
+	result.header.namespace := 'fsw';
+	result.header.version := '5.0';
+	result.description := object Description {
+		description :=  self.name;
+	};
+
+	
+	result._uses := object UsesStatement {
+		
+	};
+	
+	//shr.core, shr.base, cimi.core,  cimi.topic, cimi.statement, cimi.entity, cimi.element, cimi.encounter, shr.condition, cimi.datatypes
+	result._uses.namespace += 'shr.core';
+//	result._uses.namespace += 'shr.base';
+//	result._uses.namespace += 'cimi.core';
+//	result._uses.namespace += 'cimi.topic';
+//	result._uses.namespace += 'cimi.statement';
+//	result._uses.namespace += 'cimi.entity';
+//	result._uses.namespace += 'cimi.element';
+//	result._uses.namespace += 'cimi.encounter';
+//	result._uses.namespace += 'shr.condition';
+//	result._uses.namespace += 'cimi.datatypes';
+	
+	
+//	result._uses.namespace := self.qualifiedName;
+	 
+	 
+	 result.codeSystems += object CodeSystem {
+	  namespace := 'UCUM = http://unitsofmeasure.org';
+	 };
+	 result.codeSystems += object CodeSystem {
+	  namespace := 'LNC = http://loinc.org';
+	 };
+	 result.codeSystems += object CodeSystem {
+	  namespace := 'OBSCAT = http://hl7.org/fhir/observation-category';
+	 };
+	 	 
+	 
+	result.entries += self.clientDependency.supplier[uml::Class] ->map mapClasstoCIMPL(result);
+	
+	self.elementImport.importedElement[uml::Enumeration]->map localValueSets();
+	
+	
+}
+
+mapping uml::Enumeration::localValueSets() {
+self.ownedLiteral->forEach(li) {
+	log(li.name);
+}
+	
+}
+
+mapping uml::Class::mapClasstoCIMPL(inout profile : cimpl::Profile) : EntryElement {
+	log('Start ' +self.qualifiedName);
+	profile.entries += self.generalization.general[uml::Class]->mapClasstoCIMPL(profile);
+	
+	result.name := self.name.substring(1,1).toUpper() + self.name.substring(2,self.name.size());
+	if (not self.generalization->isEmpty()) then {
+		self.generalization->forEach(g) {
+			result.basedOn :=  g.general.name;
+		};
+	} else {	
+ 
+	}endif;
+	
+	result.redefinitions += self.ownedAttribute -> map mapDefinitions();
+	result.concept := self.getMappings('Concept');
+	result.conceptDescription := self.getMappings('Concept');
+	result.description := self.getDescription();
+	
+	if (not self.ownedAttribute.subsettedProperty->isEmpty()) then {
+		result.subsets += object Subsets {
+		name:='hasMember';	
+		subsets += self.ownedAttribute -> map mapObservations();
+	};	
+	} endif;
+	log('End ' +self.qualifiedName);
+	log(result.toString());
+	
+//	self.ownedAttribute->select((not type.getNearestPackage().name.equalsIgnoreCase('Datatypes')) and (not type.namespace.name.equalsIgnoreCase('PrimitiveTypes')))->forEach(entry){
+//		log(entry.type.name);
+//		profile.entries += entry.type[uml::Class]->mapClasstoCIMPL(profile);
+//	};
+//	self.ownedAttribute->select((not type.getNearestPackage().name.equalsIgnoreCase('Datatypes')) and (not type.namespace.name.equalsIgnoreCase('PrimitiveTypes')))->mapEntry(profile);
+//	profile.elements += self.ownedAttribute->mapElements(); 
+//	profile.entries += self.ownedAttribute->mapEntries(profile);
+}
+
+
+mapping uml::Property::mapDefinitions() : cimpl::Redefinition when { self.subsettedProperty->isEmpty() }  {
+
+//	log('mapRefinitions'  + self.qualifiedName);
+	result.cardinality := object Cardinality {
+		
+	};
+	result.cardinality.lower := 0;
+	result.cardinality.upper := 1;
+		result.name := self.name.substring(1,1).toUpper() + self.name.substring(2,self.name.size());
+//		result.entryElement := self.name.substring(1,1).toUpper() + self.name.substring(2,self.name.size());	
+//	if ( self.type <> null and ( not self.type.oclIsInvalid())) then {
+//
+//	
+//	
+////	if (self.type.getNearestPackage().name.equalsIgnoreCase('Datatypes')) or ( self.type.namespace.name.equalsIgnoreCase('PrimitiveTypes') ) then {
+////		result.entryElement := self.name.substring(1,1).toUpper() + self.name.substring(2,self.name.size());	
+////	} else {
+//		result.entryElement := self.name;	
+////	} endif;
+//	
+//	
+//	} else {
+//		log('booom ' + self.qualifiedName);
+//		result.name := self.qualifiedName;
+//		result.entryElement := self.qualifiedName;
+//	} endif;
+//	
+////	result.entryElement	:= self.getMappings('Concept');
+}
+
+query uml::Type::getNamefff( ) : String
+{
+  if ('String'.equalsIgnoreCase(self.name)) {
+  	return 'string';
+  } endif;
+  
+   if ('Code'.equalsIgnoreCase(self.name)) {
+  	return 'CodeableConcept';
+  } endif;
+  
+    if ('Real'.equalsIgnoreCase(self.name)) {
+  	return 'Quantity';
+  } endif;
+  
+      if ('ID'.equalsIgnoreCase(self.name)) {
+  	return 'id';
+  } endif;
+  
+        if ('PointInTime'.equalsIgnoreCase(self.name)) {
+  	return 'dateTime';
+  } endif;
+  
+          if ('Boolean'.equalsIgnoreCase(self.name)) {
+  	return 'boolean';
+  } endif;
+  
+           if ('Boolean'.equalsIgnoreCase(self.name)) {
+  	return 'boolean';
+  } endif;
+  
+  return self.name;
+}
+
+
+mapping uml::Property::mapDefinitions2() : cimpl::Redefinition when { self.subsettedProperty->isEmpty() }  {
+
+//	log('mapRefinitions'  + self.qualifiedName);
+	result.cardinality := object Cardinality {
+		
+	};
+	result.cardinality.lower := 0;
+	result.cardinality.upper := 1;
+	result.name := 'name';
+//	result.entryElement :=  'type'; // self.type.name;
+//	result.entryElement	:= self.getMappings('Concept');
+}
+
+mapping uml::Property::mapRedefinitions() : cimpl::Redefinition when {self.association = null and  ( not self.redefinedProperty->isEmpty() ) } {
+//	log('mapRefinitions'  + self.qualifiedName);
+	result.name := self.name.substring(1,1).toUpper() + self.name.substring(2,self.name.size());
+//	result.entryElement	:= self.getMappings('Concept');
+}
+
+mapping uml::Property::mapEvaluations() : cimpl::Subset  when {self.association = null and  ( self.redefinedProperty->isEmpty() ) } {
+	result.cardinality := object Cardinality {
+		
+	};
+	result.cardinality.lower := 0;
+	result.cardinality.upper := 1;
+	result.typeName := self.name.substring(1,1).toUpper() + self.name.substring(2,self.name.size());
+}
+
+mapping uml::Property::mapObservations() : cimpl::Subset  when { not  self.subsettedProperty->isEmpty()  } {
+	result.cardinality := object Cardinality {
+		
+	};
+	result.cardinality.lower := 0;
+	result.cardinality.upper := 1;
+	result.typeName := self.name.substring(1,1).toUpper() + self.name.substring(2,self.name.size());
+}
+
+mapping uml::Property::mapElements() : cimpl::Element {
+
+result.name := self.name.substring(1,1).toUpper() + self.name.substring(2,self.name.size());
+	log(self.qualifiedName);
+//		if (not self.type.oclIsInvalid()) {
+//		log( self.type.name);
+//		result.basedOn :=  self.type.name;
+//	} else {
+//		result.basedOn := 'BOOM';
+//	} endif;
+	
+//	if (not self.type[uml::Class].generalization->isEmpty()) then {
+//		self.type[uml::Class].generalization->forEach(g) {
+//					result.basedOn :=  g.general.name;
+//		};
+//	} else {
+//		result.basedOn := 'String';
+//	}endif;
+
+	result.description := self.getDescription();
+	result.concept := self.getMappings('Concept');
+
+	result.value :=  self.type.name;  
+}
+mapping uml::Property::mapElements2() : cimpl::Element  when { (self.subsettedProperty->isEmpty()) and (not self.type.getNearestPackage().name.equalsIgnoreCase('Datatypes')) and (not self.type.namespace.name.equalsIgnoreCase('PrimitiveTypes')) } {
+
+//	result.name := self.name.substring(1,1).toUpper() + self.name.substring(2,self.name.size());
+	
+	if (not self.type.oclIsInvalid()) {
+		log( self.type.name);
+		result.basedOn :=  self.type.name;
+	} else {
+		result.basedOn := 'BOOM';
+	} endif;
+	
+//	if (not self.type[uml::Class].generalization->isEmpty()) then {
+//		self.type[uml::Class].generalization->forEach(g) {
+//					result.basedOn :=  g.general.name;
+//		};
+//	} else {
+//		result.basedOn := 'String';
+//	}endif;
+
+	result.description := self.getDescription();
+	result.concept := self.getMappings('Concept');
+
+	result.value := 'string';  
+
+//	result.basedOn := 'TBD';
+//	
+//	if (not self.type[uml::Class].generalization->isEmpty()) then {
+//		self.type[uml::Class].generalization->forEach(g) {
+//					result.basedOn :=  g.general.name;
+//		};
+//	} else {
+//		result.basedOn := 'TBD';
+//	}endif;
+//	
+//	
+//	
+//	//result.basedOn := self.getMappings('BasedOn');
+//
+//	if ('Quantity'.equalsIgnoreCase(self.type.name) or 'Real'.equalsIgnoreCase(self.type.name)) then {
+//		result.value  := object Quantity {
+//			units :=  self.getMappings('Value'); //'UCUM#cm';
+//		};			
+//	} else {
+//		result.value  := object CodeableConcept {
+//			valueSetURL := self.getMappings('Value');	
+//		};		
+//	} endif;
+//
+//
+//	result.description := self.getDescription();
+//	result.concept := self.getMappings('Concept');
+	
+}
+
+// when { (not self.type.getNearestPackage().name.equalsIgnoreCase('Datatypes')) and (not self.type.namespace.name.equalsIgnoreCase('PrimitiveTypes')) }
+mapping uml::Property::mapEntries(inout profile : cimpl::Profile) : cimpl::EntryElement  {
+	log('Start ' +self.type.qualifiedName);
+	result.name := self.name.substring(1,1).toUpper() + self.name.substring(2,self.name.size());
+	result.concept := self.type.getMappings('Concept');
+	result.conceptDescription := self.type.getMappings('Concept');
+	result.description := self.getDescription();
+	result.redefinitions += self.type.oclAsType(uml::Class).ownedAttribute -> map mapDefinitions();
+	profile.elements += self.type.oclAsType(uml::Class).ownedAttribute->mapElements(); 
+	profile.entries +=  self.type.oclAsType(uml::Class).ownedAttribute->mapEntries(profile);
+	log('End ' +self.type.qualifiedName);
+}
+
+query uml::NamedElement::getMappings(in key: String ) : String
+{
+	if (self.isStereotypeApplied(self.getApplicableStereotype('Terminology::ValueSetConstraints'))) then
+	{
+		var constraints : term::ValueSetConstraints := self.getStereotypeApplication(self.getAppliedStereotype('Terminology::ValueSetConstraints')).oclAsType(term::ValueSetConstraints );
+		var contextToValueSet : term::ContextToValueSet := constraints.constraints->select(key.equalsIgnoreCase(context))->asSequence()->first();
+		if (not contextToValueSet.oclIsInvalid()) then {
+		
+		if ('BasedOn'.equalsIgnoreCase(key)) then {
+		return contextToValueSet.valueSetName;
+		} else {
+		return contextToValueSet.valueSetURI;	
+		} endif;
+				 
+			
+		}  endif;
+	} endif;
+
+
+return 'TBD ';
+
+}
+
+
+query uml::NamedElement::getDescription() : String
+{
+
+return 'Description';
+//self.ownedComment->forEach(comment) {
+//	return comment.body;	
+//};
+//
+//
+//return 'TBD';
+
+}
+

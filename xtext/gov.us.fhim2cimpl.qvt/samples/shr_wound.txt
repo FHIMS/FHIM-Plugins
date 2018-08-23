@@ -1,0 +1,415 @@
+Grammar:	DataElement 5.0
+Namespace:	sw
+Description: "SHR implementation of the HL7 Pressure Ulcer Prevention Domain Analysis Model (May, 2011)."
+Uses:  		shr.core, shr.base, cimi.core,  cimi.topic, cimi.statement, cimi.entity, cimi.element, cimi.encounter, shr.condition, cimi.datatypes
+
+CodeSystem:  	UCUM = http://unitsofmeasure.org
+CodeSystem:     LNC = http://loinc.org
+CodeSystem:		OBSCAT = http://hl7.org/fhir/observation-category
+
+ 
+
+//------------- Wound Absence or Presence ---------------
+EntryElement:	WoundPresenceAssertion
+Based on:		FindingSiteConditionPresenceStatement
+Concept:		SCT#416462003 "Wound (disorder)"
+Description:	"A determination that a wound that exists at a particular body site.
+The WoundIdentifier serves as a link between this assertion and assessments of the wound that might occur at later times. Multiple wound assessments can be associated with a single wound."
+0..0			StatementTopic
+				Onset value is type dateTime  // 85585-8  Date of Onset {mm/dd/yyyy} 
+				Abatement value is type dateTime // 88878-4 Date of abatement {mm/dd/yyyy}
+1..1			Category is OBSCAT#exam
+1..1			TopicCode is SCT#416462003 "Wound (disorder)"
+1..1			WoundType
+0..1			ConditionIdentifier is type WoundIdentifier
+0..1			ConditionCause is type WoundTypeEtiology
+1..1			AnatomicalLocation is type WoundAnatomicalLocation
+0..0			Severity  // not sure if zeroing it out should be prohibited, but it is not part of LOINC panel
+0..0			Criticality
+0..0			Certainty
+0..0			Device
+0..0			Precondition
+
+		Element: 	WoundType
+		Based on:	TopicCode
+		Concept:	LNC#72300-7
+		Description:	"A type code describing the wound or skin injury.  
+		Differentiating pressure ulcers and other types of wounds is important for an accurate count of their number and for identifying appropriate wound treatment.  The values will be used for documenting and retrieving data regarding the number and types of wounds present. "
+		Value:		CodeableConcept from https://vsac.nlm.nih.gov/valueset/2.16.840.1.113883.1.11.20.2.6/expansion if covered
+
+		Element:	WoundIdentifier
+		Based on:	ConditionIdentifier
+		Concept:	LNC#81666-0
+		Description: "A human-readable identifier for the lesion; e.g., a letter or integer."
+		Value:		string
+
+		Element:	WoundTypeEtiology
+		Based on:	ConditionCause
+		Concept:	LNC#11373-8 "Injury cause"
+		Description:	"A specialization of condition cause, specific to the causes of injuries (or not having injury in the wound absent context)."
+		Value: 		CodeableConcept from https://vsac.nlm.nih.gov/valueset/2.16.840.1.113762.1.4.1181.3/expansion  // should be from http://loinc.org/vs/LL4936-2 
+
+		Element:	WoundAnatomicalLocation
+		Based on:	AnatomicalLocation
+		Concept:	LNC#39111-0 "Body Site"
+		Value:		CodeableConcept from https://vsac.nlm.nih.gov/valueset/2.16.840.1.113762.1.4.1181.14/expansion
+		1..1 		Laterality
+		0..0		AnatomicalDirection
+
+
+EntryElement:	WoundAbsenceAssertion
+Based on:		FindingSiteConditionAbsenceStatement
+Description:	"Documents the absence of a wound at a given body site. 
+No wounds anywhere on the body can be indicated by omitting the anatomical location, or using the Snomed code #181469002 (Entire skin (body structure)) in WoundAnatomicalLocation."
+0..0			StatementTopic
+1..1			TopicCode is SCT#416462003 "Wound (disorder)"
+1..1			Category is OBSCAT#exam
+1..1			AnatomicalLocation is type WoundAnatomicalLocation
+
+//--------------- Wound Assessment -------------------------
+
+EntryElement:	WoundAssessmentPanel
+Based on:		NonLaboratoryObservation
+Concept:		LNC#39135-9
+Description:	"Group of observations regarding the properties and severity of a wound."
+1..1			WoundIdentifier
+				Interpretation is type WoundAssessmentInterpretation
+0..0			ResultValue
+0..0			ExceptionValue
+0..0			AnatomicalLocation // carried by wound assertion
+0..0			Device	
+				TopicCode is LNC#39135-9
+0..0			ReferenceRange		
+				Media is type PhotographicImage  // 72170-4  	Photographic image	[Media] 
+				EvaluationComponent
+includes 0..1	WoundEpisode  // very similar to Episodicity or ClinicalStatus, but value set is different.
+includes 0..1	WoundTrend
+includes 0..1 	WoundPeriwoundDescription   // 72301-5  	Description of Periwound
+includes 0..*	WoundVisibleInternalStructure  //89250-5  Device or anatomic structure visible in wound
+includes 0..1	WoundPressureUlcerAssociation // missing LOINC code
+includes 0..1	WoundTunnelingPresentOrAbsent  //  72298-3  	Tunneling of Wound	R	 present/absent	   	 
+includes 0..1	WoundUnderminingPresentOrAbsent // 72295-9  	Undermining of Wound	R
+includes 0..1	WoundExudatePresentOrAbsent // 89259-6  	Presence of wound exudate
+				PanelMembers.Observation
+includes 0..*	WoundBedAppearanceObservation  //89254-7 	Wound bed appearance observation
+includes 0..*	WoundBedColorObservation  // xxxx  Wound color observation
+includes 0..1	WoundEdgeObservation   //  89256-2  Wound edge observation
+includes 0..*	WoundTunnelingObservation  //  89257-0  Wound tunneling observation
+includes 0..*	WoundUnderminingObservation  // 89258-8  Wound undermining observation
+includes 0..1	WoundExudateObservation  // 72292-6  Wound exudate observation
+includes 0..1	WoundSizeObservation  // 72287-6 Wound size observation
+
+		Element: 		WoundEpisode
+		Based on:		CodedEvaluationComponent
+		Concept:		LNC#89252-1 "Episode of Wound"
+		Description:	"Wound episode refers to a period of the wound, an incident in the course of a wound"
+		Value: 			CodeableConcept from https://vsac.nlm.nih.gov/valueset/2.16.840.1.113762.1.4.1181.4/expansion 
+
+		Element:		WoundPeriwoundDescription 
+		Based on:		CodedEvaluationComponent
+		Concept:		LNC#72301-5
+		Description:	 "A description of the skin around the wound (periwound). Color, induration, warmth and edema should be assessed. Redness of the surrounding skin can be indicative of unrelieved pressure. Irritation of the surrounding skin can result from exposure to feces or urine, a reaction to the dressing or tape, or inappropriate removal of dressing or tape. Redness, tenderness, warmth and swelling are classical clinical signs of infection. [Reference: Brown, P., 2009]"
+		Value:			CodeableConcept from https://vsac.nlm.nih.gov/valueset/2.16.840.1.113762.1.4.1181.2/expansion
+ //could be from http://loinc.org/vs/LL2216-1
+
+		Element:		WoundVisibleInternalStructure
+		Based on:		CodedEvaluationComponent
+		Concept:		LNC#89250-5
+		Description: 	"Exposed body structures, devices, and/or foreign bodies visible by the naked eye in a wound."
+		Value:			CodeableConcept from https://vsac.nlm.nih.gov/valueset/2.16.840.1.113762.1.4.1181.1/expansion
+// should be from http://loinc.org/vs/LL4935-4 
+
+		Element:		WoundPressureUlcerAssociation
+		Based on:		CodedEvaluationComponent
+		Concept:		TBD
+		Description:	"Is the wound associated with a device or pressure point?"
+		Value:			CodeableConcept from YesNoUnknownVS
+
+		Element:		WoundTunnelingPresentOrAbsent
+		Based on:		CodedEvaluationComponent
+		Concept:		LNC#72298-3
+		Description:	"The presence or absence of wound tunneling."
+		Value:			CodeableConcept from PresentAbsentVS
+	// LOINC: should re-use the same Snomed codes for Present-Absent
+
+		Element:		WoundUnderminingPresentOrAbsent
+		Based on:		CodedEvaluationComponent
+		Concept:		LNC#72295-9
+		Description:	"The presence or absence of wound undermining."
+		Value:			CodeableConcept from PresentAbsentVS
+
+		Element:		WoundExudatePresentOrAbsent
+		Based on:		CodedEvaluationComponent
+		Concept:		LNC#89259-6
+		Description:	"The presence or absence of wound exudate."
+		Value:			CodeableConcept from PresentAbsentVS
+
+		Element:		WoundAssessmentInterpretation
+		Based on:		Interpretation
+		Concept: 		LNC#80338-7
+		Description:	"Overall assessement of whether the wound is within normal parameters."
+		Value:			CodeableConcept from http://loinc.org/vs/LL3816-7 if covered // underpowered? 'normal' and 'other'
+
+		Element:		WoundTrend
+		Based on:		CodedEvaluationComponent
+		Concept:		LNC#89253-9
+		Description:	"Whether a condition is improving, worsening, stable, or resolved."
+		Value:			CodeableConcept from https://vsac.nlm.nih.gov/valueset/2.16.840.1.113762.1.4.1181.5/expansion // should be from http://loinc.org/vs/LL4938-8 with values improved, deteriorated, stablized or resolved. Resolved is missing from the VS in VSAC
+
+
+// LOINC: The wound bed panel is factored so the percentages pair unambiguously with the color/appearances. It should be a set of 2-tuples (pairs). The way it is done in LOINC doesn't allow pairing 
+EntryElement: 	WoundBedAppearanceObservation
+Based on:		ComponentOnlyNonLaboratoryObservation
+Concept:		LNC#89254-7
+Description:	"The appearance of the base (bed) of the wound, together with the percentage of the bed with each type of appearance."
+1..1			WoundIdentifier
+				TopicCode is LNC#89254-7
+0..0			AnatomicalLocation  // location is given by the wound assertion	
+0..0			Device	
+				EvaluationComponent
+includes 1..1	WoundBedAppearance
+includes 1..1	WoundBedAppearancePercentage
+
+		Element:		WoundBedAppearance
+		Based on:		CodedEvaluationComponent
+		Concept:		LNC#72371-8
+		Description:	"Appearance of wound base (bed)."
+		Value:			CodeableConcept from https://vsac.nlm.nih.gov/valueset/2.16.840.1.113762.1.4.1181.6/expansion  //could be from http://loinc.org/vs/LL2237-7
+
+		Element:		WoundBedAppearancePercentage
+		Based on:		EvaluationComponent
+		Concept:		LNC#72370-0
+		Description:	"Area of wound bed appearance/Entire ​Area of wound bed."
+		Value:			Quantity with units UCUM#% 
+
+EntryElement: 	WoundBedColorObservation
+Based on:		ComponentOnlyNonLaboratoryObservation
+Concept:		TBD
+Description:	"Color of part or all of the wound base (bed), and the percentage of the area with that color."
+1..1			WoundIdentifier
+				TopicCode is TBD#TBD
+0..0			AnatomicalLocation  // location is given by the wound assertion
+0..0			Device	
+				EvaluationComponent
+includes 1..1	WoundBedColor
+includes 1..1	WoundBedColorAreaPercentage
+
+// LOINC: Why precoordinate a general concept such as 'color' with the concept of wound bed?
+		Element:		WoundBedColor
+		Based on:		CodedEvaluationComponent
+		Concept:		LNC#39132-6 
+		Description:	"Color of Wound base (bed)."
+		Value:			CodeableConcept from https://vsac.nlm.nih.gov/valueset/2.16.840.1.113762.1.4.1181.7/expansion  //could be from http://loinc.org/vs/LL2338-3	 
+
+// LOINC: Why precoordinate a general concept such as 'percentage of area' with the concept of wound bed? 	
+		Element:		WoundBedColorAreaPercentage
+		Based on:		EvaluationComponent
+		Concept:		LNC#89255-4
+		Description:	"Wound bed area identified by color/​Area of wound bed."
+		Value:			Quantity with units UCUM#%
+
+EntryElement:	WoundEdgeObservation
+Based on:		ComponentOnlyNonLaboratoryObservation
+Concept:		LNC#89256-2
+Description:	"The state of the tissue at the edge of the wound."
+1..1			WoundIdentifier
+				TopicCode is LNC#89256-2
+0..0			AnatomicalLocation  // location is given by the wound assertion	
+0..0			Device				
+				EvaluationComponent
+includes 1..1	WoundEdgeDescription
+includes 0..1	WoundEdgeColor
+// LOINC:Is the entire edge of the wound described by one color? Or should it be by percentage, similar to the wound bed?
+// LOINC: Why precoordinate a general concept such as 'color' with the concept of wound edge?
+
+		Element:		WoundEdgeDescription
+		Based on:		CodedEvaluationComponent
+		Concept:		LNC#72304-9 
+		Description:	"Edge of wound description."
+		Value:			CodeableConcept from https://vsac.nlm.nih.gov/valueset/2.16.840.1.113762.1.4.1181.8/expansion // could be from http://loinc.org/vs/LL2230-2
+
+		Element:		WoundEdgeColor
+		Based on:		CodedEvaluationComponent
+		Concept:		LNC#39133-4 
+		Description:	"Color of Wound edge."
+		Value:			CodeableConcept could be from http://loinc.org/vs/LL2338-3	
+
+EntryElement:	WoundTunnelingObservation
+Based on:		ComponentOnlyNonLaboratoryObservation
+Concept:		LNC#89257-0
+Description:	"A discharging blind-ended track that extends from the surface of an organ to an underlying area or abscess cavity. The track is invariably lined with granulation tissue. In chronic cases this may be augmented with epithelial tissue."
+1..1			WoundIdentifier
+				TopicCode is LNC#89257-0
+0..0			AnatomicalLocation  // location is given by the wound assertion
+0..0			Device	
+				EvaluationComponent
+includes 0..1	WoundTunnelLength
+includes 0..1	WoundTunnelClockDirection
+
+// LOINC: why precoordinate length + tunneling?
+// LOINC: why precoordinate clock position + tunneling?
+
+		Element:		WoundTunnelLength
+		Based on:		EvaluationComponent
+		Concept:		LNC#72296-7
+		Description:	"Length of wound tunneling."
+		Value:			Quantity with units UCUM#cm
+
+// LOINC: should require use the full clock position value set
+		Element:		WoundTunnelClockDirection
+		Based on:		CodedEvaluationComponent
+		Concept:		LNC#72297-5
+		Description:	"Clock position of wound tunnel"
+		Value:			CodeableConcept from ClockDirectionVS
+
+
+EntryElement:	WoundUnderminingObservation
+Based on:		ComponentOnlyNonLaboratoryObservation
+Concept:		LNC#89258-8
+Description:	"Assessment of deep tissue (subcutaneous fat and muscle) damage around the wound margin. Undermining are narrow sinus tracts  away from the wound margins and go downward into the wound."
+				TopicCode is LNC#89258-8
+1..1			WoundIdentifier
+0..0			AnatomicalLocation  // location is given by the wound assertion	
+0..0			Device	
+		 		EvaluationComponent
+includes 0..1	WoundUnderminingLength
+includes 0..1	WoundUnderminingClockDirection
+
+		Element:		WoundUnderminingLength
+		Based on:		EvaluationComponent
+		Concept:		LNC#72293-4
+		Description:	"Length of wound undermining."
+		Value:			Quantity with units UCUM#cm
+
+// LOINC: should require use the full clock position value set
+		Element:		WoundUnderminingClockDirection
+		Based on:		CodedEvaluationComponent
+		Concept:		LNC#72294-2
+		Description:	"Clock position of wound undermining"
+		Value:			CodeableConcept from ClockDirectionVS
+
+EntryElement:	WoundExudateObservation
+Based on:		ComponentOnlyNonLaboratoryObservation
+Concept:		LNC#72292-6
+Description:	"Description of the fluid produced by a wound."
+				TopicCode is LNC#72292-6
+1..1			WoundIdentifier
+0..0			AnatomicalLocation  // location is given by the wound assertion	
+0..0			Device	
+				EvaluationComponent
+includes 0..1	WoundExudateAmount
+includes 0..1	WoundExudateVolume
+includes 1..1	WoundExudateAppearance
+includes 1..1	WoundExudateColor
+includes 0..1	WoundExudateOdor
+
+//  LOINC: Wound area should be in wound size panel, not wound exudate panel
+
+		Element:	WoundExudateAmount
+		Based on:	CodedEvaluationComponent
+		Concept:	LNC#39116-9
+		Description:"Drainage amount of wound"
+		Value:		CodeableConcept from https://vsac.nlm.nih.gov/valueset/2.16.840.1.113762.1.4.1181.10/expansion //could be from http://loinc.org/vs/LL2222-9
+
+		Element:	WoundExudateVolume
+		Based on:	EvaluationComponent
+		Concept:	LNC#39122-7
+		Description:"Appearance of exudate from wound"
+		Value:		Quantity with units UCUM#mL
+
+		Element:	WoundExudateAppearance
+		Based on:	CodedEvaluationComponent
+		Concept:	LNC#72290-0 
+		Description:"Appearance of exudate from wound"
+		Value:		CodeableConcept from https://vsac.nlm.nih.gov/valueset/2.16.840.1.113762.1.4.1181.11/expansion //could be from http://loinc.org/vs/LL2220-3
+
+		Element:	WoundExudateColor
+		Based on:	CodedEvaluationComponent
+		Concept:	LNC#72289-2 
+		Description:"Color of exudate from wound"
+		Value:		CodeableConcept from https://vsac.nlm.nih.gov/valueset/2.16.840.1.113762.1.4.1181.12/expansion
+ // could be from http://loinc.org/vs/LL2219-5
+
+		Element:	WoundExudateOdor
+		Based on:	CodedEvaluationComponent
+		Concept:	LNC#72288-4
+		Description:"Odor of exudate from wound"
+		Value:		CodeableConcept from https://vsac.nlm.nih.gov/valueset/2.16.840.1.113762.1.4.1181.13/expansion
+
+
+EntryElement:	WoundSizeObservation
+Based on:		ComponentOnlyNonLaboratoryObservation
+Concept:		LNC#72287-6
+Description:	"The estimated or measured dimensions of a wound."
+				TopicCode is LNC#72287-6
+1..1			WoundIdentifier	
+0..0			AnatomicalLocation  // location is given by the wound assertion	
+0..0			Device		
+				EvaluationComponent
+includes 1..1	WoundLength
+includes 1..1	WoundWidth
+includes 0..1	WoundDepth
+includes 0..1	WoundArea
+
+		Element:		WoundLength
+		Based on:		EvaluationComponent
+		Concept:		LNC#39126-8
+		Description:	"Length of the wound (longest dimension)."
+		Value:			Quantity with units UCUM#cm
+
+		Element:		WoundWidth
+		Based on:		EvaluationComponent
+		Concept:		LNC#39125-0
+		Description:	"Width of the wound (perpendicular to longest dimension)."
+		Value:			Quantity with units UCUM#cm
+
+		Element:		WoundDepth
+		Based on:		EvaluationComponent
+		Concept:		LNC#39127-6
+		Description:	"Depth of the wound."
+		Value:			Quantity with units UCUM#cm
+
+		Element:		WoundArea
+		Based on:		EvaluationComponent
+		Concept:		LNC#89260-4
+		Description:	"Area of the wound."
+		Value:			Quantity with units UCUM#cm2
+
+/* Old Stuff
+Element:		SupportSurface
+Concept:		SCT#272243001
+Based on:		Device
+Description:	"A specific instance of a support surface used to distribute pressure and support a patient. The value is coding of the type of support surface."
+Value:			CodeableConcept from SupportSurfaceVS
+0..1			SupportSurfaceCategory
+0..1			SupportSurfaceBodyPosition
+0..*			SupportSurfaceComponent
+
+		Element:		SupportSurfaceCategory
+		Concept:		TBD
+		Description:	"The category of support surface."
+		Value:			CodeableConcept from SupportSurfaceCategoryVS
+
+		Element:		SupportSurfaceBodyPosition
+		Concept:		TBD
+		Description:	"What body positions the surface can be used for, specifically, sitting or lying."
+		Value:			CodeableConcept from SupportSurfaceBodyPositionVS
+
+		Element:		SupportSurfaceComponent
+		Concept:		TBD
+		Description:	"A physical material, structure, or system used alone or in combination with other components to fashion a support surface."
+		Value:			CodeableConcept from SupportSurfaceComponentVS
+
+Element:		SupportSurfaceUsed
+Concept:		TBD
+Based on:		DeviceUsed
+Description:	"A paricular instance of the use of a support surface in patient care."
+Value: 			Device is type SupportSurface
+				Implanted is #no
+0..1			ImmersionDepth
+
+		Element:		ImmersionDepth
+		Concept:		TBD
+		Description:	"Depth of penetration (sinking) into a support surface."
+		Value:			Quantity with units UCUM#cm "cm"
+*/

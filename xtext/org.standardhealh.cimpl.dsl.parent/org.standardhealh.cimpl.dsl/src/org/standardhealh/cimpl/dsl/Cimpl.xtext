@@ -2,31 +2,62 @@ grammar org.standardhealh.cimpl.dsl.Cimpl with org.eclipse.xtext.common.Terminal
 
 generate cimpl "http://www.standardhealh.org/cimpl/dsl/Cimpl"
 
-Model:
-	elements=Doc?;
+//Model:
+//	elements=Doc?;
 	
-Doc:                
-header=DocHeader	
-uses=UsesStatement
-entries+=EntryElement*;
+Profile:                
+header=Header
+description=Description
+uses=(UsesStatement)?
+(codeSystems+=(CodeSystem)*)
+entries+=EntryElement*
+elements+=Element*;
 
 // descriptionProp? usesStatement? pathDefs? vocabularyDefs? dataDefs);
 //	description=DescriptionProp
-// DescriptionProp: 'Description:' STRING '\r';	
 
-DocHeader:'Grammar:' 'DataElement' version=STRING '\r\n' 'Namespace:' namespace=STRING '\r' '\r';
+Description: 'Description:'	description=STRING '\r';	
 
-UsesStatement:'Uses:' namespace+=STRING (',' namespace+=STRING)*'\r''\r';
+Header:'Grammar:\tDataElement'	version=CIMPLSTRING '\r\n' 'Namespace:' namespace=CIMPLSTRING '\r';
 
-EntryElement: 'EntryElement' name=STRING'\r\n'
-	          'Based On:'basedOn=STRING'\r\n' 
-	          'Concept:' concept=STRING'\r\n'
-	          'Description:' description=STRING'\r\n'
-	          (elements+=Element)? ('\r\n' elements+=Element)*'\r\n'
-	          ('\t'subelements+=EntryElement)*
-	          'Value:'value=STRING?'\r\n';
+UsesStatement:'Uses:'	namespace+=CIMPLSTRING (',' namespace+=CIMPLSTRING)*'\r''\r';
 
-Element: lower=INT'..'upper=INT name=STRING;
+CodeSystem:'CodeSystem:' namespace=CIMPLSTRING'\r';
+
+EntryElement: '\r\nEntryElement:' name=CIMPLSTRING'\r\n'
+('Based on:' basedOn=CIMPLSTRING'\r\n')?
+'Concept:'concept=CIMPLSTRING conceptDescription=STRING'\r\n'
+'Description:'description=STRING'\r\n'
+((redefinitions+=Redefinition)? ('\r\n' redefinitions+=Redefinition)*'\r\n')
+(subsets+=Subsets)?;
+//('\tEvaluationComponent\r\n'(evaluationSubsets+=Subset)? ('\r\n' evaluationSubsets+=Subset)*'\r\n')?
+//('\tPanelMembers.Observation\r\n'(observationSubsets+=Subset)? ('\r\n' observationSubsets+=Subset)*'\r\n')?;
+
+Subsets: name=CIMPLSTRING'\r\n' (subsets+=Subset)? ('\r\n' subsets+=Subset)*'\r\n';
+
+Subset: 'includes' cardinality=Cardinality typeName=CIMPLSTRING;
+
+Redefinition: (cardinality=Cardinality)? name=CIMPLSTRING;
+
+Cardinality:lower=INT'..'upper=INT;
+
+Element: '\r\nElement:' name=CIMPLSTRING '\r\n'
+	     ('Based on:' basedOn=CIMPLSTRING'\r\n')? 
+		 'Concept:' concept=CIMPLSTRING'\r\n'
+	     'Description:' description=STRING '\r\n'
+	     'Value:' value=CIMPLSTRING '\r\n';
+	     
+Value: CodeableConcept|Quantity;
+	     
+CodeableConcept: 'CodeableConcept from' valueSetURL=CIMPLSTRING;
+
+Quantity: 'Quantity with units' units=CIMPLSTRING;    
+
+CIMPLSTRING:
+    (' ' | '/' | ';' | ',' | '!' | '§' | '%' | '&' | '(' | ')' | '?' | '*' | '+' | '.' | '-' | '|' | '[' | ']');
+
+terminal BASEDON: 'Based on';  
+//terminal CIMPLSTRING: ('\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\' | '"'))*;
 
 //
 //pathDefs:           pathDef+;

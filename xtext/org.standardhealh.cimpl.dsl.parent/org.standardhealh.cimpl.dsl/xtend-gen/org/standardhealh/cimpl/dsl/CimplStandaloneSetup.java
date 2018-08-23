@@ -11,7 +11,6 @@ import org.standardhealh.cimpl.dsl.CimplStandaloneSetupGenerated;
 @SuppressWarnings("all")
 public class CimplStandaloneSetup extends CimplStandaloneSetupGenerated {
   public static void doSetup() {
-    CimplStandaloneSetup _cimplStandaloneSetup = new CimplStandaloneSetup();
-    _cimplStandaloneSetup.createInjectorAndDoEMFRegistration();
+    new CimplStandaloneSetup().createInjectorAndDoEMFRegistration();
   }
 }

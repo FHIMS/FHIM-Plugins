@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Qvt Plug-in
+Bundle-SymbolicName: gov.us.fhim2cimpl.qvt
+Bundle-Version: 0.1.0.qualifier
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.m2m.qvt.oml,
+ org.standardhealh.cimpl.dsl;bundle-version="1.0.0",
+ org.standardhealh.cimpl.dsl.ide;bundle-version="1.0.0",
+ org.standardhealh.cimpl.dsl.tests;bundle-version="1.0.0",
+ org.standardhealh.cimpl.dsl.ui;bundle-version="1.0.0",
+ org.standardhealh.cimpl.dsl.ui.tests;bundle-version="1.0.0"
+Bundle-ActivationPolicy: lazy

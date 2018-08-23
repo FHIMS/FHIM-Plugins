@@ -36,8 +36,7 @@ public class CimplServlet extends XtextServlet {
         return ObjectExtensions.<ExecutorService>operator_doubleArrow(_newCachedThreadPool, _function_1);
       };
       final Provider<ExecutorService> executorServiceProvider = _function;
-      CimplWebSetup _cimplWebSetup = new CimplWebSetup(executorServiceProvider);
-      _cimplWebSetup.createInjectorAndDoEMFRegistration();
+      new CimplWebSetup(executorServiceProvider).createInjectorAndDoEMFRegistration();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

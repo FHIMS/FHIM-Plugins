@@ -7,7 +7,8 @@ Bundle-SymbolicName: org.standardhealh.cimpl.dsl.ide; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.standardhealh.cimpl.dsl,
  org.eclipse.xtext.ide,
- org.eclipse.xtext.xbase.ide
+ org.eclipse.xtext.xbase.ide,
+ org.antlr.runtime
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.standardhealh.cimpl.dsl.ide.contentassist.antlr.internal,
  org.standardhealh.cimpl.dsl.ide.contentassist.antlr

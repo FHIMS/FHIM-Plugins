@@ -1,14 +1,24 @@
-Grammar: DataElement "version" 
- Namespace: "namespace"   Uses: "namespace"   EntryElement "name" 
- Based On: "basedon" 
- Concept: "concept" 
- Description: "description" 
- 0 .. 1 "name1" 
- 0 .. 1 "name2" 
- 0 .. 1 "name3" 
- 	EntryElement "subname" 
-		Based On: "subbasedon" 
-		Concept: "subconcept" 
-		Description: "subdescription" 
-	 	Value: "subvalue" 
-Value: "value" 
+Grammar: DataElement " 5.0" 
+ Namespace: "cimi.statement"   Uses: "shr.core" , "cimi.core" , "cimi.element"   
+EntryElement "WoundAssessmentPanel" 
+ Based On: "NonLaboratoryObservation" 
+ Concept: "LNC#39135-9" 
+ Description: "Group of observations regarding the properties and severity of a wound." 
+ 	 "name one" is type "entry element1" 
+ 	 0 .. 0 "name two" is type "entry element2" 
+ 	EvaluationComponent
+ 		 includes 0 .. 0 "type1" 
+ 	PanelMembers.Observation
+ 		 includes 0 .. 0 "type2" 
+ 
+EntryElement "2222222" 
+ Based On: "222222" 
+ Concept: "2222222#39135-9" 
+ Description: "2222222." 
+ 
+ 
+Element: "EpisodeOfWound" 
+ Based On: "CodedEvaluationComponent" 
+ Concept: "LNC#89252-1" 
+ Description: "Wound episode refers to a period of the wound, an incident in the course of a wound" 
+ Value: CodeableConcept from "https://vsac.nlm.nih.gov/valueset/2.16.840.1.113762.1.4.1181.4/expansion" 

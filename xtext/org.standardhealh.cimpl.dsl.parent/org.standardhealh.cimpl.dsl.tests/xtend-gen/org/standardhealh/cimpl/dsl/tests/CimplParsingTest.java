@@ -9,15 +9,14 @@ import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.standardhealh.cimpl.dsl.cimpl.Model;
 import org.standardhealh.cimpl.dsl.tests.CimplInjectorProvider;
 
-@RunWith(XtextRunner.class)
-@InjectWith(CimplInjectorProvider.class)
+@RunWith(XtextRunner.class)/* 
+@InjectWith(CimplInjectorProvider.class) */
 @SuppressWarnings("all")
 public class CimplParsingTest {
   @Inject
-  private ParseHelper<Model> parseHelper;
+  private /* ParseHelper<Model> */Object parseHelper;
   
   @Test
   public void loadModel() {

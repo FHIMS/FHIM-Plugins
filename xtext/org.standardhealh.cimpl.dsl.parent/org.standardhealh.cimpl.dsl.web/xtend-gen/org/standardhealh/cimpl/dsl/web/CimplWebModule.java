@@ -3,8 +3,6 @@
  */
 package org.standardhealh.cimpl.dsl.web;
 
-import com.google.inject.Provider;
-import java.util.concurrent.ExecutorService;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.standardhealh.cimpl.dsl.web.AbstractCimplWebModule;
 
@@ -14,7 +12,4 @@ import org.standardhealh.cimpl.dsl.web.AbstractCimplWebModule;
 @FinalFieldsConstructor
 @SuppressWarnings("all")
 public class CimplWebModule extends AbstractCimplWebModule {
-  public CimplWebModule(final Provider<ExecutorService> arg0) {
-    super(arg0);
-  }
 }

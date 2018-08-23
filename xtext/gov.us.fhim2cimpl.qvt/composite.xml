@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="project" default="default" xmlns:qvto="http://www.eclipse.org/qvt/1.0.0/Operational">
+	<target name="default">
+		<qvto:transformation uri="platform:/resource/gov.us.fhim2cimpl.qvt/transforms/Cimpl/NewTransformation.qvto">
+			<in uri="platform:/resource/gov.us.fhim2cimpl.qvt/fhim/FHIM.uml" />
+			<out uri="platform:/resource/gov.us.fhim2cimpl.qvt/cimpl/fhim_wound.cimpl" />
+		</qvto:transformation>
+		
+	<copy 
+		    file="/Users/seanmuir/eclipse-workspaceoxygenjbmn/gov.us.fhim2cimpl.qvt/cimpl/fhim_wound.cimpl"
+		    tofile="/Users/seanmuir/git/shr_spec/spec/fhim_wound.txt" />
+	</target>
+</project>

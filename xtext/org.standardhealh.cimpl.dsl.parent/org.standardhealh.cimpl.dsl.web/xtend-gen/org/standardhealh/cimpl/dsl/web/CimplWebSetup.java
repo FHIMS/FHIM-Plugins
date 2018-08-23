@@ -3,16 +3,11 @@
  */
 package org.standardhealh.cimpl.dsl.web;
 
-import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.google.inject.Module;
 import com.google.inject.Provider;
-import com.google.inject.util.Modules;
 import java.util.concurrent.ExecutorService;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
-import org.standardhealh.cimpl.dsl.CimplRuntimeModule;
 import org.standardhealh.cimpl.dsl.CimplStandaloneSetup;
-import org.standardhealh.cimpl.dsl.web.CimplWebModule;
 
 /**
  * Initialization support for running Xtext languages in web applications.
@@ -24,11 +19,8 @@ public class CimplWebSetup extends CimplStandaloneSetup {
   
   @Override
   public Injector createInjector() {
-    final CimplRuntimeModule runtimeModule = new CimplRuntimeModule();
-    final CimplWebModule webModule = new CimplWebModule(this.executorServiceProvider);
-    Modules.OverriddenModuleBuilder _override = Modules.override(runtimeModule);
-    Module _with = _override.with(webModule);
-    return Guice.createInjector(_with);
+    throw new Error("Unresolved compilation problems:"
+      + "\nInvalid number of arguments. The constructor CimplWebModule() is not applicable for the arguments (Provider<ExecutorService>)");
   }
   
   public CimplWebSetup(final Provider<ExecutorService> executorServiceProvider) {

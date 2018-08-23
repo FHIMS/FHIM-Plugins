@@ -13,7 +13,7 @@ import org.standardhealh.cimpl.dsl.ui.AbstractCimplUiModule;
 @FinalFieldsConstructor
 @SuppressWarnings("all")
 public class CimplUiModule extends AbstractCimplUiModule {
-  public CimplUiModule(final AbstractUIPlugin arg0) {
-    super(arg0);
+  public CimplUiModule(final AbstractUIPlugin plugin) {
+    super(plugin);
   }
 }

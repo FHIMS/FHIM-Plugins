@@ -1,0 +1,84 @@
+Grammar:	DataElement 5.0 
+ Namespace: fsw  Description: "SkinAndWound"  Uses: shr.core   CodeSystem: UCUM = http://unitsofmeasure.org  CodeSystem: LNC = http://loinc.org  CodeSystem: OBSCAT = http://hl7.org/fhir/observation-category  
+EntryElement: InformationEntry 
+ Concept: TBD  "TBD " 
+ Description: "Description" 
+ 0 .. 1 Comment 
+ 0 .. 1 ContentVersion 
+ 0 .. 1 Identifier 
+ 0 .. 1 RecordStatus 
+ 0 .. 1 SourceRecordType 
+ 0 .. 1 SourceSystem 
+ 0 .. 1 Recorded 
+ 0 .. 1 SubjectOfInformation 
+ 0 .. 1 SubjectOfRecord 
+ 
+EntryElement: ClinicalStatement 
+ Based on: InformationEntry 
+ Concept: TBD  "TBD " 
+ Description: "Description" 
+ 0 .. 1 ClinicalDataSource 
+ 0 .. 1 ContextCode 
+ 0 .. 1 Encounter 
+ 0 .. 1 RelatedClinicalInformation 
+ 0 .. 1 TemporalContext 
+ 0 .. 1 TopicCode 
+ 0 .. 1 Cosigned 
+ 0 .. 1 Signed 
+ 0 .. 1 Verified 
+ 
+EntryElement: ObservationStatement 
+ Based on: ClinicalStatement 
+ Concept: TBD  "TBD " 
+ Description: "Description" 
+ 0 .. 1 BasedOn 
+ 0 .. 1 BodySite 
+ 0 .. 1 Category 
+ 0 .. 1 ComponentObservation 
+ 0 .. 1 DataAbsentReason 
+ 0 .. 1 DateTime 
+ 0 .. 1 DateTimeIssued 
+ 0 .. 1 DeltaFlag 
+ 0 .. 1 Description 
+ 0 .. 1 DeviceInstance 
+ 0 .. 1 Encounter 
+ 0 .. 1 EvaluationProcedure 
+ 0 .. 1 InterpretationEvent 
+ 0 .. 1 Method 
+ 0 .. 1 Multimedia 
+ 0 .. 1 Observed 
+ 0 .. 1 ObservedCharacteristic 
+ 0 .. 1 ReferenceRange 
+ 0 .. 1 Reliability 
+ 0 .. 1 ResultStatus 
+ 0 .. 1 Specimen 
+ 0 .. 1 Value 
+ 0 .. 1 DerivedFrom 
+ 0 .. 1 HasMember 
+ 0 .. 1 PartOf 
+ 
+ EntryElement: Foobar
+1..1 PatientID
+
+
+
+	Element:		PatientID
+	SeerElement: 47747748
+		Concept:		LNC#89259-6
+		Description:	"The presence or absence of wound exudate."
+		Value:			String
+		
+ 
+EntryElement: WoundAssessment 
+ Based on: ObservationStatement 
+ Concept: TBD  "TBD " 
+ Description: "Description" 
+ 0 .. 1 WoundAssertion 
+ 0 .. 1 WoundBedAndEdge 
+ 0 .. 1 WoundEdge 
+ 0 .. 1 WoundExudate 
+ 0 .. 1 WoundSize 
+ 0 .. 1 WoundTrend 
+ 0 .. 1 WoundTunneling 
+ 0 .. 1 WoundUndermining 
+
