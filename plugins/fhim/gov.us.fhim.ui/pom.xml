@@ -23,7 +23,7 @@
 		<dependency>
 			<groupId>com.ibm.xtools.modeler.ui</groupId>
 			<artifactId>com.ibm.xtools.modeler.ui</artifactId>
-			<version>7.60.700.v20161116_1808</version>
+			<!--  <version>7.60.700.v20161116_1808</version> -->
 		</dependency>
 	</dependencies>
 </project>

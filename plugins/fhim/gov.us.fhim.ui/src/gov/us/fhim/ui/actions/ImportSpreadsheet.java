@@ -216,7 +216,7 @@ public class ImportSpreadsheet implements IObjectActionDelegate {
 				if (!StringUtils.isEmpty(ne.getQualifiedName()) && ne instanceof Property) {
 					namedElements.put(ne.getQualifiedName(), (Property) ne);
 					// namedElements.put(ne.getQualifiedName().replace("(Abstract)", ""), ne);
-					System.out.println("Adding Property" + ne.getQualifiedName());
+					// System.out.println("Adding Property" + ne.getQualifiedName());
 				}
 
 			}
@@ -346,11 +346,20 @@ public class ImportSpreadsheet implements IObjectActionDelegate {
 			}
 		}
 
-		Map<String, String> options = new HashMap<String, String>();
+		Map<String, Object> options = new HashMap<String, Object>();
 
-		for (
+		options.put(XMLResource.OPTION_RECORD_UNKNOWN_FEATURE, Boolean.TRUE);
+		options.put(XMLResource.OPTION_DEFER_IDREF_RESOLUTION, Boolean.FALSE);
+		options.put(XMLResource.OPTION_DEFER_ATTACHMENT, Boolean.FALSE);
 
-		Resource resource : resourceSet.getResources()) {
+		// for (Resource resource : resourceSet.getResources()) {
+		//
+		// System.out.println("resolveAll " + resource.getURI().toString());
+		//
+		// EcoreUtil.resolveAll(resource);
+		// }
+
+		for (Resource resource : resourceSet.getResources()) {
 			try {
 				System.out.println("Saving " + resource.getURI().toString());
 				resource.save(options);

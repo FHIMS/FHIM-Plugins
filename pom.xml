@@ -19,6 +19,9 @@
 	</properties>
 
 	<repositories>
+	
+	 
+		
 		<repository>
 			<id>luna</id>
 			<layout>p2</layout>
@@ -34,18 +37,14 @@
 			<layout>p2</layout>
 			<url>http://download.eclipse.org/nebula/releases/latest</url>
 		</repository>
-		<repository>
-			<id>rsa</id>
-			<url>file:/Applications/IBM/IBMIMShared</url>
-			<layout>p2</layout>
-		</repository>
+		
 	</repositories>
 
 	<modules>
 		<module>plugins/fhim</module>
-		<module>plugins/hdf</module>
+		<!--	<module>plugins/hdf</module> -->
 		<module>features/fhim</module>
-		<!-- <module>releng/gov.us.fhim.uml.site</module> -->
+		<module>releng/gov.us.fhim.uml.site</module>
 	</modules>
 	<build>
 		<plugins>

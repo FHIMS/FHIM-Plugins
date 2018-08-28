@@ -18,33 +18,3 @@ Require-Bundle: org.eclipse.ui,
  com.ibm.xtools.modeler.ui
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
-Export-Package: gov.us.fhim.ui,
- gov.us.fhim.ui.actions
-Import-Package: org.eclipse.mdht.uml.term.core.profile,
- org.eclipse.mdht.uml.term.core.util
-Bundle-ClassPath: fhirLibraries/animal-sniffer-annotations-1.14.jar,
- fhirLibraries/commons-codec-1.10.jar,
- fhirLibraries/commons-io-2.5.jar,
- fhirLibraries/commons-lang3-3.6.jar,
- fhirLibraries/error_prone_annotations-2.0.18.jar,
- fhirLibraries/gson-2.8.1.jar,
- fhirLibraries/guava-23.0.jar,
- fhirLibraries/hapi-fhir-base-3.3.0.jar,
- fhirLibraries/hapi-fhir-client-3.3.0.jar,
- fhirLibraries/hapi-fhir-client-okhttp-3.3.0.jar,
- fhirLibraries/hapi-fhir-structures-dstu3-3.3.0.jar,
- fhirLibraries/hapi-fhir-utilities-3.3.0.jar,
- fhirLibraries/httpclient-4.5.3.jar,
- fhirLibraries/httpcore-4.4.6.jar,
- fhirLibraries/j2objc-annotations-1.1.jar,
- fhirLibraries/java-hamcrest-2.0.0.0.jar,
- fhirLibraries/jcl-over-slf4j-1.7.25.jar,
- fhirLibraries/jsr305-1.3.9.jar,
- fhirLibraries/junit-4.12.jar,
- fhirLibraries/mockito-all-1.10.19.jar,
- fhirLibraries/okhttp-3.8.1.jar,
- fhirLibraries/okio-1.13.0.jar,
- fhirLibraries/slf4j-api-1.7.25.jar,
- fhirLibraries/slf4j-simple-1.7.25.jar,
- .
-
